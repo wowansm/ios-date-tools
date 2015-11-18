@@ -346,6 +346,24 @@ public class TimePeriod: NSObject {
     }
     
     /**
+       - parameter size: Desired size, defaults to seconds.
+     
+       - returns: new `TimePeriod` instance earlier than receiver by duration in given size (defaults to seconds).
+     */
+    public func previous(size: TimePeriodSize = .Second) -> TimePeriod {
+        return TimePeriod(size: size, amount: self.durationIn(size), endingAt: self.startDate, calendar: self.calendar)
+    }
+    
+    /**
+       - parameter size: Desired size, defaults to seconds.
+     
+       - returns: new `TimePeriod` instance later than receiver by duration in given size (defaults to seconds).
+    */
+    public func next(size: TimePeriodSize = .Second) -> TimePeriod {
+        return TimePeriod(size: size, amount: self.durationIn(size), startingAt: self.endDate, calendar: self.calendar)
+    }
+    
+    /**
        Shifts the `startDate` and `endDate` earlier by a given size amount. Amount multiplies size.
     
        - parameter size: Desired shift size

@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D321A6A41BBAB4640095F9C8 /* TimePeriodCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D321A6A31BBAB4640095F9C8 /* TimePeriodCollectionTests.swift */; settings = {ASSET_TAGS = (); }; };
-		D35959C51BC5547C00E952B7 /* DateTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35959C41BC5547C00E952B7 /* DateTestUtils.swift */; settings = {ASSET_TAGS = (); }; };
+		D321A6A41BBAB4640095F9C8 /* TimePeriodCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D321A6A31BBAB4640095F9C8 /* TimePeriodCollectionTests.swift */; };
+		D35959C51BC5547C00E952B7 /* DateTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35959C41BC5547C00E952B7 /* DateTestUtils.swift */; };
 		D3B928531BAC409E005FB9FD /* DateTools.h in Headers */ = {isa = PBXBuildFile; fileRef = D3B928521BAC409E005FB9FD /* DateTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D3B9285A1BAC409F005FB9FD /* DateTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B9284F1BAC409E005FB9FD /* DateTools.framework */; settings = {ASSET_TAGS = (); }; };
-		D3B9286A1BAC40FA005FB9FD /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928691BAC40FA005FB9FD /* TimePeriod.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B9286C1BAC5F25005FB9FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286B1BAC5F25005FB9FD /* Constants.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B9286E1BAC6041005FB9FD /* TimePeriodChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286D1BAC6041005FB9FD /* TimePeriodChain.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928701BAC6052005FB9FD /* TimePeriodCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286F1BAC6052005FB9FD /* TimePeriodCollection.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928721BAC605E005FB9FD /* TimePeriodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928741BAC6082005FB9FD /* NSDate+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* NSDate+DateTools.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928C91BB15363005FB9FD /* TimePeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928C81BB15363005FB9FD /* TimePeriodTests.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928E01BB19110005FB9FD /* NSCalendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* NSCalendar+DateTools.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928F01BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928EF1BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift */; settings = {ASSET_TAGS = (); }; };
-		D3B928F21BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928F11BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift */; settings = {ASSET_TAGS = (); }; };
-		D3E83CD91BBC0DDA0041CD1A /* TimePeriodChainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E83CD81BBC0DDA0041CD1A /* TimePeriodChainTests.swift */; settings = {ASSET_TAGS = (); }; };
-		EEF495B6E776FDCBD6ECF09F /* Pods_DateToolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32180C43E22CDC8FB4D8406 /* Pods_DateToolsTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D3B9285A1BAC409F005FB9FD /* DateTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3B9284F1BAC409E005FB9FD /* DateTools.framework */; };
+		D3B9286A1BAC40FA005FB9FD /* TimePeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928691BAC40FA005FB9FD /* TimePeriod.swift */; };
+		D3B9286C1BAC5F25005FB9FD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286B1BAC5F25005FB9FD /* Constants.swift */; };
+		D3B9286E1BAC6041005FB9FD /* TimePeriodChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286D1BAC6041005FB9FD /* TimePeriodChain.swift */; };
+		D3B928701BAC6052005FB9FD /* TimePeriodCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286F1BAC6052005FB9FD /* TimePeriodCollection.swift */; };
+		D3B928721BAC605E005FB9FD /* TimePeriodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */; };
+		D3B928741BAC6082005FB9FD /* NSDate+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* NSDate+DateTools.swift */; };
+		D3B928C91BB15363005FB9FD /* TimePeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928C81BB15363005FB9FD /* TimePeriodTests.swift */; };
+		D3B928E01BB19110005FB9FD /* NSCalendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* NSCalendar+DateTools.swift */; };
+		D3B928F01BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928EF1BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift */; };
+		D3B928F21BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928F11BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift */; };
+		D3E83CD91BBC0DDA0041CD1A /* TimePeriodChainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E83CD81BBC0DDA0041CD1A /* TimePeriodChainTests.swift */; };
+		EEF495B6E776FDCBD6ECF09F /* Pods_DateToolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32180C43E22CDC8FB4D8406 /* Pods_DateToolsTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
