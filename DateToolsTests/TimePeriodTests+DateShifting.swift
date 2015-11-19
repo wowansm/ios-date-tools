@@ -55,6 +55,28 @@ extension TimePeriodTests {
         self.testShiftLater(shortPeriod, .Year, -1, date("1999-01-01"))
     }
     
+    //MARK: - Previous and next methods
+    
+    func testTimePeriod_previous_returnsPreviousTimePeriod() {
+        self.testPrevious(shortPeriod, .Second, date("1999-10-20"))
+        self.testPrevious(shortPeriod, .Minute, date("1999-10-20"))
+        self.testPrevious(shortPeriod, .Hour, date("1999-10-20"))
+        self.testPrevious(shortPeriod, .Day, date("1999-10-20"))
+        self.testPrevious(shortPeriod, .Week, date("1999-10-23"))
+        self.testPrevious(shortPeriod, .Month, date("1999-11-01"))
+        self.testPrevious(shortPeriod, .Year, date("2000-01-01"))
+    }
+    
+    func testTimePeriod_next_returnsNextTimePeriod() {
+        self.testNext(shortPeriod, .Second, date("2000-05-26"))
+        self.testNext(shortPeriod, .Minute, date("2000-05-26"))
+        self.testNext(shortPeriod, .Hour, date("2000-05-26"))
+        self.testNext(shortPeriod, .Day, date("2000-05-26"))
+        self.testNext(shortPeriod, .Week, date("2000-05-23"))
+        self.testNext(shortPeriod, .Month, date("2000-05-14"))
+        self.testNext(shortPeriod, .Year, date("2000-03-14"))
+    }
+    
     //MARK: - lengthen with anchor Start
     
     func testTimePeriod_lengthenWithStartAnchorBySeconds_lengthensPeriodByGivenSize() {
@@ -320,6 +342,20 @@ extension TimePeriodTests {
     }
     
     //MARK: - Helpers
+    
+    func testPrevious(period: TimePeriod, _ size: TimePeriodSize, _ expectedDate: NSDate) {
+        let previous = period.previous(size)
+        expect(previous) !== period
+        expect(previous.endDate) == period.startDate
+        expect(previous.startDate) == expectedDate
+    }
+    
+    func testNext(period: TimePeriod, _ size: TimePeriodSize, _ expectedDate: NSDate) {
+        let next = period.next(size)
+        expect(next) !== period
+        expect(next.startDate) == period.endDate
+        expect(next.endDate) == expectedDate
+    }
     
     func testShiftEarlier(var period: TimePeriod, _ size: TimePeriodSize, _ amount: Int, _ startDate: NSDate) {
         period = period.copy() as! TimePeriod

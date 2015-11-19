@@ -33,8 +33,8 @@ class TimePeriodTests: XCTestCase {
         super.setUp()
         calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-        startDate = calendar.dateWithYear(2000, month: 01, day: 01)
-        endDate = calendar.dateWithYear(1900, month: 06, day: 15)
+        startDate = date("2000-01-01")
+        endDate = date("1900-06-15")
         longPeriod = TimePeriod(startDate: endDate, endDate: startDate, calendar: calendar)
         shortPeriod = TimePeriod(startDate: startDate, endDate: date("2000-03-14"), calendar: calendar)
         veryShortPeriod = TimePeriod(startDate: startDate, endDate: date("2000-01-02 12:20:30"), calendar: calendar)
@@ -45,7 +45,6 @@ class TimePeriodTests: XCTestCase {
         periodInside = TimePeriod(startDate: date("1950-01-01"), endDate: date("1960-01-01"), calendar: calendar)
         periodBeforeTouching = TimePeriod(startDate: date("1890-01-01"), endDate: date("1900-06-15"), calendar: calendar)
         periodAfterTouching = TimePeriod(startDate: date("2000-01-01"), endDate: date("2010-01-01"), calendar: calendar)
-
     }
     
     override func tearDown() {
