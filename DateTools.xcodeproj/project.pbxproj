@@ -64,7 +64,7 @@
 		D3B928EF1BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimePeriodTests+DateShifting.swift"; sourceTree = "<group>"; };
 		D3B928F11BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimePeriodTests+Relationships.swift"; sourceTree = "<group>"; };
 		D3E83CD81BBC0DDA0041CD1A /* TimePeriodChainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodChainTests.swift; sourceTree = "<group>"; };
-		D3F81B831C0EF2EF002FA2CE /* DateTools tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "DateTools tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3F81B831C0EF2EF002FA2CE /* DateTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DateTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9520BD1BD130A5009AEB36 /* DateTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DateTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F06987FB4395F9EF2CD303A7 /* Pods-DateToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateToolsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,7 +136,7 @@
 				D3B9284F1BAC409E005FB9FD /* DateTools.framework */,
 				D3B928591BAC409F005FB9FD /* DateToolsTests.xctest */,
 				DC9520BD1BD130A5009AEB36 /* DateTools.framework */,
-				D3F81B831C0EF2EF002FA2CE /* DateTools tvOS.framework */,
+				D3F81B831C0EF2EF002FA2CE /* DateTools.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,7 +263,7 @@
 			);
 			name = "DateTools tvOS";
 			productName = DateTools;
-			productReference = D3F81B831C0EF2EF002FA2CE /* DateTools tvOS.framework */;
+			productReference = D3F81B831C0EF2EF002FA2CE /* DateTools.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DC9520BC1BD130A5009AEB36 /* DateTools watchOS */ = {
@@ -629,7 +629,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateTools;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DateTools;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -648,7 +648,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateTools;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DateTools;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -731,6 +731,7 @@
 				D3F81B891C0EF2EF002FA2CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DC9520C41BD130A5009AEB36 /* Build configuration list for PBXNativeTarget "DateTools watchOS" */ = {
 			isa = XCConfigurationList;
