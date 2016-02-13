@@ -1,12 +1,12 @@
 # Swift Date Tools 
 [![Build Status](https://travis-ci.org/codewise/ios-date-tools.svg?branch=master)](https://travis-ci.org/codewise/ios-date-tools)
-[![Cocoapods](https://cocoapod-badges.herokuapp.com/v/SwiftDateTools/badge.png)](http://cocoapods.org/?q=swiftdatetools)
+[![CocoaPods](https://cocoapod-badges.herokuapp.com/v/SwiftDateTools/badge.png)](http://cocoapods.org/?q=swiftdatetools)
 
 Project is a swift version of [DateTools](https://github.com/MatthewYork/DateTools) library created by Matthew York.
 
 ## Installation
 
-**Cocoapods**
+**CocoaPods**
 
 <code>pod 'SwiftDateTools'</code>
 
