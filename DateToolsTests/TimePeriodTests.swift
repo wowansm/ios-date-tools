@@ -65,8 +65,7 @@ class TimePeriodTests: XCTestCase {
         super.tearDown()
     }
     
-    //MARK: - create with starting date
-    
+    // MARK: - Testing creation with start date
     func testTimePeriod_createPeriodsWithStartingDate_returnsValidTimePeriods() {
         let testCases: [(TimePeriodSize, Int, Date)] = [
             (.day, 1, date(dateString: "2000-01-02")),
@@ -87,8 +86,7 @@ class TimePeriodTests: XCTestCase {
         }
     }
     
-    //MARK: - create with ending date
-    
+    // MARK: - Testing creation with end date
     func testTimePeriod_createPeriodsWithEndingDate_returnsValidTimePeriods() {
         let testCases: [(TimePeriodSize, Int, Date)] = [
             (.day, 1, date(dateString: "1900-06-14")),
@@ -121,8 +119,7 @@ class TimePeriodTests: XCTestCase {
         expect(period.calendar) == self.longPeriod.calendar
     }
     
-    //MARK: - Duration in ... tests
-    
+    // MARK: - Testing duration in unit methods
     func testTimePeriod_durationInYears_returnsValidAmountOfYearsInPeriod() {
         expect(self.longPeriod.durationIn(size: .year)) == 99
         expect(self.shortPeriod.durationIn(size: .year)) == 0
@@ -159,8 +156,7 @@ class TimePeriodTests: XCTestCase {
         expect(self.veryShortPeriod.durationIn(size: .second)) == 130830
     }
     
-    //MARK: - Period comparison tests
-    
+    // MARK: - Testing time period comparisons
     func testTimePeriod_isMoment_returnsTrueIfStartDateIsEqualEndDate() {
         let period = TimePeriod(startDate: date(dateString: "2000-01-01"), endDate: date(dateString: "2000-01-01"), calendar: calendar)
         expect(period.isMoment()) == true
@@ -241,8 +237,7 @@ class TimePeriodTests: XCTestCase {
         expect(self.longPeriod.intersects(period: self.periodInside)) == true
     }
     
-    //MARK: - other utility methods tests
-    
+    // MARK: - Testing utility methods
     func testTimePeriod_gapBetween_returnsGapInSecondsBetweenTwoTimePeriods() {
         expect(self.longPeriod.gapBetween(period: self.periodInside)) == 0
         expect(self.longPeriod.gapBetween(period: self.periodAfter)) == Double(SECONDS_IN_DAY)
@@ -263,9 +258,7 @@ class TimePeriodTests: XCTestCase {
         expect(Calendar.isLeapYear(year: 2004)) == true
     }
     
-    
-    //MARK: - Helpers
-    
+    // MARK: - Helper methods
     func testTimePeriodStartingAtWithSize(size: TimePeriodSize, amount: Int, expectedEndDate: Date) {
         let period = TimePeriod(size: size, amount: amount, startingAt: startDate, calendar: calendar)
         

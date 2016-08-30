@@ -184,7 +184,6 @@ class TimePeriodChainTests: XCTestCase {
         
         expect(self.chain.equals(chain: chain)) == false
         expect(self.chain == chain) == false
-        
     }
     
     // MARK: - Helper methods

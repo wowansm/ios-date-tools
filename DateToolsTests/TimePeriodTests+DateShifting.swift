@@ -13,7 +13,7 @@ import Nimble
 
 extension TimePeriodTests {
     
-    //MARK: - Test date shifting methods
+    // MARK: - Testing date shifting methods
     func testTimePeriod_shiftEarlier_shiftsPeriodEarlier() {
         self.testShiftEarlier(period: shortPeriod, size: .second, amount: 3, startDate: date(dateString: "1999-12-31 23:59:57"))
         self.testShiftEarlier(period: shortPeriod, size: .minute, amount: 73, startDate: date(dateString: "1999-12-31 22:47"))
@@ -54,7 +54,7 @@ extension TimePeriodTests {
         self.testShiftLater(period: shortPeriod, size: .year, amount: -1, startDate: date(dateString: "1999-01-01"))
     }
     
-    // MARK: - Test lengthen with start anchor
+    // MARK: - Testing lengthen with start anchor
     func testTimePeriod_lengthenWithStartAnchorBySeconds_lengthensPeriodByGivenSize() {
         self.shortPeriod.lengthen(withAnchor: .start, size: .second, amount: 39)
         expect(self.shortPeriod.startDate) == startDate
@@ -97,7 +97,7 @@ extension TimePeriodTests {
         expect(self.shortPeriod.endDate)   == date(dateString: "2007-03-14")
     }
     
-    // MARK: - Test length with center anchor
+    // MARK: - Testing lengthen with center anchor
     func testTimePeriod_lengthenWithCenterAnchorBySeconds_lengthensPeriodByGivenSize() {
         self.shortPeriod.lengthen(withAnchor: .center, size: .second, amount: 40)
         expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 23:59:40")
@@ -140,7 +140,7 @@ extension TimePeriodTests {
         expect(self.shortPeriod.endDate)   == date(dateString: "2004-03-14")
     }
 
-    // MARK: - Test length with end anchor
+    // MARK: - Testing lengthen with end anchor
     func testTimePeriod_lengthenWithEndAnchorBySeconds_lengthensPeriodByGivenSize() {
         self.shortPeriod.lengthen(withAnchor: .end, size: .second, amount: 40)
         expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 23:59:20")
@@ -183,7 +183,7 @@ extension TimePeriodTests {
         expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
-    // MARK: - Test shorten with start anchor
+    // MARK: - Testing shorten with start anchor
     func testTimePeriod_shortenWithStartAnchorBySeconds_shortensPeriodByGivenSize() {
         self.shortPeriod.shorten(withAnchor: .start, size: .second, amount: 39)
         expect(self.shortPeriod.startDate) == startDate
@@ -226,7 +226,7 @@ extension TimePeriodTests {
         expect(self.shortPeriod.endDate)   == date(dateString: "1993-03-14")
     }
     
-    // MARK: - Test shorten with center anchor
+    // MARK: - Testing shorten with center anchor
     func testTimePeriod_shortenWithCenterAnchorBySeconds_shortensPeriodByGivenSize() {
         self.shortPeriod.shorten(withAnchor: .center, size: .second, amount: 40)
         expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 00:00:20")
@@ -269,7 +269,7 @@ extension TimePeriodTests {
         expect(self.longPeriod.endDate)   == date(dateString: "1996-01-01")
     }
     
-    // MARK: - Test shorten with end anchor
+    // MARK: - Testing shorten with end anchor
     func testTimePeriod_shortenWithEndAnchorBySeconds_shortensPeriodByGivenSize() {
         self.shortPeriod.shorten(withAnchor: .end, size: .second, amount: 40)
         expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 00:00:40")

@@ -78,8 +78,7 @@ class TimePeriodCollectionTests: XCTestCase {
         expect(self.collection.endDate) == self.twoMonthsPeriodAfterTwoWeeks.endDate
     }
     
-    //MARK: - Duration in ... tests
-    
+    // MARK: - Testing duration in unit methods
     func testPeriodCollection_durationInYears_returnsOverallDurationOfAllPeriodsInYears() {
         expect(self.collection.durationInYears) == 0
     }
@@ -118,8 +117,7 @@ class TimePeriodCollectionTests: XCTestCase {
         expect(self.emptyCollection.durationInYears)   == 0
     }
     
-    //MARK: - Adding periods
-    
+    // MARK: - Testing adding time periods
     func testPeriodCollection_addTimePeriod_addsTimePeriodAtTheEndOfCollection() {
         collection.add(timePeriod: fourMonthsPeriod)
         expect(self.collection[4]) == fourMonthsPeriod
@@ -151,8 +149,7 @@ class TimePeriodCollectionTests: XCTestCase {
         expect(self.collection.count) == 4
     }
     
-    //MARK: - Removing periods
-    
+    // MARK: - Testing removing time periods
     func testPeriodCollection_removeFirstTimePeriod_removesAndReturnFirstTimePeriod() {
         let removedPeriod = self.collection.remove(atIndex: 0)
         expect(removedPeriod) == monthPeriod
@@ -188,8 +185,7 @@ class TimePeriodCollectionTests: XCTestCase {
         expect(self.collection.count) == 0
     }
     
-    //MARK: - Sorting
-    
+    // MARK: - Testing sorting time period collections
     func testPeriodCollection_sortingByStartAscending_sortsPeriodsByStartAscending() {
         collection.sortByStartAscending()
         expect(self.collection[0]) == monthPeriod
@@ -238,8 +234,7 @@ class TimePeriodCollectionTests: XCTestCase {
         expect(self.collection[3]) == monthPeriodAfterMonth
     }
     
-    //MARK: - shifting tests
-    
+    // MARK: - Testing shifting time period collections
     func testPeriodCollection_shiftLater_shiftsAllPeriodsLaterByGivenSize() {
         collection.shiftLater(withSize: .week, amount: 1)
         
@@ -320,8 +315,7 @@ class TimePeriodCollectionTests: XCTestCase {
 
     }
     
-    //MARK: - period relationship methods
-    
+    // MARK: - Testing time period relationship methods
     func testPeriodCollection_periodsInside_returnsAllPeriodsInsideOfAGivenPeriod() {
         let periods1 = self.collection.periodsInside(period: TimePeriod(size: .week, amount: 5, startingAt: self.startDate, calendar: self.calendar))
         let periods2 = self.collection.periodsInside(period: TimePeriod(size: .month, amount: 2, endingAt: self.twoMonthsPeriodAfterTwoWeeks.endDate, calendar: self.calendar))
@@ -367,10 +361,8 @@ class TimePeriodCollectionTests: XCTestCase {
         expect(periods2.periods).to(contain(twoMonthsPeriodAfterTwoWeeks))
     }
 
-    //MARK: - helpers
-    
+    // MARK: - Helper methods
     func createTimePeriodWithMonthSize(amount: Int, startingAt: Date) -> TimePeriod {
         return TimePeriod(size: .month, amount: amount, startingAt: startingAt, calendar: self.calendar)
     }
-    
 }
