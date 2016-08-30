@@ -72,7 +72,7 @@ protocol TimePeriodGroup: NSObjectProtocol {
         - parameter size: Desired shift size
         - parameter amount: Multiplier of size
     */
-    func shiftLaterWithSize(size: TimePeriodSize, amount: Int)
+    func shiftLater(withSize: TimePeriodSize, amount: Int)
     
     /**
         Shifts all TimePeriod objects earlier by a given size amount. Amount multiplies size.
@@ -80,7 +80,7 @@ protocol TimePeriodGroup: NSObjectProtocol {
         - parameter size: Desired shift size
         - parameter amount: Multiplier of size
     */
-    func shiftEarlierWithSize(size: TimePeriodSize, amount: Int)
+    func shiftEarlier(withSize: TimePeriodSize, amount: Int)
     
     /**
         Checks whether given TimePeriodGroup has the same startDate, endDate and number of TimePeriod objects
@@ -173,13 +173,13 @@ extension TimePeriodGroup {
         }
     }
     
-    func shiftLaterWithSize(size: TimePeriodSize, amount: Int = 1) {
+    func shiftLater(withSize size: TimePeriodSize, amount: Int = 1) {
         self.periods.forEach { elem in
             elem.shiftLater(withSize: size, amount: amount)
         }
     }
     
-    func shiftEarlierWithSize(size: TimePeriodSize, amount: Int) {
+    func shiftEarlier(withSize size: TimePeriodSize, amount: Int) {
         self.periods.forEach { elem in
             elem.shiftEarlier(withSize: size, amount: amount)
         }

@@ -71,7 +71,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - parameter timePeriod: `TimePeriod` object to be added to the chain
     */
-    public func addTimePeriod(timePeriod: TimePeriod) {
+    public func add(timePeriod: TimePeriod) {
         if self.periods.count > 0 {
             let modifiedPeriod = TimePeriod(size: TimePeriodSize.second, amount: Int(timePeriod.durationInSeconds), startingAt: self.periods[self.periods.count - 1].endDate, calendar: self.calendar)
             self.periods.append(modifiedPeriod)
@@ -89,10 +89,10 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
         - parameter timePeriod: `TimePeriod` object to be inserted
         - parameter index: index at which `TimePeriod` object has to be inserted
     */
-    public func insertTimePeriod(timePeriod: TimePeriod, atIndex index: Int) {
+    public func insert(timePeriod: TimePeriod, atIndex index: Int) {
         switch index {
         case 0 where self.periods.count == 0:
-            self.addTimePeriod(timePeriod: timePeriod)
+            self.add(timePeriod: timePeriod)
             
         case 0 where self.periods.count > 0:
             let modifiedPeriod = TimePeriod(size: TimePeriodSize.second, amount: Int(timePeriod.durationInSeconds), endingAt: self.periods[0].startDate, calendar: self.calendar)
@@ -120,7 +120,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - returns: `Optional(TimePeriod)` removed from the chain, `nil` if object is not found
     */
-    public func removeTimePeriod(atIndex index: Int) -> TimePeriod? {
+    public func remove(atIndex index: Int) -> TimePeriod? {
         guard index >= 0 && index < self.periods.count else {
             return nil
         }
@@ -180,7 +180,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - returns: true when chains are equal, false otherwise
     */
-    public func isEqualToChain(chain: TimePeriodChain) -> Bool {
+    public func equals(chain: TimePeriodChain) -> Bool {
         if !self.hasSameCharacteristicsAs(timePeriodGroup: chain) {
             return false
         }
@@ -210,10 +210,10 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
 }
 
 public func == (lhs: TimePeriodChain, rhs: TimePeriodChain) -> Bool {
-    return lhs.isEqualToChain(chain: rhs)
+    return lhs.equals(chain: rhs)
 }
 
 public func != (lhs: TimePeriodChain, rhs: TimePeriodChain) -> Bool {
-    return !lhs.isEqualToChain(chain: rhs)
+    return !lhs.equals(chain: rhs)
 }
 

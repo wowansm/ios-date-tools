@@ -220,7 +220,7 @@ public class TimePeriod: NSObject {
     
        - returns: `true` if the two periods are the same, otherwise `false`
      */
-    public func isEqualTo(period: TimePeriod) -> Bool {
+    public func equals(period: TimePeriod) -> Bool {
         return (self.startDate == period.startDate) && (self.endDate == period.endDate)
     }
     
@@ -455,9 +455,9 @@ public class TimePeriod: NSObject {
 
 // MARK: - Comparators
 public func == (lhs: TimePeriod, rhs: TimePeriod) -> Bool {
-    return lhs.isEqualTo(period: rhs)
+    return lhs.equals(period: rhs)
 }
 
 public func != (lhs: TimePeriod, rhs: TimePeriod) -> Bool {
-    return !lhs.isEqualTo(period: rhs)
+    return !lhs.equals(period: rhs)
 }
