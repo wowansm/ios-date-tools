@@ -16,9 +16,9 @@
 		D3B9286E1BAC6041005FB9FD /* TimePeriodChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286D1BAC6041005FB9FD /* TimePeriodChain.swift */; };
 		D3B928701BAC6052005FB9FD /* TimePeriodCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286F1BAC6052005FB9FD /* TimePeriodCollection.swift */; };
 		D3B928721BAC605E005FB9FD /* TimePeriodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */; };
-		D3B928741BAC6082005FB9FD /* NSDate+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* NSDate+DateTools.swift */; };
+		D3B928741BAC6082005FB9FD /* Date+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* Date+DateTools.swift */; };
 		D3B928C91BB15363005FB9FD /* TimePeriodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928C81BB15363005FB9FD /* TimePeriodTests.swift */; };
-		D3B928E01BB19110005FB9FD /* NSCalendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* NSCalendar+DateTools.swift */; };
+		D3B928E01BB19110005FB9FD /* Calendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* Calendar+DateTools.swift */; };
 		D3B928F01BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928EF1BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift */; };
 		D3B928F21BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928F11BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift */; };
 		D3E83CD91BBC0DDA0041CD1A /* TimePeriodChainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3E83CD81BBC0DDA0041CD1A /* TimePeriodChainTests.swift */; };
@@ -28,8 +28,8 @@
 		DC9520C81BD130D1009AEB36 /* TimePeriodChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286D1BAC6041005FB9FD /* TimePeriodChain.swift */; };
 		DC9520C91BD130D1009AEB36 /* TimePeriodCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9286F1BAC6052005FB9FD /* TimePeriodCollection.swift */; };
 		DC9520CA1BD130D1009AEB36 /* TimePeriodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */; };
-		DC9520CB1BD130D1009AEB36 /* NSDate+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* NSDate+DateTools.swift */; };
-		DC9520CC1BD130D1009AEB36 /* NSCalendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* NSCalendar+DateTools.swift */; };
+		DC9520CB1BD130D1009AEB36 /* Date+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* Date+DateTools.swift */; };
+		DC9520CC1BD130D1009AEB36 /* Calendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* Calendar+DateTools.swift */; };
 		EEF495B6E776FDCBD6ECF09F /* Pods_DateToolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32180C43E22CDC8FB4D8406 /* Pods_DateToolsTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -58,9 +58,9 @@
 		D3B9286D1BAC6041005FB9FD /* TimePeriodChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodChain.swift; sourceTree = "<group>"; };
 		D3B9286F1BAC6052005FB9FD /* TimePeriodCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodCollection.swift; sourceTree = "<group>"; };
 		D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodGroup.swift; sourceTree = "<group>"; };
-		D3B928731BAC6082005FB9FD /* NSDate+DateTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DateTools.swift"; sourceTree = "<group>"; };
+		D3B928731BAC6082005FB9FD /* Date+DateTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+DateTools.swift"; sourceTree = "<group>"; };
 		D3B928C81BB15363005FB9FD /* TimePeriodTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodTests.swift; sourceTree = "<group>"; };
-		D3B928DF1BB19110005FB9FD /* NSCalendar+DateTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCalendar+DateTools.swift"; sourceTree = "<group>"; };
+		D3B928DF1BB19110005FB9FD /* Calendar+DateTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar+DateTools.swift"; sourceTree = "<group>"; };
 		D3B928EF1BB2F37A005FB9FD /* TimePeriodTests+DateShifting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimePeriodTests+DateShifting.swift"; sourceTree = "<group>"; };
 		D3B928F11BB2F3BA005FB9FD /* TimePeriodTests+Relationships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimePeriodTests+Relationships.swift"; sourceTree = "<group>"; };
 		D3E83CD81BBC0DDA0041CD1A /* TimePeriodChainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodChainTests.swift; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 				D3B9286D1BAC6041005FB9FD /* TimePeriodChain.swift */,
 				D3B9286F1BAC6052005FB9FD /* TimePeriodCollection.swift */,
 				D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */,
-				D3B928731BAC6082005FB9FD /* NSDate+DateTools.swift */,
-				D3B928DF1BB19110005FB9FD /* NSCalendar+DateTools.swift */,
+				D3B928731BAC6082005FB9FD /* Date+DateTools.swift */,
+				D3B928DF1BB19110005FB9FD /* Calendar+DateTools.swift */,
 			);
 			path = DateTools;
 			sourceTree = "<group>";
@@ -231,12 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3B928661BAC409F005FB9FD /* Build configuration list for PBXNativeTarget "DateToolsTests" */;
 			buildPhases = (
-				D25A3B70006FA295379C411D /* Check Pods Manifest.lock */,
+				D25A3B70006FA295379C411D /* [CP] Check Pods Manifest.lock */,
 				D3B928551BAC409F005FB9FD /* Sources */,
 				D3B928561BAC409F005FB9FD /* Frameworks */,
 				D3B928571BAC409F005FB9FD /* Resources */,
-				31D9A405E895DB4EFA93B280 /* Embed Pods Frameworks */,
-				F98184235CE2288822C4E3D9 /* Copy Pods Resources */,
+				31D9A405E895DB4EFA93B280 /* [CP] Embed Pods Frameworks */,
+				F98184235CE2288822C4E3D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -291,7 +291,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "CodeWise sp. z o.o. Sp. k.";
 				TargetAttributes = {
 					D3B9284E1BAC409E005FB9FD = {
@@ -360,14 +360,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31D9A405E895DB4EFA93B280 /* Embed Pods Frameworks */ = {
+		31D9A405E895DB4EFA93B280 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,29 +375,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D25A3B70006FA295379C411D /* Check Pods Manifest.lock */ = {
+		D25A3B70006FA295379C411D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F98184235CE2288822C4E3D9 /* Copy Pods Resources */ = {
+		F98184235CE2288822C4E3D9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,9 +415,9 @@
 				D3B9286E1BAC6041005FB9FD /* TimePeriodChain.swift in Sources */,
 				D3B928721BAC605E005FB9FD /* TimePeriodGroup.swift in Sources */,
 				D3B9286A1BAC40FA005FB9FD /* TimePeriod.swift in Sources */,
-				D3B928E01BB19110005FB9FD /* NSCalendar+DateTools.swift in Sources */,
+				D3B928E01BB19110005FB9FD /* Calendar+DateTools.swift in Sources */,
 				D3B9286C1BAC5F25005FB9FD /* Constants.swift in Sources */,
-				D3B928741BAC6082005FB9FD /* NSDate+DateTools.swift in Sources */,
+				D3B928741BAC6082005FB9FD /* Date+DateTools.swift in Sources */,
 				D3B928701BAC6052005FB9FD /* TimePeriodCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,9 +449,9 @@
 				DC9520C81BD130D1009AEB36 /* TimePeriodChain.swift in Sources */,
 				DC9520CA1BD130D1009AEB36 /* TimePeriodGroup.swift in Sources */,
 				DC9520C61BD130D1009AEB36 /* TimePeriod.swift in Sources */,
-				DC9520CC1BD130D1009AEB36 /* NSCalendar+DateTools.swift in Sources */,
+				DC9520CC1BD130D1009AEB36 /* Calendar+DateTools.swift in Sources */,
 				DC9520C71BD130D1009AEB36 /* Constants.swift in Sources */,
-				DC9520CB1BD130D1009AEB36 /* NSDate+DateTools.swift in Sources */,
+				DC9520CB1BD130D1009AEB36 /* Date+DateTools.swift in Sources */,
 				DC9520C91BD130D1009AEB36 /* TimePeriodCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,8 +480,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -528,8 +530,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -549,6 +553,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -560,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1.0;
 				DYLIB_CURRENT_VERSION = 1.0;
@@ -571,6 +577,7 @@
 				PRODUCT_NAME = DateTools;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -579,6 +586,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1.0;
 				DYLIB_CURRENT_VERSION = 1.0;
@@ -589,6 +597,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateTools;
 				PRODUCT_NAME = DateTools;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -597,6 +606,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F06987FB4395F9EF2CD303A7 /* Pods-DateToolsTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DateToolsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -610,6 +620,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69CA5226A2601D94A7FA63FC /* Pods-DateToolsTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DateToolsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -621,6 +632,7 @@
 		D3F81B881C0EF2EF002FA2CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -640,6 +652,7 @@
 		D3F81B891C0EF2EF002FA2CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -659,6 +672,7 @@
 		DC9520C21BD130A5009AEB36 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -678,6 +692,7 @@
 		DC9520C31BD130A5009AEB36 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
