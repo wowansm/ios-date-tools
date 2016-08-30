@@ -19,70 +19,71 @@
 import Foundation
 
 public enum TimePeriodRelation : UInt {
-    case After
-    case StartTouching
-    case StartInside
-    case InsideStartTouching
-    case EnclosingStartTouching
-    case Enclosing
-    case EnclosingEndTouching
-    case ExactMatch
-    case Inside
-    case InsideEndTouching
-    case EndInside
-    case EndTouching
-    case Before
-    case None //One or more of the dates does not exist
+    case after
+    case startTouching
+    case startInside
+    case insideStartTouching
+    case enclosingStartTouching
+    case enclosing
+    case enclosingEndTouching
+    case exactMatch
+    case inside
+    case insideEndTouching
+    case endInside
+    case endTouching
+    case before
+    case none // One or more of the dates does not exist
 }
 
 public enum TimePeriodSize : UInt {
-    case Second
-    case Minute
-    case Hour
-    case Day
-    case Week
-    case Month
-    case Year
+    case second
+    case minute
+    case hour
+    case day
+    case week
+    case month
+    case year
 }
 
 public enum TimePeriodInterval : UInt {
-    case Open
-    case Closed
+    case open
+    case closed
 }
 
 public enum TimePeriodAnchor : UInt {
-    case Start
-    case Center
-    case End
+    case start
+    case center
+    case end
 }
 
 public class TimePeriod: NSObject {
-    
+    // MARK: - Properties
     /**
        The start date for a TimePeriod representing the starting boundary of the time period
      */
-    public var startDate: NSDate
+    public var startDate: Date
     
     /**
        The end date for a TimePeriod representing the ending boundary of the time period
      */
-    public var endDate: NSDate
+    public var endDate: Date
     
     /**
        Calendar used for date calculations
      */
-    public let calendar: NSCalendar
+    public let calendar: Calendar
     
+    // MARK: - Initializers
     /**
       Initializes an instance of TimePeriod from a given start and end date
     
       - parameter startDate: Desired start date
       - parameter endDate: Desired end date
-      - parameter calendar: Calendar used for date calculations, defaults to `NSCalendar.currentCalendar()`
+      - parameter calendar: Calendar used for date calculations, defaults to `Calendar.current`
     
       - returns: TimePeriod - new instance
      */
-    public init(startDate: NSDate, endDate: NSDate, calendar: NSCalendar = NSCalendar.currentCalendar()) {
+    public init(startDate: Date, endDate: Date, calendar: Calendar = Calendar.current) {
         self.startDate = startDate
         self.endDate = endDate
         self.calendar = calendar
@@ -95,12 +96,12 @@ public class TimePeriod: NSObject {
        - parameter size: Desired size of the new time period
        - parameter amount: Desired multiplier of the size provided
        - parameter date: Desired start date of the new time period
-       - parameter calendar: Calendar used for date calculations, defaults to `NSCalendar.currentCalendar()`
+       - parameter calendar: Calendar used for date calculations, defaults to `Calendar.current`
     
        - returns: TimePeriod - new instance
      */
-    public convenience init(size: TimePeriodSize, amount: Int = 1, startingAt date: NSDate, calendar: NSCalendar = NSCalendar.currentCalendar()) {
-        self.init(startDate: date, endDate: TimePeriod.dateWithAddedTime(size, amount: amount, baseDate: date, calendar: calendar), calendar: calendar)
+    public convenience init(size: TimePeriodSize, amount: Int = 1, startingAt date: Date, calendar: Calendar = Calendar.current) {
+        self.init(startDate: date, endDate: TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: date, calendar: calendar), calendar: calendar)
     }
     
     
@@ -111,14 +112,15 @@ public class TimePeriod: NSObject {
        - parameter size: Desired size of the new time period
        - parameter amount: Desired multiplier of the size provided
        - parameter date: Desired end date of the new time period
-       - parameter calendar: Calendar used for date calculations, defaults to `NSCalendar.currentCalendar()`
+       - parameter calendar: Calendar used for date calculations, defaults to `Calendar.current`
     
        - returns: TimePeriod - new instance
      */
-    public convenience init(size: TimePeriodSize, amount: Int = 1, endingAt date: NSDate, calendar: NSCalendar = NSCalendar.currentCalendar()) {
-        self.init(startDate: TimePeriod.dateWithSubtractedTime(size, amount: amount, baseDate: date, calendar: calendar), endDate: date, calendar: calendar)
+    public convenience init(size: TimePeriodSize, amount: Int = 1, endingAt date: Date, calendar: Calendar = Calendar.current) {
+        self.init(startDate: TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: date, calendar: calendar), endDate: date, calendar: calendar)
     }
     
+    // MARK: - TimePeriod methods
     /**
       Returns a new instance of TimePeriod that represents the largest time period available.
       The start date is in the distant past and the end date is in the distant future.
@@ -126,7 +128,7 @@ public class TimePeriod: NSObject {
       - returns: TimePeriod - new instance
      */
     public class func timePeriodWithAllTime() -> TimePeriod {
-        return TimePeriod(startDate: NSDate.distantPast(), endDate: NSDate.distantFuture())
+        return TimePeriod(startDate: Date.distantPast, endDate: Date.distantFuture)
     }
     
     /**
@@ -135,28 +137,28 @@ public class TimePeriod: NSObject {
       - returns: true if receiver is a moment, otherwise false
      */
     public func isMoment() -> Bool {
-        return self.startDate.isEqualToDate(self.endDate)
+        return self.startDate == self.endDate
     }
     
-    
+    // MARK: - Duration methods
     /**
        - returns: duration of the receiver in given `TimePeriodSize`
      */
     public func durationIn(size: TimePeriodSize) -> Int {
         switch size {
-        case .Second:
+        case .second:
             return Int(self.durationInSeconds)
-        case .Minute:
+        case .minute:
             return Int(self.durationInMinutes)
-        case .Hour:
+        case .hour:
             return Int(self.durationInHours)
-        case .Day:
+        case .day:
             return self.durationInDays
-        case .Week:
+        case .week:
             return self.durationInWeeks
-        case .Month:
+        case .month:
             return self.durationInMonths
-        case .Year:
+        case .year:
             return self.durationInYears
         }
     }
@@ -165,51 +167,52 @@ public class TimePeriod: NSObject {
         - returns: duration of the receiver in years
      */
     public var durationInYears: Int {
-        get { return self.calendar.yearsEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.yearsEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in months
     */
     public var durationInMonths: Int {
-        get { return self.calendar.monthsEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.monthsEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in weeks
     */
     public var durationInWeeks: Int {
-        get { return self.calendar.weeksEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.weeksEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in days
     */
     public var durationInDays: Int {
-        get { return self.calendar.daysEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.daysEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in hours
     */
     public var durationInHours: Double {
-        get { return self.calendar.hoursEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.hoursEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in minutes
     */
     public var durationInMinutes: Double {
-        get { return self.calendar.minutesEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.minutesEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in seconds
     */
     public var durationInSeconds: Double {
-        get { return self.calendar.secondsEarlierFor(self.startDate, thanDate: self.endDate) }
+        get { return self.calendar.secondsEarlier(for: self.startDate, than: self.endDate) }
     }
     
+    // MARK: - Relationship methods
     /**
        Returns a `Bool` representing whether the receiver's start and end dates exatcly match a given time period
     
@@ -217,7 +220,7 @@ public class TimePeriod: NSObject {
     
        - returns: `true` if the two periods are the same, otherwise `false`
      */
-    public func isEqualToPeriod(period: TimePeriod) -> Bool {
+    public func isEqualTo(period: TimePeriod) -> Bool {
         return (self.startDate == period.startDate) && (self.endDate == period.endDate)
     }
     
@@ -255,8 +258,8 @@ public class TimePeriod: NSObject {
     public func overlapsWith(period: TimePeriod) -> Bool {
         return (
             (period.startDate <  self.startDate && period.endDate >  self.startDate) ||
-                (period.startDate >= self.startDate && period.endDate <= self.endDate) ||
-                (period.startDate <  self.endDate   && period.endDate >  self.endDate)
+            (period.startDate >= self.startDate && period.endDate <= self.endDate) ||
+            (period.startDate <  self.endDate   && period.endDate >  self.endDate)
         )
     }
     
@@ -271,8 +274,8 @@ public class TimePeriod: NSObject {
     public func intersects(period: TimePeriod) -> Bool {
         return (
             (period.startDate <  self.startDate && period.endDate >= self.startDate) ||
-                (period.startDate >= self.startDate && period.endDate <= self.endDate) ||
-                (period.startDate <= self.endDate   && period.endDate >  self.endDate)
+            (period.startDate >= self.startDate && period.endDate <= self.endDate) ||
+            (period.startDate <= self.endDate   && period.endDate >  self.endDate)
         )
     }
     
@@ -281,39 +284,39 @@ public class TimePeriod: NSObject {
     
        - returns: the relationship of the receiver to a given `TimePeriod`
      */
-    public func relationToPeriod(period: TimePeriod) -> TimePeriodRelation {
+    public func relationTo(period: TimePeriod) -> TimePeriodRelation {
         guard self.startDate < self.endDate && period.startDate < period.endDate else {
-            return .None
+            return .none
         }
         
         if period.endDate < self.startDate {
-            return .After
+            return .after
         } else if period.endDate == self.startDate {
-            return .StartTouching
+            return .startTouching
         } else if period.startDate <  self.startDate && period.endDate < self.endDate  {
-            return .StartInside
+            return .startInside
         } else if period.startDate == self.startDate && period.endDate > self.endDate {
-            return .InsideStartTouching
+            return .insideStartTouching
         } else if period.startDate == self.startDate && period.endDate < self.endDate {
-            return .EnclosingStartTouching
+            return .enclosingStartTouching
         } else if period.startDate > self.startDate  && period.endDate < self.endDate {
-            return .Enclosing
+            return .enclosing
         } else if period.startDate > self.startDate  && period.endDate == self.endDate {
-            return .EnclosingEndTouching
+            return .enclosingEndTouching
         } else if period.startDate == self.startDate && period.endDate == self.endDate {
-            return .ExactMatch
+            return .exactMatch
         } else if period.startDate < self.startDate  && period.endDate > self.endDate {
-            return .Inside
+            return .inside
         } else if period.startDate < self.startDate  && period.endDate == self.endDate {
-            return .InsideEndTouching
+            return .insideEndTouching
         } else if period.startDate < self.endDate    && period.endDate > self.endDate {
-            return .EndInside
+            return .endInside
         } else if period.startDate == self.endDate   && period.endDate > self.endDate {
-            return .EndTouching
+            return .endTouching
         } else if period.startDate > self.endDate {
-            return .Before
+            return .before
         }
-        return .None
+        return .none
     }
     
     /**
@@ -321,11 +324,11 @@ public class TimePeriod: NSObject {
     
        - returns: the gap in seconds between the receiver and provided time period. Returns 0 if the time periods intersect, otherwise returns the gap between.
      */
-    public func gapBetween(period: TimePeriod) -> NSTimeInterval {
+    public func gapBetween(period: TimePeriod) -> TimeInterval {
         if self.endDate < period.startDate {
-            return abs(self.endDate.timeIntervalSinceDate(period.startDate))
+            return abs(self.endDate.timeIntervalSince(period.startDate))
         } else if period.endDate < self.startDate {
-            return abs(period.endDate.timeIntervalSinceDate(self.startDate))
+            return abs(period.endDate.timeIntervalSince(self.startDate))
         }
         return 0
     }
@@ -336,24 +339,25 @@ public class TimePeriod: NSObject {
     
        - returns: `Bool` representing whether the provided date is contained in the receiver.
      */
-    public func containsDate(date: NSDate, interval: TimePeriodInterval) -> Bool {
+    public func contains(date: Date, interval: TimePeriodInterval) -> Bool {
         switch interval {
-        case .Open:
+        case .open:
             return self.startDate < date && self.endDate > date
-        case .Closed:
+        case .closed:
             return self.startDate <= date && self.endDate >= date
         }
     }
     
+    // MARK: - Mutating methods
     /**
        Shifts the `startDate` and `endDate` earlier by a given size amount. Amount multiplies size.
     
        - parameter size: Desired shift size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func shiftEarlierWithSize(size: TimePeriodSize, amount: Int = 1) {
-        self.startDate = TimePeriod.dateWithSubtractedTime(size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
-        self.endDate = TimePeriod.dateWithSubtractedTime(size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
+    public func shiftEarlier(withSize size: TimePeriodSize, amount: Int = 1) {
+        self.startDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
+        self.endDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
     }
     
     /**
@@ -362,9 +366,9 @@ public class TimePeriod: NSObject {
        - parameter size: Desired shift size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func shiftLaterWithSize(size: TimePeriodSize, amount: Int = 1) {
-        self.startDate = TimePeriod.dateWithAddedTime(size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
-        self.endDate = TimePeriod.dateWithAddedTime(size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
+    public func shiftLater(withSize size: TimePeriodSize, amount: Int = 1) {
+        self.startDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
+        self.endDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
     }
     
     /**
@@ -374,15 +378,15 @@ public class TimePeriod: NSObject {
        - parameter size: Desired lenghtening size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func lengthenWithAnchorDate(anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
+    public func lengthen(withAnchor anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
         switch anchor {
-        case .Start:
-            self.endDate = TimePeriod.dateWithAddedTime(size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
-        case .Center:
-            self.startDate = TimePeriod.dateWithSubtractedTime(size, amount: Int(Double(amount) * 0.5), baseDate: self.startDate, calendar: self.calendar)
-            self.endDate = TimePeriod.dateWithAddedTime(size, amount: Int(Double(amount) * 0.5), baseDate: self.endDate, calendar: self.calendar)
-        case .End:
-            self.startDate = TimePeriod.dateWithSubtractedTime(size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
+        case .start:
+            self.endDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
+        case .center:
+            self.startDate = TimePeriod.dateWithSubtractedTime(size: size, amount: Int(Double(amount) * 0.5), baseDate: self.startDate, calendar: self.calendar)
+            self.endDate = TimePeriod.dateWithAddedTime(size: size, amount: Int(Double(amount) * 0.5), baseDate: self.endDate, calendar: self.calendar)
+        case .end:
+            self.startDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         }
     }
     
@@ -393,68 +397,67 @@ public class TimePeriod: NSObject {
        - parameter size: Desired shortening size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func shortenWithAnchorDate(anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
+    public func shorten(withAnchor anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
         switch anchor {
-        case .Start:
-            self.endDate = TimePeriod.dateWithSubtractedTime(size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
-        case .Center:
-            self.startDate = TimePeriod.dateWithAddedTime(size, amount: Int(Double(amount) * 0.5), baseDate: self.startDate, calendar: self.calendar)
-            self.endDate = TimePeriod.dateWithSubtractedTime(size, amount: Int(Double(amount) * 0.5), baseDate: self.endDate, calendar: self.calendar)
-        case .End:
-            self.startDate = TimePeriod.dateWithAddedTime(size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
+        case .start:
+            self.endDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
+        case .center:
+            self.startDate = TimePeriod.dateWithAddedTime(size: size, amount: Int(Double(amount) * 0.5), baseDate: self.startDate, calendar: self.calendar)
+            self.endDate = TimePeriod.dateWithSubtractedTime(size: size, amount: Int(Double(amount) * 0.5), baseDate: self.endDate, calendar: self.calendar)
+        case .end:
+            self.startDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         }
     }
     
-    public override func copy() -> AnyObject {
-        return TimePeriod(startDate: NSDate(timeIntervalSince1970: self.startDate.timeIntervalSince1970), endDate: NSDate(timeIntervalSince1970: self.endDate.timeIntervalSince1970), calendar: self.calendar.copy() as! NSCalendar)
-    }
+    // public override func copy() -> AnyObject {
+    //    return TimePeriod(startDate: Date(timeIntervalSince1970: self.startDate.timeIntervalSince1970), endDate: Date(timeIntervalSince1970: self.endDate.timeIntervalSince1970), calendar: self.calendar.copy() as! Calendar)
+    // }
     
-    //MARK: - Private
-    
-    private class func dateWithAddedTime(size: TimePeriodSize, amount: Int, baseDate date: NSDate, calendar: NSCalendar) -> NSDate {
+    // MARK: - Private helper methods
+    private class func dateWithAddedTime(size: TimePeriodSize, amount: Int, baseDate date: Date, calendar: Calendar) -> Date {
         switch size {
-        case .Second:
-            return calendar.dateByAddingSeconds(amount, toDate: date)
-        case .Minute:
-            return calendar.dateByAddingMinutes(amount, toDate: date)
-        case .Hour:
-            return calendar.dateByAddingHours(amount, toDate: date)
-        case .Day:
-            return calendar.dateByAddingDays(amount, toDate: date)
-        case .Week:
-            return calendar.dateByAddingWeeks(amount, toDate: date)
-        case .Month:
-            return calendar.dateByAddingMonths(amount, toDate: date)
-        case .Year:
-            return calendar.dateByAddingYears(amount, toDate: date)
+        case .second:
+            return calendar.dateByAdding(seconds: amount, to: date)
+        case .minute:
+            return calendar.dateByAdding(minutes: amount, to: date)
+        case .hour:
+            return calendar.dateByAdding(hours: amount, to: date)
+        case .day:
+            return calendar.dateByAdding(days: amount, to: date)
+        case .week:
+            return calendar.dateByAdding(weeks: amount, to: date)
+        case .month:
+            return calendar.dateByAdding(months: amount, to: date)
+        case .year:
+            return calendar.dateByAdding(years: amount, to: date)
         }
     }
     
-    private class func dateWithSubtractedTime(size: TimePeriodSize, amount: Int, baseDate date: NSDate, calendar: NSCalendar) -> NSDate {
+    private class func dateWithSubtractedTime(size: TimePeriodSize, amount: Int, baseDate date: Date, calendar: Calendar) -> Date {
         switch size {
-        case .Second:
-            return calendar.dateBySubtractingSeconds(amount, toDate: date)
-        case .Minute:
-            return calendar.dateBySubtractingMinutes(amount, toDate: date)
-        case .Hour:
-            return calendar.dateBySubtractingHours(amount, toDate: date)
-        case .Day:
-            return calendar.dateBySubtractingDays(amount, toDate: date)
-        case .Week:
-            return calendar.dateBySubtractingWeeks(amount, toDate: date)
-        case .Month:
-            return calendar.dateBySubtractingMonths(amount, toDate: date)
-        case .Year:
-            return calendar.dateBySubtractingYears(amount, toDate: date)
+        case .second:
+            return calendar.dateBySubtracting(seconds: amount, from: date)
+        case .minute:
+            return calendar.dateBySubtracting(minutes: amount, from: date)
+        case .hour:
+            return calendar.dateBySubtracting(hours: amount, from: date)
+        case .day:
+            return calendar.dateBySubtracting(days: amount, from: date)
+        case .week:
+            return calendar.dateBySubtracting(weeks: amount, from: date)
+        case .month:
+            return calendar.dateBySubtracting(months: amount, from: date)
+        case .year:
+            return calendar.dateBySubtracting(years: amount, from: date)
         }
     }
-    
 }
 
+// MARK: - Comparators
 public func == (lhs: TimePeriod, rhs: TimePeriod) -> Bool {
-    return lhs.isEqualToPeriod(rhs)
+    return lhs.isEqualTo(period: rhs)
 }
 
 public func != (lhs: TimePeriod, rhs: TimePeriod) -> Bool {
-    return !lhs.isEqualToPeriod(rhs)
+    return !lhs.isEqualTo(period: rhs)
 }

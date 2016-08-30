@@ -23,12 +23,12 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
     /**
        The start date of `TimePeriodCollection` representing the earliest date of TimePeriod objects.
      */
-    public var startDate: NSDate?
+    public var startDate: Date?
     
     /**
        The end date of `TimePeriodCollection` representing the latest date of TimePeriod objects.
      */
-    public var endDate: NSDate?
+    public var endDate: Date?
     
     internal(set) var periods: [TimePeriod] = [] {
         didSet {
@@ -36,15 +36,15 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         }
     }
     
-    internal(set) var calendar: NSCalendar
+    internal(set) var calendar: Calendar
     
     /**
        Initializes an instance of `TimePeriodCollection` using given calendar
     
-       - parameter calendar: Calendar used for date calculations, defaults to `NSCalendar.currentCalendar()`
+       - parameter calendar: Calendar used for date calculations, defaults to `Calendar.current`
     
      */
-    public init(calendar: NSCalendar = NSCalendar.currentCalendar()) {
+    public init(calendar: Calendar = Calendar.current) {
         self.calendar = calendar
         super.init()
     }
@@ -69,7 +69,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
             return
         }
         
-        self.periods.insert(timePeriod, atIndex: index)
+        self.periods.insert(timePeriod, at: index)
     }
     
     /**
@@ -85,7 +85,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         }
         
         let period = self.periods[index]
-        self.periods.removeAtIndex(index)
+        self.periods.remove(at: index)
         
         return period
     }
@@ -94,7 +94,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         Sorts collection by `startDate` in ascending order
     */
     public func sortByStartAscending() {
-        self.periods.sortInPlace { (lhs, rhs) -> Bool in
+        self.periods.sort { (lhs, rhs) -> Bool in
             return lhs.startDate < rhs.startDate
         }
     }
@@ -103,7 +103,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         Sorts collection by `startDate` in descending order
     */
     public func sortByStartDescending() {
-        self.periods.sortInPlace { (lhs, rhs) -> Bool in
+        self.periods.sort { (lhs, rhs) -> Bool in
             return lhs.startDate > rhs.startDate
         }
     }
@@ -112,7 +112,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         Sorts collection by `endDate` in ascending order
     */
     public func sortByEndAscending() {
-        self.periods.sortInPlace { (lhs, rhs) -> Bool in
+        self.periods.sort { (lhs, rhs) -> Bool in
             return lhs.endDate < rhs.endDate
         }
     }
@@ -121,7 +121,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         Sorts collection by `endDate` in descending order
     */
     public func sortByEndDescending() {
-        self.periods.sortInPlace { (lhs, rhs) -> Bool in
+        self.periods.sort { (lhs, rhs) -> Bool in
             return lhs.endDate > rhs.endDate
         }
     }
@@ -130,7 +130,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         Sorts collection by `TimePeriod` duration in ascending order
     */
     public func sortByDurationAscending() {
-        self.periods.sortInPlace { (lhs, rhs) -> Bool in
+        self.periods.sort { (lhs, rhs) -> Bool in
             return lhs.durationInSeconds < rhs.durationInSeconds
         }
     }
@@ -139,7 +139,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         Sorts collection by `TimePeriod` duration in descending order
     */
     public func sortByDurationDescending() {
-        self.periods.sortInPlace { (lhs, rhs) -> Bool in
+        self.periods.sort { (lhs, rhs) -> Bool in
             return lhs.durationInSeconds > rhs.durationInSeconds
         }
     }
@@ -150,7 +150,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         - returns: `TimePeriodCollection` containing `TimePeriod` objects that are inside of given `TimePeriod`
     */
     public func periodsInside(period: TimePeriod) -> TimePeriodCollection {
-        return self.periodsWithRelationToPeriod(period, relation: TimePeriod.isInside)
+        return self.periodsWithRelationToPeriod(period: period, relation: TimePeriod.isInside)
     }
     
     /**
@@ -158,12 +158,12 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
     
         - returns: `TimePeriodCollection` containing `TimePeriod` objects that intersect given date
     */
-    public func periodsIntersectedByDate(date: NSDate) -> TimePeriodCollection {
+    public func periodsIntersectedByDate(date: Date) -> TimePeriodCollection {
         let collection = TimePeriodCollection(calendar: self.calendar)
         
         self.periods.forEach { elem in
-            if elem.containsDate(date, interval: TimePeriodInterval.Closed) {
-                collection.addTimePeriod(elem)
+            if elem.contains(date: date, interval: TimePeriodInterval.closed) {
+                collection.addTimePeriod(timePeriod: elem)
             }
         }
         
@@ -176,7 +176,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         - returns: `TimePeriodCollection` containing `TimePeriod` objects that intersect given `TimePeriod`
     */
     public func periodsIntersectedByPeriod(period: TimePeriod) -> TimePeriodCollection {
-        return self.periodsWithRelationToPeriod(period, relation: TimePeriod.intersects)
+        return self.periodsWithRelationToPeriod(period: period, relation: TimePeriod.intersects)
     }
 
     /**
@@ -185,7 +185,7 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         - returns: `TimePeriodCollection` containing `TimePeriod` objects that are overlapped by given `TimePeriod`. This covers all space they share, minus instantaneous space (i.e. one's start date equals another's end date)
     */
     public func periodsOverlappedByPeriod(period: TimePeriod) -> TimePeriodCollection {
-        return self.periodsWithRelationToPeriod(period, relation: TimePeriod.overlapsWith)
+        return self.periodsWithRelationToPeriod(period: period, relation: TimePeriod.overlapsWith)
     }
     
     /**
@@ -197,29 +197,29 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         - returns: true when collections are equal, false otherwise
     */
     public func isEqualToCollection(collection: TimePeriodCollection, considerOrder: Bool = false) -> Bool {
-        if !self.hasSameCharacteristicsAs(collection) {
+        if !self.hasSameCharacteristicsAs(timePeriodGroup: collection) {
             return false
         }
         
         if considerOrder {
-            return self.isEqualToCollectionConsideringOrder(collection)
+            return self.isEqualToCollectionConsideringOrder(collection: collection)
         } else {
-            return self.isEqualToCollectionNotConsideringOrder(collection)
+            return self.isEqualToCollectionNotConsideringOrder(collection: collection)
         } 
     }
     
-    public override func copy() -> AnyObject {
-        let collection = TimePeriodCollection(calendar: self.calendar)
-        for period in self.periods {
-            collection.addTimePeriod(period)
-        }
-        return collection
-    }
+    // public override func copy() -> AnyObject {
+    //    let collection = TimePeriodCollection(calendar: self.calendar)
+    //    for period in self.periods {
+    //        collection.addTimePeriod(timePeriod: period)
+    //    }
+    //    return collection
+    // }
     
     //MARK: - Private
     
     private func isEqualToCollectionConsideringOrder(collection: TimePeriodCollection) -> Bool {
-        for (idx, period) in self.periods.enumerate() {
+        for (idx, period) in self.periods.enumerated() {
             if collection[idx] != period {
                 return false
             }
@@ -238,12 +238,12 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         return true
     }
     
-    private func periodsWithRelationToPeriod(period: TimePeriod, relation: TimePeriod -> TimePeriod -> Bool) -> TimePeriodCollection {
+    private func periodsWithRelationToPeriod(period: TimePeriod, relation: (TimePeriod) -> (TimePeriod) -> Bool) -> TimePeriodCollection {
         let collection = TimePeriodCollection(calendar: self.calendar)
         
         self.periods.forEach { elem in
             if relation(elem)(period) {
-                collection.addTimePeriod(elem)
+                collection.addTimePeriod(timePeriod: elem)
             }
         }
         
@@ -251,8 +251,8 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
     }
     
     private func updateVariables() {
-        self.startDate = NSDate.distantFuture()
-        self.endDate = NSDate.distantPast()
+        self.startDate = Date.distantFuture
+        self.endDate = Date.distantPast
         
         for period in self.periods {
             if self.startDate! > period.startDate {
@@ -270,9 +270,9 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
 }
 
 public func == (lhs: TimePeriodCollection, rhs: TimePeriodCollection) -> Bool {
-    return lhs.isEqualToCollection(rhs)
+    return lhs.isEqualToCollection(collection: rhs)
 }
 
 public func != (lhs: TimePeriodCollection, rhs: TimePeriodCollection) -> Bool {
-    return !lhs.isEqualToCollection(rhs)
+    return !lhs.isEqualToCollection(collection: rhs)
 }

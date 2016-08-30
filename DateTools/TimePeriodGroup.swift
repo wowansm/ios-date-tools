@@ -19,7 +19,7 @@
 import Foundation
 
 protocol TimePeriodGroup: NSObjectProtocol {
-    
+    // MARK: - Date properties
     /**
       Number of time periods in group
     */
@@ -33,21 +33,21 @@ protocol TimePeriodGroup: NSObjectProtocol {
     /**
       The start date of a group representing the earliest date of the time periods
     */
-    var startDate: NSDate? { get }
-    
+    var startDate: Date? { get }
     
     /**
       The end date of a group representing the latest date of the time periods
     */
-    var endDate: NSDate? { get }
+    var endDate: Date? { get }
     
     /**
       Calendar used for date calculations
     */
-    var calendar: NSCalendar { get }
+    var calendar: Calendar { get }
 
     subscript(index: Int) -> TimePeriod { get set }
     
+    // MARK: - Duration properties
     var durationInYears:   Int { get }
     var durationInMonths:  Int { get }
     var durationInWeeks:   Int { get }
@@ -56,6 +56,7 @@ protocol TimePeriodGroup: NSObjectProtocol {
     var durationInMinutes: Int { get }
     var durationInSeconds: Int { get }
     
+    // MARK: - Methods
     /**
         Returns the duration of the receiver in given TimePeriodSize
     
@@ -81,7 +82,6 @@ protocol TimePeriodGroup: NSObjectProtocol {
     */
     func shiftEarlierWithSize(size: TimePeriodSize, amount: Int)
     
-    
     /**
         Checks whether given TimePeriodGroup has the same startDate, endDate and number of TimePeriod objects
     
@@ -93,7 +93,7 @@ protocol TimePeriodGroup: NSObjectProtocol {
 }
 
 extension TimePeriodGroup {
-    
+    // MARK: - Properties
     var count: Int { get { return self.periods.count } }
     
     subscript(index: Int) -> TimePeriod {
@@ -105,83 +105,83 @@ extension TimePeriodGroup {
         }
     }
     
-    var durationInYears:   Int {
+    var durationInYears: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return self.calendar.yearsEarlierFor(startDate, thanDate: endDate)
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return self.calendar.yearsEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInMonths:  Int {
+    var durationInMonths: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return self.calendar.monthsEarlierFor(startDate, thanDate: endDate)
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return self.calendar.monthsEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInWeeks:   Int {
+    var durationInWeeks: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return self.calendar.weeksEarlierFor(startDate, thanDate: endDate)
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return self.calendar.weeksEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInDays:    Int {
+    var durationInDays: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return self.calendar.daysEarlierFor(startDate, thanDate: endDate)
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return self.calendar.daysEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInHours:   Int {
+    var durationInHours: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return Int(self.calendar.hoursEarlierFor(startDate, thanDate: endDate))
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return Int(self.calendar.hoursEarlier(for: startDate, than: endDate))
         }
     }
     
     var durationInMinutes: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return Int(self.calendar.minutesEarlierFor(startDate, thanDate: endDate))
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return Int(self.calendar.minutesEarlier(for: startDate, than: endDate))
         }
     }
     
     var durationInSeconds: Int {
         get {
-            guard let startDate = self.startDate, endDate = self.endDate else { return 0 }
-            return Int(self.calendar.secondsEarlierFor(startDate, thanDate: endDate))
+            guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
+            return Int(self.calendar.secondsEarlier(for: startDate, than: endDate))
         }
     }
     
     func durationIn(size: TimePeriodSize) -> Int {
         switch size {
-        case .Second:
+        case .second:
             return self.durationInSeconds
-        case .Minute:
+        case .minute:
             return self.durationInMinutes
-        case .Hour:
+        case .hour:
             return self.durationInHours
-        case .Day:
+        case .day:
             return self.durationInDays
-        case .Week:
+        case .week:
             return self.durationInWeeks
-        case .Month:
+        case .month:
             return self.durationInMonths
-        case .Year:
+        case .year:
             return self.durationInYears
         }
     }
     
     func shiftLaterWithSize(size: TimePeriodSize, amount: Int = 1) {
         self.periods.forEach { elem in
-            elem.shiftLaterWithSize(size, amount: amount)
+            elem.shiftLater(withSize: size, amount: amount)
         }
     }
     
     func shiftEarlierWithSize(size: TimePeriodSize, amount: Int) {
         self.periods.forEach { elem in
-            elem.shiftEarlierWithSize(size, amount: amount)
+            elem.shiftEarlier(withSize: size, amount: amount)
         }
     }
     
