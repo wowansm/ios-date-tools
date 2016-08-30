@@ -1,6 +1,7 @@
 use_frameworks!
 
-target 'DateToolsTests', :exclusive => true do
-	pod 'Nimble', '~> 2.0.0-rc.3'
+target 'DateToolsTests' do
+    pod 'Nimble',
+	:git => 'https://github.com/norio-nomura/Nimble.git',
+	:branch => 'nn-swift-3-compatibility'
 end
-
