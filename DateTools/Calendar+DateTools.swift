@@ -128,7 +128,7 @@ public extension Calendar {
     // MARK: - Counting components between dates
     public func years(from firstDate: Date, to secondDate: Date) -> Int {
         let earliest = (firstDate < secondDate) ? firstDate : secondDate
-        let latest = (firstDate < secondDate) ? secondDate : firstDate
+        let latest = (firstDate == earliest) ? secondDate : firstDate
         
         let multiplier = (earliest == firstDate) ? -1 : 1
         let components = self.dateComponents([Calendar.Component.year], from: earliest, to: latest)
@@ -138,7 +138,7 @@ public extension Calendar {
     
     public func months(from firstDate: Date, to secondDate: Date) -> Int {
         let earliest = (firstDate < secondDate) ? firstDate : secondDate
-        let latest = (firstDate < secondDate) ? secondDate : firstDate
+        let latest = (firstDate == earliest) ? secondDate : firstDate
         
         let multiplier = (earliest == firstDate) ? -1 : 1
         let components = self.dateComponents(allCalendarComponentFlags, from: earliest, to: latest)
@@ -147,7 +147,7 @@ public extension Calendar {
     
     public func weeks(from firstDate: Date, to secondDate: Date) -> Int {
         let earliest = (firstDate < secondDate) ? firstDate : secondDate
-        let latest = (firstDate < secondDate) ? secondDate : firstDate
+        let latest = (firstDate == earliest) ? secondDate : firstDate
         
         let multiplier = (earliest == firstDate) ? -1 : 1
         let components = self.dateComponents([Calendar.Component.weekOfYear], from: earliest, to: latest)
@@ -157,7 +157,7 @@ public extension Calendar {
     
     public func days(from firstDate: Date, to secondDate: Date) -> Int {
         let earliest = (firstDate < secondDate) ? firstDate : secondDate
-        let latest = (firstDate < secondDate) ? secondDate : firstDate
+        let latest = (firstDate == earliest) ? secondDate : firstDate
         
         let multiplier = (earliest == firstDate) ? -1 : 1
         let components = self.dateComponents([Calendar.Component.day], from: earliest, to: latest)
