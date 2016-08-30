@@ -194,15 +194,15 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
         return true
     }
     
-    // public override func copy() -> AnyObject {
-    //    let chain = TimePeriodChain(calendar: self.calendar)
-    //    for period in self.periods {
-    //        chain.addTimePeriod(timePeriod: period)
-    //    }
-    //    return chain
-    // }
-    
-    private func updateVariables() {
+    public override func copy() -> Any {
+        let chain = TimePeriodChain(calendar: self.calendar)
+        for period in self.periods {
+            chain.add(timePeriod: period)
+        }
+        return chain
+    }
+
+private func updateVariables() {
         self.startDate = self.periods.first?.startDate
         self.endDate = self.periods.last?.endDate
     }

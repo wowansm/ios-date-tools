@@ -208,13 +208,13 @@ public class TimePeriodCollection: NSObject, TimePeriodGroup {
         } 
     }
     
-    // public override func copy() -> AnyObject {
-    //    let collection = TimePeriodCollection(calendar: self.calendar)
-    //    for period in self.periods {
-    //        collection.addTimePeriod(timePeriod: period)
-    //    }
-    //    return collection
-    // }
+     public override func copy() -> Any {
+        let collection = TimePeriodCollection(calendar: self.calendar)
+        for period in self.periods {
+            collection.add(timePeriod: period)
+        }
+        return collection
+     }
     
     //MARK: - Private
     

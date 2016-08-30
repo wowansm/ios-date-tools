@@ -409,9 +409,9 @@ public class TimePeriod: NSObject {
         }
     }
     
-    // public override func copy() -> AnyObject {
-    //    return TimePeriod(startDate: Date(timeIntervalSince1970: self.startDate.timeIntervalSince1970), endDate: Date(timeIntervalSince1970: self.endDate.timeIntervalSince1970), calendar: self.calendar.copy() as! Calendar)
-    // }
+     public override func copy() -> Any {
+        return TimePeriod(startDate: Date(timeIntervalSince1970: self.startDate.timeIntervalSince1970), endDate: Date(timeIntervalSince1970: self.endDate.timeIntervalSince1970), calendar: self.calendar)
+     }
     
     // MARK: - Private helper methods
     private class func dateWithAddedTime(size: TimePeriodSize, amount: Int, baseDate date: Date, calendar: Calendar) -> Date {
