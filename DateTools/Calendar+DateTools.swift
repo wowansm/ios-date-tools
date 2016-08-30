@@ -18,8 +18,7 @@
 
 import Foundation
 
-// Deprecate?
-public let allCalendarComponentFlags: [Calendar.Component] = [
+public let allCalendarComponentFlags: Set<Calendar.Component> = [
     Calendar.Component.year, Calendar.Component.quarter, Calendar.Component.month, Calendar.Component.day,
     Calendar.Component.hour, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal,
     Calendar.Component.weekOfMonth, Calendar.Component.weekOfYear, Calendar.Component.yearForWeekOfYear
@@ -142,9 +141,7 @@ public extension Calendar {
         let latest = (firstDate < secondDate) ? secondDate : firstDate
         
         let multiplier = (earliest == firstDate) ? -1 : 1
-        // Does this still work?
-        let components = self.dateComponents([Calendar.Component.month], from: earliest, to: latest)
-        
+        let components = self.dateComponents(allCalendarComponentFlags, from: earliest, to: latest)
         return multiplier * (components.month! + 12 * components.year!)
     }
     
