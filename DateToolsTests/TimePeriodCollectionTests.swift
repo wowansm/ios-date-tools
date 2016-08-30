@@ -14,8 +14,8 @@ class TimePeriodCollectionTests: XCTestCase {
     
     var collection: TimePeriodCollection!
     var emptyCollection: TimePeriodCollection!
-    var calendar: NSCalendar!
-    var startDate: NSDate!
+    var calendar: Calendar!
+    var startDate: Date!
     
     var monthPeriod: TimePeriod!
     var twoMonthsPeriod: TimePeriod!
@@ -26,22 +26,22 @@ class TimePeriodCollectionTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
         collection = TimePeriodCollection(calendar: calendar)
         emptyCollection = TimePeriodCollection(calendar: calendar)
         
-        startDate = date("2010-01-01")
-        monthPeriod = self.createTimePeriodWithMonthSize(1, startingAt: startDate)
-        twoMonthsPeriod = self.createTimePeriodWithMonthSize(2, startingAt: startDate)
-        monthPeriodAfterMonth = self.createTimePeriodWithMonthSize(1, startingAt: calendar.dateByAddingMonths(1, toDate: self.startDate))
-        twoMonthsPeriodAfterTwoWeeks = self.createTimePeriodWithMonthSize(2, startingAt: calendar.dateByAddingWeeks(2, toDate: self.startDate))
-        fourMonthsPeriod = self.createTimePeriodWithMonthSize(4, startingAt: self.startDate)
+        startDate = date(dateString: "2010-01-01")
+        monthPeriod = self.createTimePeriodWithMonthSize(amount: 1, startingAt: startDate)
+        twoMonthsPeriod = self.createTimePeriodWithMonthSize(amount: 2, startingAt: startDate)
+        monthPeriodAfterMonth = self.createTimePeriodWithMonthSize(amount: 1, startingAt: calendar.dateByAdding(months: 1, to: self.startDate))
+        twoMonthsPeriodAfterTwoWeeks = self.createTimePeriodWithMonthSize(amount: 2, startingAt: calendar.dateByAdding(weeks: 2, to: self.startDate))
+        fourMonthsPeriod = self.createTimePeriodWithMonthSize(amount: 4, startingAt: self.startDate)
         
-        collection.addTimePeriod(monthPeriod)
-        collection.addTimePeriod(twoMonthsPeriod)
-        collection.addTimePeriod(monthPeriodAfterMonth)
-        collection.addTimePeriod(twoMonthsPeriodAfterTwoWeeks)
+        collection.add(timePeriod: monthPeriod)
+        collection.add(timePeriod: twoMonthsPeriod)
+        collection.add(timePeriod: monthPeriodAfterMonth)
+        collection.add(timePeriod: twoMonthsPeriodAfterTwoWeeks)
     }
     
     override func tearDown() {
@@ -121,20 +121,20 @@ class TimePeriodCollectionTests: XCTestCase {
     //MARK: - Adding periods
     
     func testPeriodCollection_addTimePeriod_addsTimePeriodAtTheEndOfCollection() {
-        collection.addTimePeriod(fourMonthsPeriod)
+        collection.add(timePeriod: fourMonthsPeriod)
         expect(self.collection[4]) == fourMonthsPeriod
         expect(self.collection.count) == 5
     }
     
     func testPeriodCollection_insertTimePeriodAtTheBeginning_insertsTimePeriodAtTheBeginning() {
-        collection.insertTimePeriod(fourMonthsPeriod, atIndex: 0)
+        collection.insert(timePeriod: fourMonthsPeriod, atIndex: 0)
         expect(self.collection[0]) == fourMonthsPeriod
         expect(self.collection[1]) == monthPeriod
         expect(self.collection.count) == 5
     }
     
     func testPeriodCollection_insertTimePeriodInTheMiddle_insertsTimePeriodInTheMiddle() {
-        collection.insertTimePeriod(fourMonthsPeriod, atIndex: 2)
+        collection.insert(timePeriod: fourMonthsPeriod, atIndex: 2)
         expect(self.collection[2]) == fourMonthsPeriod
         expect(self.collection[1]) == twoMonthsPeriod
         expect(self.collection[3]) == monthPeriodAfterMonth
@@ -142,48 +142,48 @@ class TimePeriodCollectionTests: XCTestCase {
     }
     
     func testPeriodCollection_insertAtTheEnd_insertsTimePeriodAtTheEnd() {
-        collection.insertTimePeriod(fourMonthsPeriod, atIndex: 4)
+        collection.insert(timePeriod: fourMonthsPeriod, atIndex: 4)
         expect(self.collection[4]) == fourMonthsPeriod
     }
     
     func testPeriodCollection_insertAtBadIndex_doesNotInsertTimePeriod() {
-        collection.insertTimePeriod(fourMonthsPeriod, atIndex: 5)
+        collection.insert(timePeriod: fourMonthsPeriod, atIndex: 5)
         expect(self.collection.count) == 4
     }
     
     //MARK: - Removing periods
     
     func testPeriodCollection_removeFirstTimePeriod_removesAndReturnFirstTimePeriod() {
-        let removedPeriod = self.collection.removeTimePeriod(atIndex: 0)
+        let removedPeriod = self.collection.remove(atIndex: 0)
         expect(removedPeriod) == monthPeriod
         expect(self.collection.count) == 3
         expect(self.collection[0]) == twoMonthsPeriod
     }
     
     func testPeriodCollection_removeMiddleTimePeriod_removesMiddleTimePeriodAndReturn() {
-        let removedPeriod = self.collection.removeTimePeriod(atIndex: 2)
+        let removedPeriod = self.collection.remove(atIndex: 2)
         expect(removedPeriod) == monthPeriodAfterMonth
         expect(self.collection[2]) == twoMonthsPeriodAfterTwoWeeks
         expect(self.collection.count) == 3
     }
     
     func testPeriodCollection_removeLastTimePeriod_removesLastTimePeriodAndReturn() {
-        let removedPeriod = self.collection.removeTimePeriod(atIndex: 3)
+        let removedPeriod = self.collection.remove(atIndex: 3)
         expect(removedPeriod) == twoMonthsPeriodAfterTwoWeeks
         expect(self.collection.count) == 3
     }
     
     func testPeriodCollection_removePeriodOutsideBounds_doesNotCrashAndReturnsNil() {
-        let removedPeriod = self.collection.removeTimePeriod(atIndex: 4)
+        let removedPeriod = self.collection.remove(atIndex: 4)
         expect(removedPeriod).to(beNil())
         expect(self.collection.count) == 4
     }
     
     func testPeriodCollection_removeAllPeriodsFromCollection_yieldsEmptyCollection() {
-        self.collection.removeTimePeriod(atIndex: 0)
-        self.collection.removeTimePeriod(atIndex: 0)
-        self.collection.removeTimePeriod(atIndex: 0)
-        self.collection.removeTimePeriod(atIndex: 0)
+        self.collection.remove(atIndex: 0)
+        self.collection.remove(atIndex: 0)
+        self.collection.remove(atIndex: 0)
+        self.collection.remove(atIndex: 0)
         
         expect(self.collection.count) == 0
     }
@@ -241,66 +241,66 @@ class TimePeriodCollectionTests: XCTestCase {
     //MARK: - shifting tests
     
     func testPeriodCollection_shiftLater_shiftsAllPeriodsLaterByGivenSize() {
-        collection.shiftLaterWithSize(.Week, amount: 1)
+        collection.shiftLater(withSize: .week, amount: 1)
         
-        expect(self.collection[0].startDate) == date("2010-01-08")
-        expect(self.collection[0].endDate)   == date("2010-02-08")
+        expect(self.collection[0].startDate) == date(dateString: "2010-01-08")
+        expect(self.collection[0].endDate)   == date(dateString: "2010-02-08")
         
-        expect(self.collection[1].startDate) == date("2010-01-08")
-        expect(self.collection[1].endDate)   == date("2010-03-08")
+        expect(self.collection[1].startDate) == date(dateString: "2010-01-08")
+        expect(self.collection[1].endDate)   == date(dateString: "2010-03-08")
         
-        expect(self.collection[2].startDate) == date("2010-02-08")
-        expect(self.collection[2].endDate)   == date("2010-03-08")
+        expect(self.collection[2].startDate) == date(dateString: "2010-02-08")
+        expect(self.collection[2].endDate)   == date(dateString: "2010-03-08")
         
-        expect(self.collection[3].startDate) == date("2010-01-22")
-        expect(self.collection[3].endDate)   == date("2010-03-22")
+        expect(self.collection[3].startDate) == date(dateString: "2010-01-22")
+        expect(self.collection[3].endDate)   == date(dateString: "2010-03-22")
     }
     
     func testPeriodCollection_shiftEarlier_shiftsAllPeriodsEarlierByGivenSize() {
-        collection.shiftEarlierWithSize(.Month, amount: 2)
+        collection.shiftEarlier(withSize: .month, amount: 2)
         
-        expect(self.collection[0].startDate) == date("2009-11-01")
-        expect(self.collection[0].endDate)   == date("2009-12-01")
+        expect(self.collection[0].startDate) == date(dateString: "2009-11-01")
+        expect(self.collection[0].endDate)   == date(dateString: "2009-12-01")
         
-        expect(self.collection[1].startDate) == date("2009-11-01")
-        expect(self.collection[1].endDate)   == date("2010-01-01")
+        expect(self.collection[1].startDate) == date(dateString: "2009-11-01")
+        expect(self.collection[1].endDate)   == date(dateString: "2010-01-01")
         
-        expect(self.collection[2].startDate) == date("2009-12-01")
-        expect(self.collection[2].endDate)   == date("2010-01-01")
+        expect(self.collection[2].startDate) == date(dateString: "2009-12-01")
+        expect(self.collection[2].endDate)   == date(dateString: "2010-01-01")
         
-        expect(self.collection[3].startDate) == date("2009-11-15")
-        expect(self.collection[3].endDate)   == date("2010-01-15")
+        expect(self.collection[3].startDate) == date(dateString: "2009-11-15")
+        expect(self.collection[3].endDate)   == date(dateString: "2010-01-15")
     }
     
     func testPeriodCollection_isEqualToCollectionConsideringOrder_returnsTrueWhenCollectionsAreEqual() {
         let collectionCopy = self.collection.copy() as! TimePeriodCollection
         let secondCollection = TimePeriodCollection(calendar: calendar)
-        secondCollection.addTimePeriod(monthPeriod)
-        secondCollection.addTimePeriod(twoMonthsPeriod)
-        secondCollection.addTimePeriod(monthPeriodAfterMonth)
-        secondCollection.addTimePeriod(twoMonthsPeriodAfterTwoWeeks)
+        secondCollection.add(timePeriod: monthPeriod)
+        secondCollection.add(timePeriod: twoMonthsPeriod)
+        secondCollection.add(timePeriod: monthPeriodAfterMonth)
+        secondCollection.add(timePeriod: twoMonthsPeriodAfterTwoWeeks)
         
-        expect(collectionCopy.isEqualToCollection(self.collection, considerOrder: true)) == true
-        expect(secondCollection.isEqualToCollection(self.collection, considerOrder: true)) == true
-        expect(TimePeriodCollection().isEqualToCollection(self.emptyCollection, considerOrder: true)) == true
+        expect(collectionCopy.equals(collection: self.collection, considerOrder: true)) == true
+        expect(secondCollection.equals(collection: self.collection, considerOrder: true)) == true
+        expect(TimePeriodCollection().equals(collection: self.emptyCollection, considerOrder: true)) == true
     }
     
     func testPeriodCollection_isEqualToCollectionWithDifferentCharacteristics_returnsFalse() {
         let collectionCopy = self.collection.copy() as! TimePeriodCollection
         collectionCopy[1] = fourMonthsPeriod
         
-        expect(collectionCopy.isEqualToCollection(self.collection)) == false
+        expect(collectionCopy.equals(collection: self.collection)) == false
     }
     
     func testPeriodCollection_isEqualToCollectionConsideringOrder_returnsFalseWhenCollectionsAreNotEqual() {
         let collectionCopy = self.collection.copy() as! TimePeriodCollection
-        collectionCopy.addTimePeriod(fourMonthsPeriod)
+        collectionCopy.add(timePeriod: fourMonthsPeriod)
         let collection2 = self.collection.copy() as! TimePeriodCollection
         collection2[0] = collection[1]
         collection2[1] = collection[0]
         
-        expect(collectionCopy.isEqualToCollection(self.collection, considerOrder: true)) == false
-        expect(collection2.isEqualToCollection(self.collection, considerOrder: true)) == false
+        expect(collectionCopy.equals(collection: self.collection, considerOrder: true)) == false
+        expect(collection2.equals(collection: self.collection, considerOrder: true)) == false
     }
     
     func testPeriodCollection_isEqualNotConsideringOrder_returnsTrueWhenCollectionsAreEqual() {
@@ -308,14 +308,14 @@ class TimePeriodCollectionTests: XCTestCase {
         collectionCopy[0] = collection[1]
         collectionCopy[1] = collection[0]
         
-        expect(collectionCopy.isEqualToCollection(self.collection)) == true
+        expect(collectionCopy.equals(collection: self.collection)) == true
     }
     
     func testPeriodCollection_isEqualNotConsideringOrder_returnsFalseWhenCollectionsAreNotEqual() {
         let collectionCopy = self.collection.copy() as! TimePeriodCollection
-        collectionCopy[0] = TimePeriod(size: .Week, amount: 2, startingAt: self.startDate, calendar: self.calendar)
+        collectionCopy[0] = TimePeriod(size: .week, amount: 2, startingAt: self.startDate, calendar: self.calendar)
         
-        expect(collectionCopy.isEqualToCollection(self.collection)) == false
+        expect(collectionCopy.equals(collection: self.collection)) == false
         expect(collectionCopy == self.collection) == false
 
     }
@@ -323,8 +323,8 @@ class TimePeriodCollectionTests: XCTestCase {
     //MARK: - period relationship methods
     
     func testPeriodCollection_periodsInside_returnsAllPeriodsInsideOfAGivenPeriod() {
-        let periods1 = self.collection.periodsInside(TimePeriod(size: .Week, amount: 5, startingAt: self.startDate, calendar: self.calendar))
-        let periods2 = self.collection.periodsInside(TimePeriod(size: .Month, amount: 2, endingAt: self.twoMonthsPeriodAfterTwoWeeks.endDate, calendar: self.calendar))
+        let periods1 = self.collection.periodsInside(period: TimePeriod(size: .week, amount: 5, startingAt: self.startDate, calendar: self.calendar))
+        let periods2 = self.collection.periodsInside(period: TimePeriod(size: .month, amount: 2, endingAt: self.twoMonthsPeriodAfterTwoWeeks.endDate, calendar: self.calendar))
         
         expect(periods1.count) == 1
         expect(periods1[0]) == monthPeriod
@@ -335,8 +335,8 @@ class TimePeriodCollectionTests: XCTestCase {
     }
     
     func testPeriodCollection_periodsIntersectedByDate_returnsAllPeriodsThatContainGivenDate() {
-        let periods1 = self.collection.periodsIntersectedByDate(date("2010-01-20"))
-        let periods2 = self.collection.periodsIntersectedByDate(date("2010-03-02"))
+        let periods1 = self.collection.periodsIntersected(byDate: date(dateString: "2010-01-20"))
+        let periods2 = self.collection.periodsIntersected(byDate: date(dateString: "2010-03-02"))
         
         expect(periods1.count) == 3
         expect(periods1.periods).to(contain(monthPeriod, twoMonthsPeriod, twoMonthsPeriodAfterTwoWeeks))
@@ -346,8 +346,8 @@ class TimePeriodCollectionTests: XCTestCase {
     }
     
     func testPeriodCollection_periodsIntersectedByPeriod_returnsAllPeriodsThatIntersectWithGivenPeriod() {
-        let periods1 = self.collection.periodsIntersectedByPeriod(TimePeriod(size: .Week, amount: 5, startingAt: self.startDate.dateBySubtractingDays(5), calendar: self.calendar))
-        let periods2 = self.collection.periodsIntersectedByPeriod(TimePeriod(size: .Week, amount: 1, startingAt: self.twoMonthsPeriod.endDate, calendar: self.calendar))
+        let periods1 = self.collection.periodsIntersected(byPeriod: TimePeriod(size: .week, amount: 5, startingAt: self.startDate.dateBySubtracting(days: 5), calendar: self.calendar))
+        let periods2 = self.collection.periodsIntersected(byPeriod: TimePeriod(size: .week, amount: 1, startingAt: self.twoMonthsPeriod.endDate, calendar: self.calendar))
         
         expect(periods1.count) == 3
         expect(periods1.periods).to(contain(monthPeriod, twoMonthsPeriod, twoMonthsPeriodAfterTwoWeeks))
@@ -357,8 +357,8 @@ class TimePeriodCollectionTests: XCTestCase {
     }
     
     func testPeriodCollection_periodsOverlappedByPeriod_returnsAllPeriodsOverlappedByGivenPeriod() {
-        let periods1 = self.collection.periodsOverlappedByPeriod(TimePeriod(size: .Month, amount: 2, startingAt: self.startDate.dateBySubtractingMonths(1), calendar: self.calendar))
-        let periods2 = self.collection.periodsOverlappedByPeriod(TimePeriod(size: .Week, amount: 1, startingAt: self.twoMonthsPeriod.endDate, calendar: self.calendar))
+        let periods1 = self.collection.periodsOverlapped(byPeriod: TimePeriod(size: .month, amount: 2, startingAt: self.startDate.dateBySubtracting(months: 1), calendar: self.calendar))
+        let periods2 = self.collection.periodsOverlapped(byPeriod: TimePeriod(size: .week, amount: 1, startingAt: self.twoMonthsPeriod.endDate, calendar: self.calendar))
         
         expect(periods1.count) == 3
         expect(periods1.periods).to(contain(monthPeriod, twoMonthsPeriod, twoMonthsPeriodAfterTwoWeeks))
@@ -369,8 +369,8 @@ class TimePeriodCollectionTests: XCTestCase {
 
     //MARK: - helpers
     
-    func createTimePeriodWithMonthSize(amount: Int, startingAt: NSDate) -> TimePeriod {
-        return TimePeriod(size: .Month, amount: amount, startingAt: startingAt, calendar: self.calendar)
+    func createTimePeriodWithMonthSize(amount: Int, startingAt: Date) -> TimePeriod {
+        return TimePeriod(size: .month, amount: amount, startingAt: startingAt, calendar: self.calendar)
     }
     
 }

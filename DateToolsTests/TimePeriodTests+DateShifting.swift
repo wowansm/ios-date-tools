@@ -13,326 +13,319 @@ import Nimble
 
 extension TimePeriodTests {
     
-    //MARK: - Date shifting methods
-    
+    //MARK: - Test date shifting methods
     func testTimePeriod_shiftEarlier_shiftsPeriodEarlier() {
-        self.testShiftEarlier(shortPeriod, .Second, 3, date("1999-12-31 23:59:57"))
-        self.testShiftEarlier(shortPeriod, .Minute, 73, date("1999-12-31 22:47"))
-        self.testShiftEarlier(shortPeriod, .Hour, 122, date("1999-12-26 22"))
-        self.testShiftEarlier(shortPeriod, .Day, 44, date("1999-11-18"))
-        self.testShiftEarlier(shortPeriod, .Week, 1, date("1999-12-25"))
-        self.testShiftEarlier(shortPeriod, .Month, 8, date("1999-05-01"))
-        self.testShiftEarlier(shortPeriod, .Year, 1, date("1999-01-01"))
+        self.testShiftEarlier(period: shortPeriod, size: .second, amount: 3, startDate: date(dateString: "1999-12-31 23:59:57"))
+        self.testShiftEarlier(period: shortPeriod, size: .minute, amount: 73, startDate: date(dateString: "1999-12-31 22:47"))
+        self.testShiftEarlier(period: shortPeriod, size: .hour, amount: 122, startDate: date(dateString: "1999-12-26 22"))
+        self.testShiftEarlier(period: shortPeriod, size: .day, amount: 44, startDate: date(dateString: "1999-11-18"))
+        self.testShiftEarlier(period: shortPeriod, size: .week, amount: 1, startDate: date(dateString: "1999-12-25"))
+        self.testShiftEarlier(period: shortPeriod, size: .month, amount: 8, startDate: date(dateString: "1999-05-01"))
+        self.testShiftEarlier(period: shortPeriod, size: .year, amount: 1, startDate: date(dateString: "1999-01-01"))
     }
     
     func testTimePeriod_shiftEarlierByNegativeAmount_shiftsPeriodLater() {
-        self.testShiftEarlier(shortPeriod, .Second, -12, date("2000-01-01 00:00:12"))
-        self.testShiftEarlier(shortPeriod, .Minute, -39, date("2000-01-01 00:39"))
-        self.testShiftEarlier(shortPeriod, .Hour, -31, date("2000-01-02 07"))
-        self.testShiftEarlier(shortPeriod, .Day, -43, date("2000-02-13"))
-        self.testShiftEarlier(shortPeriod, .Week, -2, date("2000-01-15"))
-        self.testShiftEarlier(shortPeriod, .Month, -14, date("2001-03-01"))
-        self.testShiftEarlier(shortPeriod, .Year, -1, calendar.dateWithYear(2001))
+        self.testShiftEarlier(period: shortPeriod, size: .second, amount: -12, startDate: date(dateString: "2000-01-01 00:00:12"))
+        self.testShiftEarlier(period: shortPeriod, size: .minute, amount: -39, startDate: date(dateString: "2000-01-01 00:39"))
+        self.testShiftEarlier(period: shortPeriod, size: .hour, amount: -31, startDate: date(dateString: "2000-01-02 07"))
+        self.testShiftEarlier(period: shortPeriod, size: .day, amount: -43, startDate: date(dateString: "2000-02-13"))
+        self.testShiftEarlier(period: shortPeriod, size: .week, amount: -2, startDate: date(dateString: "2000-01-15"))
+        self.testShiftEarlier(period: shortPeriod, size: .month, amount: -14, startDate: date(dateString: "2001-03-01"))
+        self.testShiftEarlier(period: shortPeriod, size: .year, amount: -1, startDate: calendar.date(year: 2001))
     }
     
     func testTimePeriod_shiftLater_shiftsPeriodLater() {
-        self.testShiftLater(shortPeriod, .Second, 12, date("2000-01-01 00:00:12"))
-        self.testShiftLater(shortPeriod, .Minute, 39, date("2000-01-01 00:39"))
-        self.testShiftLater(shortPeriod, .Hour, 31, date("2000-01-02 07"))
-        self.testShiftLater(shortPeriod, .Day, 43, date("2000-02-13"))
-        self.testShiftLater(shortPeriod, .Week, 2, date("2000-01-15"))
-        self.testShiftLater(shortPeriod, .Month, 14, date("2001-03-01"))
-        self.testShiftLater(shortPeriod, .Year, 1, calendar.dateWithYear(2001))
+        self.testShiftLater(period: shortPeriod, size: .second, amount: 12, startDate: date(dateString: "2000-01-01 00:00:12"))
+        self.testShiftLater(period: shortPeriod, size: .minute, amount: 39, startDate: date(dateString: "2000-01-01 00:39"))
+        self.testShiftLater(period: shortPeriod, size: .hour, amount: 31, startDate: date(dateString: "2000-01-02 07"))
+        self.testShiftLater(period: shortPeriod, size: .day, amount: 43, startDate: date(dateString: "2000-02-13"))
+        self.testShiftLater(period: shortPeriod, size: .week, amount: 2, startDate: date(dateString: "2000-01-15"))
+        self.testShiftLater(period: shortPeriod, size: .month, amount: 14, startDate: date(dateString: "2001-03-01"))
+        self.testShiftLater(period: shortPeriod, size: .year, amount: 1, startDate: calendar.date(year: 2001))
     }
     
     func testTimePeriod_shiftLaterByNegativeAmount_shiftsPeriodEarlier() {
-        self.testShiftLater(shortPeriod, .Second, -3, date("1999-12-31 23:59:57"))
-        self.testShiftLater(shortPeriod, .Minute, -73, date("1999-12-31 22:47"))
-        self.testShiftLater(shortPeriod, .Hour, -122, date("1999-12-26 22"))
-        self.testShiftLater(shortPeriod, .Day, -44, date("1999-11-18"))
-        self.testShiftLater(shortPeriod, .Week, -1, date("1999-12-25"))
-        self.testShiftLater(shortPeriod, .Month, -8, date("1999-05-01"))
-        self.testShiftLater(shortPeriod, .Year, -1, date("1999-01-01"))
+        self.testShiftLater(period: shortPeriod, size: .second, amount: -3, startDate: date(dateString: "1999-12-31 23:59:57"))
+        self.testShiftLater(period: shortPeriod, size: .minute, amount: -73, startDate: date(dateString: "1999-12-31 22:47"))
+        self.testShiftLater(period: shortPeriod, size: .hour, amount: -122, startDate: date(dateString: "1999-12-26 22"))
+        self.testShiftLater(period: shortPeriod, size: .day, amount: -44, startDate: date(dateString: "1999-11-18"))
+        self.testShiftLater(period: shortPeriod, size: .week, amount: -1, startDate: date(dateString: "1999-12-25"))
+        self.testShiftLater(period: shortPeriod, size: .month, amount: -8, startDate: date(dateString: "1999-05-01"))
+        self.testShiftLater(period: shortPeriod, size: .year, amount: -1, startDate: date(dateString: "1999-01-01"))
     }
     
-    //MARK: - lengthen with anchor Start
-    
+    // MARK: - Test lengthen with start anchor
     func testTimePeriod_lengthenWithStartAnchorBySeconds_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Second, amount: 39)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .second, amount: 39)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-14 00:00:39")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14 00:00:39")
     }
     
     func testTimePeriod_lengthenWithStartAnchorByMinutes_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Minute, amount: 41)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .minute, amount: 41)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-14 00:41")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14 00:41")
     }
     
     func testTimePeriod_lengthenWithStartAnchorByHours_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Hour, amount: 5)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .hour, amount: 5)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-14 05")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14 05")
     }
     
     func testTimePeriod_lengthenWithStartAnchorByDays_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Day, amount: 5)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .day, amount: 5)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-19")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-19")
     }
     
     func testTimePeriod_lengthenWithStartAnchorByWeeks_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Week, amount: 2)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .week, amount: 2)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-28")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-28")
     }
     
     func testTimePeriod_lengthenWithStartAnchorByMonths_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Month, amount: 4)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .month, amount: 4)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-07-14")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-07-14")
     }
     
     func testTimePeriod_lengthenWithStartAnchorByYears_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Start, size: .Year, amount: 7)
+        self.shortPeriod.lengthen(withAnchor: .start, size: .year, amount: 7)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2007-03-14")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2007-03-14")
     }
     
-    //MARK: lengthen with anchor Center
-
+    // MARK: - Test length with center anchor
     func testTimePeriod_lengthenWithCenterAnchorBySeconds_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Second, amount: 40)
-        expect(self.shortPeriod.startDate) == date("1999-12-31 23:59:40")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14 00:00:20")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .second, amount: 40)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 23:59:40")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14 00:00:20")
     }
     
     func testTimePeriod_lengthenWithCenterAnchorByMinutes_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Minute, amount: 30)
-        expect(self.shortPeriod.startDate) == date("1999-12-31 23:45")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14 00:15")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .minute, amount: 30)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 23:45")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14 00:15")
     }
     
     func testTimePeriod_lengthenWithCenterAnchorByHours_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Hour, amount: 6)
-        expect(self.shortPeriod.startDate) == date("1999-12-31 21")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14 03")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .hour, amount: 6)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 21")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14 03")
     }
     
     func testTimePeriod_lengthenWithCenterAnchorByDays_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Day, amount: 4)
-        expect(self.shortPeriod.startDate) == date("1999-12-30")
-        expect(self.shortPeriod.endDate)   == date("2000-03-16")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .day, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-30")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-16")
     }
     
     func testTimePeriod_lengthenWithCenterAnchorByWeeks_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Week, amount: 2)
-        expect(self.shortPeriod.startDate) == date("1999-12-25")
-        expect(self.shortPeriod.endDate)   == date("2000-03-21")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .week, amount: 2)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-25")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-21")
     }
     
     func testTimePeriod_lengthenWithCenterAnchorByMonths_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Month, amount: 4)
-        expect(self.shortPeriod.startDate) == date("1999-11-01")
-        expect(self.shortPeriod.endDate)   == date("2000-05-14")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .month, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-11-01")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-05-14")
     }
     
     func testTimePeriod_lengthenWithCenterAnchorByYears_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.Center, size: .Year, amount: 8)
-        expect(self.shortPeriod.startDate) == calendar.dateWithYear(1996)
-        expect(self.shortPeriod.endDate)   == date("2004-03-14")
+        self.shortPeriod.lengthen(withAnchor: .center, size: .year, amount: 8)
+        expect(self.shortPeriod.startDate) == calendar.date(year: 1996)
+        expect(self.shortPeriod.endDate)   == date(dateString: "2004-03-14")
     }
 
-    //MARK: lengthen with anchor end
-    
+    // MARK: - Test length with end anchor
     func testTimePeriod_lengthenWithEndAnchorBySeconds_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Second, amount: 40)
-        expect(self.shortPeriod.startDate) == date("1999-12-31 23:59:20")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .second, amount: 40)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 23:59:20")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_lengthenWithEndAnchorByMinutes_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Minute, amount: 30)
-        expect(self.shortPeriod.startDate) == date("1999-12-31 23:30:00")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .minute, amount: 30)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 23:30:00")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_lengthenWithEndAnchorByHours_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Hour, amount: 6)
-        expect(self.shortPeriod.startDate) == date("1999-12-31 18")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .hour, amount: 6)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-31 18")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_lengthenWithEndAnchorByDays_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Day, amount: 4)
-        expect(self.shortPeriod.startDate) == date("1999-12-28")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .day, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-28")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_lengthenWithEndAnchorByWeeks_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Week, amount: 2)
-        expect(self.shortPeriod.startDate) == date("1999-12-18")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .week, amount: 2)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-12-18")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_lengthenWithEndAnchorByMonths_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Month, amount: 4)
-        expect(self.shortPeriod.startDate) == date("1999-09-01")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .month, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "1999-09-01")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_lengthenWithEndAnchorByYears_lengthensPeriodByGivenSize() {
-        self.shortPeriod.lengthenWithAnchorDate(.End, size: .Year, amount: 8)
-        expect(self.shortPeriod.startDate) == calendar.dateWithYear(1992)
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.lengthen(withAnchor: .end, size: .year, amount: 8)
+        expect(self.shortPeriod.startDate) == calendar.date(year: 1992)
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
-    //MARK: - shorten with anchor start
-    
+    // MARK: - Test shorten with start anchor
     func testTimePeriod_shortenWithStartAnchorBySeconds_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Second, amount: 39)
+        self.shortPeriod.shorten(withAnchor: .start, size: .second, amount: 39)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-13 23:59:21")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-13 23:59:21")
     }
     
     func testTimePeriod_shortenWithStartAnchorByMinutes_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Minute, amount: 41)
+        self.shortPeriod.shorten(withAnchor: .start, size: .minute, amount: 41)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-13 23:19")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-13 23:19")
     }
     
     func testTimePeriod_shortenWithStartAnchorByHours_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Hour, amount: 5)
+        self.shortPeriod.shorten(withAnchor: .start, size: .hour, amount: 5)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-13 19")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-13 19")
     }
     
     func testTimePeriod_shortenWithStartAnchorByDays_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Day, amount: 5)
+        self.shortPeriod.shorten(withAnchor: .start, size: .day, amount: 5)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-03-09")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-09")
     }
     
     func testTimePeriod_shortenWithStartAnchorByWeeks_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Week, amount: 2)
+        self.shortPeriod.shorten(withAnchor: .start, size: .week, amount: 2)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("2000-02-29")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-02-29")
     }
     
     func testTimePeriod_shortenWithStartAnchorByMonths_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Month, amount: 4)
+        self.shortPeriod.shorten(withAnchor: .start, size: .month, amount: 4)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("1999-11-14")
+        expect(self.shortPeriod.endDate)   == date(dateString: "1999-11-14")
     }
     
     func testTimePeriod_shortenWithStartAnchorByYears_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Start, size: .Year, amount: 7)
+        self.shortPeriod.shorten(withAnchor: .start, size: .year, amount: 7)
         expect(self.shortPeriod.startDate) == startDate
-        expect(self.shortPeriod.endDate)   == date("1993-03-14")
+        expect(self.shortPeriod.endDate)   == date(dateString: "1993-03-14")
     }
     
-    //MARK: shorten with anchor center
-    
+    // MARK: - Test shorten with center anchor
     func testTimePeriod_shortenWithCenterAnchorBySeconds_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Center, size: .Second, amount: 40)
-        expect(self.shortPeriod.startDate) == date("2000-01-01 00:00:20")
-        expect(self.shortPeriod.endDate)   == date("2000-03-13 23:59:40")
+        self.shortPeriod.shorten(withAnchor: .center, size: .second, amount: 40)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 00:00:20")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-13 23:59:40")
     }
     
     func testTimePeriod_shortenWithCenterAnchorByMinutes_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Center, size: .Minute, amount: 30)
-        expect(self.shortPeriod.startDate) == date("2000-01-01 00:15")
-        expect(self.shortPeriod.endDate)   == date("2000-03-13 23:45")
+        self.shortPeriod.shorten(withAnchor: .center, size: .minute, amount: 30)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 00:15")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-13 23:45")
     }
     
     func testTimePeriod_shortenWithCenterAnchorByHours_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Center, size: .Hour, amount: 6)
-        expect(self.shortPeriod.startDate) == date("2000-01-01 03")
-        expect(self.shortPeriod.endDate)   == date("2000-03-13 21")
+        self.shortPeriod.shorten(withAnchor: .center, size: .hour, amount: 6)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 03")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-13 21")
     }
     
     func testTimePeriod_shortenWithCenterAnchorByDays_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Center, size: .Day, amount: 4)
-        expect(self.shortPeriod.startDate) == date("2000-01-03")
-        expect(self.shortPeriod.endDate)   == date("2000-03-12")
+        self.shortPeriod.shorten(withAnchor: .center, size: .day, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-03")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-12")
     }
     
     func testTimePeriod_shortenWithCenterAnchorByWeeks_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.Center, size: .Week, amount: 2)
-        expect(self.shortPeriod.startDate) == date("2000-01-08")
-        expect(self.shortPeriod.endDate)   == date("2000-03-07")
+        self.shortPeriod.shorten(withAnchor: .center, size: .week, amount: 2)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-08")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-07")
     }
     
     func testTimePeriod_shortenWithCenterAnchorByMonths_shortensPeriodByGivenSize() {
-        self.longPeriod.shortenWithAnchorDate(.Center, size: .Month, amount: 4)
-        expect(self.longPeriod.startDate) == date("1900-08-15")
-        expect(self.longPeriod.endDate)   == date("1999-11-01")
+        self.longPeriod.shorten(withAnchor: .center, size: .month, amount: 4)
+        expect(self.longPeriod.startDate) == date(dateString: "1900-08-15")
+        expect(self.longPeriod.endDate)   == date(dateString: "1999-11-01")
     }
     
     func testTimePeriod_shortenWithCenterAnchorByYears_shortensPeriodByGivenSize() {
-        self.longPeriod.shortenWithAnchorDate(.Center, size: .Year, amount: 8)
-        expect(self.longPeriod.startDate) == date("1904-06-15")
-        expect(self.longPeriod.endDate)   == date("1996-01-01")
+        self.longPeriod.shorten(withAnchor: .center, size: .year, amount: 8)
+        expect(self.longPeriod.startDate) == date(dateString: "1904-06-15")
+        expect(self.longPeriod.endDate)   == date(dateString: "1996-01-01")
     }
     
-    //MARK: shorten with anchor end
-    
+    // MARK: - Test shorten with end anchor
     func testTimePeriod_shortenWithEndAnchorBySeconds_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Second, amount: 40)
-        expect(self.shortPeriod.startDate) == date("2000-01-01 00:00:40")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .second, amount: 40)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 00:00:40")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_shortenWithEndAnchorByMinutes_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Minute, amount: 30)
-        expect(self.shortPeriod.startDate) == date("2000-01-01 00:30")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .minute, amount: 30)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 00:30")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_shortenWithEndAnchorByHours_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Hour, amount: 6)
-        expect(self.shortPeriod.startDate) == date("2000-01-01 06")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .hour, amount: 6)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-01 06")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_shortenWithEndAnchorByDays_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Day, amount: 4)
-        expect(self.shortPeriod.startDate) == date("2000-01-05")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .day, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-05")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_shortenWithEndAnchorByWeeks_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Week, amount: 2)
-        expect(self.shortPeriod.startDate) == date("2000-01-15")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .week, amount: 2)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-01-15")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_shortenWithEndAnchorByMonths_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Month, amount: 4)
-        expect(self.shortPeriod.startDate) == date("2000-05-01")
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .month, amount: 4)
+        expect(self.shortPeriod.startDate) == date(dateString: "2000-05-01")
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
     func testTimePeriod_shortenWithEndAnchorByYears_shortensPeriodByGivenSize() {
-        self.shortPeriod.shortenWithAnchorDate(.End, size: .Year, amount: 8)
-        expect(self.shortPeriod.startDate) == calendar.dateWithYear(2008)
-        expect(self.shortPeriod.endDate)   == date("2000-03-14")
+        self.shortPeriod.shorten(withAnchor: .end, size: .year, amount: 8)
+        expect(self.shortPeriod.startDate) == calendar.date(year: 2008)
+        expect(self.shortPeriod.endDate)   == date(dateString: "2000-03-14")
     }
     
-    //MARK: - Helpers
+    // MARK: - Helper methods
+    func testShiftEarlier(period: TimePeriod, size: TimePeriodSize, amount: Int, startDate: Date) {
+        let newPeriod = period
+        print("Shifting this period: \(period.startDate)")
+        print("Start date: \(startDate)")
+        newPeriod.shiftEarlier(withSize: size, amount: amount)
+        print("Shifted \(amount) \(size) to: \(newPeriod.startDate)")
+        expect(newPeriod.startDate) == startDate
+    }
     
-    func testShiftEarlier(var period: TimePeriod, _ size: TimePeriodSize, _ amount: Int, _ startDate: NSDate) {
-        period = period.copy() as! TimePeriod
-        period.shiftEarlierWithSize(size, amount: amount)
+    func testShiftLater(period: TimePeriod, size: TimePeriodSize, amount: Int, startDate: Date) {
+        let newPeriod = period
+        newPeriod.shiftLater(withSize: size, amount: amount)
         expect(period.startDate) == startDate
     }
-    
-    func testShiftLater(var period: TimePeriod, _ size: TimePeriodSize, _ amount: Int, _ startDate: NSDate) {
-        period = period.copy() as! TimePeriod
-        period.shiftLaterWithSize(size, amount: amount)
-        expect(period.startDate) == startDate
-    }
-    
-    
 }
 

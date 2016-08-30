@@ -8,24 +8,24 @@
 
 import Foundation
 
-let secondPrecisionFormatter = createFormatterWithFormat("yyyy-MM-dd HH:mm:ss")
-let minutePrecisionFormatter = createFormatterWithFormat("yyyy-MM-dd HH:mm")
-let hourPrecisionFormatter = createFormatterWithFormat("yyyy-MM-dd HH")
-let dayPrecisionFormatter = createFormatterWithFormat("yyyy-MM-dd")
+let secondPrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd HH:mm:ss")
+let minutePrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd HH:mm")
+let hourPrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd HH")
+let dayPrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd")
 
 
-func date(dateString: String) -> NSDate {
+func date(dateString: String) -> Date {
     for formatter in [secondPrecisionFormatter, minutePrecisionFormatter, hourPrecisionFormatter, dayPrecisionFormatter] {
-        if let date = formatter.dateFromString(dateString) {
+        if let date = formatter.date(from: dateString) {
             return date
         }
     }
-    return NSDate(timeIntervalSince1970: 0)
+    return Date(timeIntervalSince1970: 0)
 }
 
-private func createFormatterWithFormat(format: String) -> NSDateFormatter {
-    let formatter = NSDateFormatter()
+private func createFormatterWithFormat(format: String) -> DateFormatter {
+    let formatter = DateFormatter()
     formatter.dateFormat = format
-    formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+    formatter.timeZone = TimeZone(secondsFromGMT: 0)
     return formatter
 }

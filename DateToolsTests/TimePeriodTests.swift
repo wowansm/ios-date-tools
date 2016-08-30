@@ -13,8 +13,8 @@ import Nimble
 
 class TimePeriodTests: XCTestCase {
     
-    var startDate: NSDate!
-    var endDate: NSDate!
+    var startDate: Date!
+    var endDate: Date!
     var longPeriod: TimePeriod!
     var shortPeriod: TimePeriod!
     var veryShortPeriod: TimePeriod!
@@ -27,24 +27,24 @@ class TimePeriodTests: XCTestCase {
     var periodAfterTouching: TimePeriod!
 
     
-    var calendar: NSCalendar!
+    var calendar: Calendar!
     
     override func setUp() {
         super.setUp()
-        calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        calendar.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-        startDate = calendar.dateWithYear(2000, month: 01, day: 01)
-        endDate = calendar.dateWithYear(1900, month: 06, day: 15)
+        calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+        startDate = calendar.date(year: 2000, month: 01, day: 01)
+        endDate = calendar.date(year: 1900, month: 06, day: 15)
         longPeriod = TimePeriod(startDate: endDate, endDate: startDate, calendar: calendar)
-        shortPeriod = TimePeriod(startDate: startDate, endDate: date("2000-03-14"), calendar: calendar)
-        veryShortPeriod = TimePeriod(startDate: startDate, endDate: date("2000-01-02 12:20:30"), calendar: calendar)
-        periodBeforeOverlaps = TimePeriod(startDate: date("1890-01-01"), endDate: date("1960-01-01"), calendar: calendar)
-        periodAfterOverlaps = TimePeriod(startDate: date("1950-01-01"), endDate: date("2010-01-01"), calendar: calendar)
-        periodBefore = TimePeriod(startDate: date("1890-01-01"), endDate: date("1900-06-14"), calendar: calendar)
-        periodAfter = TimePeriod(startDate: date("2000-01-02"), endDate: date("2010-01-01"), calendar: calendar)
-        periodInside = TimePeriod(startDate: date("1950-01-01"), endDate: date("1960-01-01"), calendar: calendar)
-        periodBeforeTouching = TimePeriod(startDate: date("1890-01-01"), endDate: date("1900-06-15"), calendar: calendar)
-        periodAfterTouching = TimePeriod(startDate: date("2000-01-01"), endDate: date("2010-01-01"), calendar: calendar)
+        shortPeriod = TimePeriod(startDate: startDate, endDate: date(dateString: "2000-03-14"), calendar: calendar)
+        veryShortPeriod = TimePeriod(startDate: startDate, endDate: date(dateString: "2000-01-02 12:20:30"), calendar: calendar)
+        periodBeforeOverlaps = TimePeriod(startDate: date(dateString: "1890-01-01"), endDate: date(dateString: "1960-01-01"), calendar: calendar)
+        periodAfterOverlaps = TimePeriod(startDate: date(dateString: "1950-01-01"), endDate: date(dateString: "2010-01-01"), calendar: calendar)
+        periodBefore = TimePeriod(startDate: date(dateString: "1890-01-01"), endDate: date(dateString: "1900-06-14"), calendar: calendar)
+        periodAfter = TimePeriod(startDate: date(dateString: "2000-01-02"), endDate: date(dateString: "2010-01-01"), calendar: calendar)
+        periodInside = TimePeriod(startDate: date(dateString: "1950-01-01"), endDate: date(dateString: "1960-01-01"), calendar: calendar)
+        periodBeforeTouching = TimePeriod(startDate: date(dateString: "1890-01-01"), endDate: date(dateString: "1900-06-15"), calendar: calendar)
+        periodAfterTouching = TimePeriod(startDate: date(dateString: "2000-01-01"), endDate: date(dateString: "2010-01-01"), calendar: calendar)
 
     }
     
@@ -68,50 +68,50 @@ class TimePeriodTests: XCTestCase {
     //MARK: - create with starting date
     
     func testTimePeriod_createPeriodsWithStartingDate_returnsValidTimePeriods() {
-        let testCases: [(TimePeriodSize, Int, NSDate)] = [
-            (.Day, 1, date("2000-01-02")),
-            (.Month, 1, date("2000-02-01")),
-            (.Year, 1, date("2001-01-01")),
-            (.Day, 5, date("2000-01-06")),
-            (.Month, 5, date("2000-06-01")),
-            (.Year, 5, date("2005-01-01")),
-            (.Day, 50, date("2000-02-20")),
-            (.Month, 14, date("2001-03-01")),
-            (.Day, -10, date("1999-12-22")),
-            (.Month, -28, date("1997-09-01")),
-            (.Day, -32, date("1999-11-30"))
+        let testCases: [(TimePeriodSize, Int, Date)] = [
+            (.day, 1, date(dateString: "2000-01-02")),
+            (.month, 1, date(dateString: "2000-02-01")),
+            (.year, 1, date(dateString: "2001-01-01")),
+            (.day, 5, date(dateString: "2000-01-06")),
+            (.month, 5, date(dateString: "2000-06-01")),
+            (.year, 5, date(dateString: "2005-01-01")),
+            (.day, 50, date(dateString: "2000-02-20")),
+            (.month, 14, date(dateString: "2001-03-01")),
+            (.day, -10, date(dateString: "1999-12-22")),
+            (.month, -28, date(dateString: "1997-09-01")),
+            (.day, -32, date(dateString: "1999-11-30"))
         ]
         
         for (size, amount, expectedDate) in testCases {
-            self.testTimePeriodStartingAtWithSize(size, amount: amount, expectedEndDate: expectedDate)
+            self.testTimePeriodStartingAtWithSize(size: size, amount: amount, expectedEndDate: expectedDate)
         }
     }
     
     //MARK: - create with ending date
     
     func testTimePeriod_createPeriodsWithEndingDate_returnsValidTimePeriods() {
-        let testCases: [(TimePeriodSize, Int, NSDate)] = [
-            (.Day, 1, date("1900-06-14")),
-            (.Month, 1, date("1900-05-15")),
-            (.Year, 1, date("1899-06-15")),
-            (.Day, 5, date("1900-06-10")),
-            (.Month, 5, date("1900-01-15")),
-            (.Year, 5, date("1895-06-15")),
-            (.Day, 50, date("1900-04-26")),
-            (.Month, 14, date("1899-04-15")),
-            (.Day, -14, date("1900-06-29")),
-            (.Month, -14, date("1901-08-15"))
+        let testCases: [(TimePeriodSize, Int, Date)] = [
+            (.day, 1, date(dateString: "1900-06-14")),
+            (.month, 1, date(dateString: "1900-05-15")),
+            (.year, 1, date(dateString: "1899-06-15")),
+            (.day, 5, date(dateString: "1900-06-10")),
+            (.month, 5, date(dateString: "1900-01-15")),
+            (.year, 5, date(dateString: "1895-06-15")),
+            (.day, 50, date(dateString: "1900-04-26")),
+            (.month, 14, date(dateString: "1899-04-15")),
+            (.day, -14, date(dateString: "1900-06-29")),
+            (.month, -14, date(dateString: "1901-08-15"))
         ]
         
         for (size, amount, expectedDate) in testCases {
-            self.testTimePeriodEndingAtWithSize(size, amount: amount, expectedStartDate: expectedDate)
+            self.testTimePeriodEndingAtWithSize(size: size, amount: amount, expectedStartDate: expectedDate)
         }
     }
     
     func testTimePeriod_createPeriodWithAllTime_returnsPeriodWithDistantPastAndFuture() {
         let period = TimePeriod.timePeriodWithAllTime()
-        expect(period.startDate) == NSDate.distantPast()
-        expect(period.endDate) == NSDate.distantFuture()
+        expect(period.startDate) == Date.distantPast
+        expect(period.endDate) == Date.distantFuture
     }
     
     func testTimePeriod_copyPeriod_returnsCopiedPeriodWithSameDateRange() {
@@ -124,156 +124,156 @@ class TimePeriodTests: XCTestCase {
     //MARK: - Duration in ... tests
     
     func testTimePeriod_durationInYears_returnsValidAmountOfYearsInPeriod() {
-        expect(self.longPeriod.durationIn(.Year)) == 99
-        expect(self.shortPeriod.durationIn(.Year)) == 0
-        expect(self.veryShortPeriod.durationIn(.Year)) == 0
+        expect(self.longPeriod.durationIn(size: .year)) == 99
+        expect(self.shortPeriod.durationIn(size: .year)) == 0
+        expect(self.veryShortPeriod.durationIn(size: .year)) == 0
     }
     
     func testTimePeriod_durationInMonths_returnsValidAmountOfMonhtsInPeriod() {
-        expect(self.longPeriod.durationIn(.Month)) == 1194
-        expect(self.shortPeriod.durationIn(.Month)) == 2
-        expect(self.veryShortPeriod.durationIn(.Month)) == 0
+        expect(self.longPeriod.durationIn(size: .month)) == 1194
+        expect(self.shortPeriod.durationIn(size: .month)) == 2
+        expect(self.veryShortPeriod.durationIn(size: .month)) == 0
     }
     
     func testTimePeriod_durationInWeeks_returnsValidAmountOfWeeksInPeriod() {
-        expect(self.longPeriod.durationIn(.Week)) == 5194
-        expect(self.shortPeriod.durationIn(.Week)) == 10
-        expect(self.veryShortPeriod.durationIn(.Week)) == 0
+        expect(self.longPeriod.durationIn(size: .week)) == 5194
+        expect(self.shortPeriod.durationIn(size: .week)) == 10
+        expect(self.veryShortPeriod.durationIn(size: .week)) == 0
     }
 
     func testTimePeriod_durationInDays_returnsValidAmountOfDaysInPeriod() {
-        expect(self.longPeriod.durationIn(.Day)) == 36359
-        expect(self.shortPeriod.durationIn(.Day)) == 73
-        expect(self.veryShortPeriod.durationIn(.Day)) == 1
+        expect(self.longPeriod.durationIn(size: .day)) == 36359
+        expect(self.shortPeriod.durationIn(size: .day)) == 73
+        expect(self.veryShortPeriod.durationIn(size: .day)) == 1
     }
     
     func testTimePeriod_durationInHours_returnsValidAmountOfHoursInPeriod() {
-        expect(self.veryShortPeriod.durationIn(.Hour)) == 36
+        expect(self.veryShortPeriod.durationIn(size: .hour)) == 36
     }
     
     func testTimePeriod_durationInMinutes_returnsValidAmountOfMinutesInPeriod() {
-        expect(self.veryShortPeriod.durationIn(.Minute)) == 2180
+        expect(self.veryShortPeriod.durationIn(size: .minute)) == 2180
     }
     
     func testTimePeriod_durationInSeconds_returnsValidAmountOfSecondsInPeriod() {
-        expect(self.veryShortPeriod.durationIn(.Second)) == 130830
+        expect(self.veryShortPeriod.durationIn(size: .second)) == 130830
     }
     
     //MARK: - Period comparison tests
     
     func testTimePeriod_isMoment_returnsTrueIfStartDateIsEqualEndDate() {
-        let period = TimePeriod(startDate: date("2000-01-01"), endDate: date("2000-01-01"), calendar: calendar)
+        let period = TimePeriod(startDate: date(dateString: "2000-01-01"), endDate: date(dateString: "2000-01-01"), calendar: calendar)
         expect(period.isMoment()) == true
         expect(self.longPeriod.isMoment()) == false
     }
     
     func testTimePeriod_isEqualToPeriod_returnsFalseForDifferentTimePeriods() {
-        expect(self.veryShortPeriod.isEqualToPeriod(self.shortPeriod)) == false
+        expect(self.veryShortPeriod.equals(period: self.shortPeriod)) == false
         expect(self.veryShortPeriod == self.shortPeriod) == false
     }
     
     func testTimePeriod_isEqualToPeriod_returnsTrueForSameTimePeriods() {
-        expect(self.longPeriod.isEqualToPeriod(TimePeriod(startDate: self.endDate, endDate: self.startDate, calendar: self.calendar))) == true
+        expect(self.longPeriod.equals(period: TimePeriod(startDate: self.endDate, endDate: self.startDate, calendar: self.calendar))) == true
         expect(self.longPeriod == TimePeriod(startDate: self.endDate, endDate: self.startDate, calendar: self.calendar)) == true
     }
     
     func testTimePeriod_isInside_returnsFalseForTimePeriodThatIsNotInsideOfAnotherTimePeriod() {
-        expect(self.periodBeforeOverlaps.isInside(self.longPeriod)) == false
-        expect(self.periodAfterOverlaps.isInside(self.longPeriod)) == false
+        expect(self.periodBeforeOverlaps.isInside(period: self.longPeriod)) == false
+        expect(self.periodAfterOverlaps.isInside(period: self.longPeriod)) == false
     }
     
     func testTimePeriod_isInside_returnsTrueForTimePeriodInsideOrEqual() {
-        expect(self.periodInside.isInside(self.longPeriod)) == true
-        expect(self.longPeriod.isInside(self.longPeriod)) == true
-        expect(self.shortPeriod.isInside(self.shortPeriod)) == true
-        expect(self.veryShortPeriod.isInside(self.veryShortPeriod)) == true
+        expect(self.periodInside.isInside(period: self.longPeriod)) == true
+        expect(self.longPeriod.isInside(period: self.longPeriod)) == true
+        expect(self.shortPeriod.isInside(period: self.shortPeriod)) == true
+        expect(self.veryShortPeriod.isInside(period: self.veryShortPeriod)) == true
     }
     
     func testTimePeriod_contains_returnsFalseForTimePeriodNotContainingOther() {
-        expect(self.longPeriod.contains(self.periodBeforeOverlaps)) == false
-        expect(self.longPeriod.contains(self.periodAfterOverlaps)) == false
+        expect(self.longPeriod.contains(period: self.periodBeforeOverlaps)) == false
+        expect(self.longPeriod.contains(period: self.periodAfterOverlaps)) == false
     }
     
     func testTimePeriod_contains_returnsTrueForTimePeriodContainingOther() {
-        expect(self.longPeriod.contains(self.periodInside)) == true
-        expect(self.longPeriod.contains(self.longPeriod)) == true
-        expect(self.shortPeriod.contains(self.shortPeriod)) == true
-        expect(self.veryShortPeriod.contains(self.veryShortPeriod)) == true
+        expect(self.longPeriod.contains(period: self.periodInside)) == true
+        expect(self.longPeriod.contains(period: self.longPeriod)) == true
+        expect(self.shortPeriod.contains(period: self.shortPeriod)) == true
+        expect(self.veryShortPeriod.contains(period: self.veryShortPeriod)) == true
     }
     
     func testTimePeriod_overlapsWith_returnsTrueIfPeriodsOverlapEachother() {
-        expect(self.periodBeforeOverlaps.overlapsWith(self.longPeriod)) == true
-        expect(self.periodAfterOverlaps.overlapsWith(self.longPeriod)) == true
-        expect(self.periodInside.overlapsWith(self.longPeriod)) == true
+        expect(self.periodBeforeOverlaps.overlapsWith(period: self.longPeriod)) == true
+        expect(self.periodAfterOverlaps.overlapsWith(period: self.longPeriod)) == true
+        expect(self.periodInside.overlapsWith(period: self.longPeriod)) == true
         
-        expect(self.longPeriod.overlapsWith(self.periodBeforeOverlaps)) == true
-        expect(self.longPeriod.overlapsWith(self.periodAfterOverlaps)) == true
-        expect(self.longPeriod.overlapsWith(self.periodInside)) == true
+        expect(self.longPeriod.overlapsWith(period: self.periodBeforeOverlaps)) == true
+        expect(self.longPeriod.overlapsWith(period: self.periodAfterOverlaps)) == true
+        expect(self.longPeriod.overlapsWith(period: self.periodInside)) == true
     }
     
     func testTimePeriod_overlapsWith_returnsFalseIfPeriodsDoesNotOverlap() {
-        expect(self.periodBefore.overlapsWith(self.longPeriod)) == false
-        expect(self.periodAfter.overlapsWith(self.longPeriod)) == false
-        expect(self.periodBeforeTouching.overlapsWith(self.longPeriod)) == false
-        expect(self.periodAfterTouching.overlapsWith(self.longPeriod)) == false
+        expect(self.periodBefore.overlapsWith(period: self.longPeriod)) == false
+        expect(self.periodAfter.overlapsWith(period: self.longPeriod)) == false
+        expect(self.periodBeforeTouching.overlapsWith(period: self.longPeriod)) == false
+        expect(self.periodAfterTouching.overlapsWith(period: self.longPeriod)) == false
         
-        expect(self.longPeriod.overlapsWith(self.periodAfter)) == false
-        expect(self.longPeriod.overlapsWith(self.periodBefore)) == false
+        expect(self.longPeriod.overlapsWith(period: self.periodAfter)) == false
+        expect(self.longPeriod.overlapsWith(period: self.periodBefore)) == false
     }
     
     func testTimePeriod_intersects_returnsFalseIfPeriodsDoesNotIntersect() {
-        expect(self.periodBefore.intersects(self.longPeriod)) == false
-        expect(self.periodAfter.intersects(self.longPeriod)) == false
+        expect(self.periodBefore.intersects(period: self.longPeriod)) == false
+        expect(self.periodAfter.intersects(period: self.longPeriod)) == false
         
-        expect(self.longPeriod.intersects(self.periodAfter)) == false
-        expect(self.longPeriod.intersects(self.periodBefore)) == false
+        expect(self.longPeriod.intersects(period: self.periodAfter)) == false
+        expect(self.longPeriod.intersects(period: self.periodBefore)) == false
     }
     
     func testTimePeriod_intersects_returnsTrueIfPeriodsIntersect() {
-        expect(self.periodBeforeOverlaps.intersects(self.longPeriod)) == true
-        expect(self.periodAfterOverlaps.intersects(self.longPeriod)) == true
-        expect(self.periodInside.intersects(self.longPeriod)) == true
-        expect(self.periodBeforeTouching.intersects(self.longPeriod)) == true
-        expect(self.periodAfterTouching.intersects(self.longPeriod)) == true
+        expect(self.periodBeforeOverlaps.intersects(period: self.longPeriod)) == true
+        expect(self.periodAfterOverlaps.intersects(period: self.longPeriod)) == true
+        expect(self.periodInside.intersects(period: self.longPeriod)) == true
+        expect(self.periodBeforeTouching.intersects(period: self.longPeriod)) == true
+        expect(self.periodAfterTouching.intersects(period: self.longPeriod)) == true
         
-        expect(self.longPeriod.intersects(self.periodBeforeOverlaps)) == true
-        expect(self.longPeriod.intersects(self.periodAfterOverlaps)) == true
-        expect(self.longPeriod.intersects(self.periodInside)) == true
+        expect(self.longPeriod.intersects(period: self.periodBeforeOverlaps)) == true
+        expect(self.longPeriod.intersects(period: self.periodAfterOverlaps)) == true
+        expect(self.longPeriod.intersects(period: self.periodInside)) == true
     }
     
     //MARK: - other utility methods tests
     
     func testTimePeriod_gapBetween_returnsGapInSecondsBetweenTwoTimePeriods() {
-        expect(self.longPeriod.gapBetween(self.periodInside)) == 0
-        expect(self.longPeriod.gapBetween(self.periodAfter)) == Double(SECONDS_IN_DAY)
-        expect(self.longPeriod.gapBetween(self.periodBefore)) == Double(SECONDS_IN_DAY)
+        expect(self.longPeriod.gapBetween(period: self.periodInside)) == 0
+        expect(self.longPeriod.gapBetween(period: self.periodAfter)) == Double(SECONDS_IN_DAY)
+        expect(self.longPeriod.gapBetween(period: self.periodBefore)) == Double(SECONDS_IN_DAY)
     }
     
     func testTimePeriod_containsDate_returnsTrueIfPeriodContainsDate() {
-        expect(self.longPeriod.containsDate(self.calendar.dateWithYear(1950), interval: TimePeriodInterval.Open)) == true
-        expect(self.longPeriod.containsDate(self.calendar.dateWithYear(2000), interval: TimePeriodInterval.Open)) == false
-        expect(self.longPeriod.containsDate(self.calendar.dateWithYear(2050), interval: TimePeriodInterval.Open)) == false
-        expect(self.longPeriod.containsDate(self.calendar.dateWithYear(2000), interval: TimePeriodInterval.Closed)) == true
+        expect(self.longPeriod.contains(date: self.calendar.date(year: 1950), interval: TimePeriodInterval.open)) == true
+        expect(self.longPeriod.contains(date: self.calendar.date(year: 2000), interval: TimePeriodInterval.open)) == false
+        expect(self.longPeriod.contains(date: self.calendar.date(year: 2050), interval: TimePeriodInterval.open)) == false
+        expect(self.longPeriod.contains(date: self.calendar.date(year: 2000), interval: TimePeriodInterval.closed)) == true
     }
     
     func testCalendarExtension_isLeapYear_returnsWhetherYearIsLeap() {
-        expect(NSCalendar.isLeapYear(2000)) == true
-        expect(NSCalendar.isLeapYear(2001)) == false
-        expect(NSCalendar.isLeapYear(2100)) == false
-        expect(NSCalendar.isLeapYear(2004)) == true
+        expect(Calendar.isLeapYear(year: 2000)) == true
+        expect(Calendar.isLeapYear(year: 2001)) == false
+        expect(Calendar.isLeapYear(year: 2100)) == false
+        expect(Calendar.isLeapYear(year: 2004)) == true
     }
     
     
     //MARK: - Helpers
     
-    func testTimePeriodStartingAtWithSize(size: TimePeriodSize, amount: Int, expectedEndDate: NSDate) {
+    func testTimePeriodStartingAtWithSize(size: TimePeriodSize, amount: Int, expectedEndDate: Date) {
         let period = TimePeriod(size: size, amount: amount, startingAt: startDate, calendar: calendar)
         
         expect(period.startDate) == startDate
         expect(period.endDate) == expectedEndDate
     }
     
-    func testTimePeriodEndingAtWithSize(size: TimePeriodSize, amount: Int, expectedStartDate: NSDate) {
+    func testTimePeriodEndingAtWithSize(size: TimePeriodSize, amount: Int, expectedStartDate: Date) {
         let period = TimePeriod(size: size, amount: amount, endingAt: endDate, calendar: calendar)
         
         expect(period.startDate) == expectedStartDate
