@@ -101,10 +101,3 @@ public extension Date {
         return self.timeIntervalSince(date)
     }
 }
-
-// MARK: - Comparators
-//public func + (lhs: Calendar.Component, rhs: Calendar.Component) -> Calendar.Component {
-//    var unit = lhs
-//    unit.insert(rhs)
-//    return unit
-//}
