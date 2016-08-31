@@ -113,7 +113,7 @@ class TimePeriodTests: XCTestCase {
     }
     
     func testTimePeriod_copyPeriod_returnsCopiedPeriodWithSameDateRange() {
-        let period = self.longPeriod.copy() as! TimePeriod
+        let period = self.longPeriod.copy()
         expect(period.startDate) == self.longPeriod.startDate
         expect(period.endDate) == self.longPeriod.endDate
         expect(period.calendar) == self.longPeriod.calendar
@@ -164,12 +164,12 @@ class TimePeriodTests: XCTestCase {
     }
     
     func testTimePeriod_isEqualToPeriod_returnsFalseForDifferentTimePeriods() {
-        expect(self.veryShortPeriod.equals(period: self.shortPeriod)) == false
+        expect(self.veryShortPeriod.equals(self.shortPeriod)) == false
         expect(self.veryShortPeriod == self.shortPeriod) == false
     }
     
     func testTimePeriod_isEqualToPeriod_returnsTrueForSameTimePeriods() {
-        expect(self.longPeriod.equals(period: TimePeriod(startDate: self.endDate, endDate: self.startDate, calendar: self.calendar))) == true
+        expect(self.longPeriod.equals(TimePeriod(startDate: self.endDate, endDate: self.startDate, calendar: self.calendar))) == true
         expect(self.longPeriod == TimePeriod(startDate: self.endDate, endDate: self.startDate, calendar: self.calendar)) == true
     }
     
@@ -240,8 +240,8 @@ class TimePeriodTests: XCTestCase {
     // MARK: - Testing utility methods
     func testTimePeriod_gapBetween_returnsGapInSecondsBetweenTwoTimePeriods() {
         expect(self.longPeriod.gapBetween(period: self.periodInside)) == 0
-        expect(self.longPeriod.gapBetween(period: self.periodAfter)) == Double(SECONDS_IN_DAY)
-        expect(self.longPeriod.gapBetween(period: self.periodBefore)) == Double(SECONDS_IN_DAY)
+        expect(self.longPeriod.gapBetween(period: self.periodAfter)) == Double(SecondsIn.day.rawValue)
+        expect(self.longPeriod.gapBetween(period: self.periodBefore)) == Double(SecondsIn.day.rawValue)
     }
     
     func testTimePeriod_containsDate_returnsTrueIfPeriodContainsDate() {

@@ -56,22 +56,22 @@ public enum TimePeriodAnchor : UInt {
     case end
 }
 
-public class TimePeriod: NSObject {
+open class TimePeriod {
     // MARK: - Properties
     /**
        The start date for a TimePeriod representing the starting boundary of the time period
      */
-    public var startDate: Date
+    open var startDate: Date
     
     /**
        The end date for a TimePeriod representing the ending boundary of the time period
      */
-    public var endDate: Date
+    open var endDate: Date
     
     /**
        Calendar used for date calculations
      */
-    public let calendar: Calendar
+    open let calendar: Calendar
     
     // MARK: - Initializers
     /**
@@ -87,7 +87,6 @@ public class TimePeriod: NSObject {
         self.startDate = startDate
         self.endDate = endDate
         self.calendar = calendar
-        super.init()
     }
     
     /**
@@ -136,7 +135,7 @@ public class TimePeriod: NSObject {
     
       - returns: true if receiver is a moment, otherwise false
      */
-    public func isMoment() -> Bool {
+    open func isMoment() -> Bool {
         return self.startDate == self.endDate
     }
     
@@ -144,7 +143,7 @@ public class TimePeriod: NSObject {
     /**
        - returns: duration of the receiver in given `TimePeriodSize`
      */
-    public func durationIn(size: TimePeriodSize) -> Int {
+    open func durationIn(size: TimePeriodSize) -> Int {
         switch size {
         case .second:
             return Int(self.durationInSeconds)
@@ -166,49 +165,49 @@ public class TimePeriod: NSObject {
     /**
         - returns: duration of the receiver in years
      */
-    public var durationInYears: Int {
+    open var durationInYears: Int {
         get { return self.calendar.yearsEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in months
     */
-    public var durationInMonths: Int {
+    open var durationInMonths: Int {
         get { return self.calendar.monthsEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in weeks
     */
-    public var durationInWeeks: Int {
+    open var durationInWeeks: Int {
         get { return self.calendar.weeksEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in days
     */
-    public var durationInDays: Int {
+    open var durationInDays: Int {
         get { return self.calendar.daysEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in hours
     */
-    public var durationInHours: Double {
+    open var durationInHours: Double {
         get { return self.calendar.hoursEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in minutes
     */
-    public var durationInMinutes: Double {
+    open var durationInMinutes: Double {
         get { return self.calendar.minutesEarlier(for: self.startDate, than: self.endDate) }
     }
     
     /**
         - returns: duration of the receiver in seconds
     */
-    public var durationInSeconds: Double {
+    open var durationInSeconds: Double {
         get { return self.calendar.secondsEarlier(for: self.startDate, than: self.endDate) }
     }
     
@@ -220,7 +219,7 @@ public class TimePeriod: NSObject {
     
        - returns: `true` if the two periods are the same, otherwise `false`
      */
-    public func equals(period: TimePeriod) -> Bool {
+    open func equals(_ period: TimePeriod) -> Bool {
         return (self.startDate == period.startDate) && (self.endDate == period.endDate)
     }
     
@@ -231,7 +230,7 @@ public class TimePeriod: NSObject {
     
        - returns: `true` if the receiver is inside the given time period, otherwise `false`
      */
-    public func isInside(period: TimePeriod) -> Bool {
+    open func isInside(period: TimePeriod) -> Bool {
         return (period.startDate <= self.startDate) && (period.endDate >= self.endDate)
     }
     
@@ -243,7 +242,7 @@ public class TimePeriod: NSObject {
     
        -  BOOL
      */
-    public func contains(period: TimePeriod) -> Bool {
+    open func contains(period: TimePeriod) -> Bool {
         return (self.startDate <= period.startDate) && (self.endDate >= period.endDate)
     }
     
@@ -255,7 +254,7 @@ public class TimePeriod: NSObject {
     
        - returns: Returns `true` if they overlap, otherwise `false`
      */
-    public func overlapsWith(period: TimePeriod) -> Bool {
+    open func overlapsWith(period: TimePeriod) -> Bool {
         return (
             (period.startDate <  self.startDate && period.endDate >  self.startDate) ||
             (period.startDate >= self.startDate && period.endDate <= self.endDate) ||
@@ -271,7 +270,7 @@ public class TimePeriod: NSObject {
     
        - returns: Returns `true` if they intersect, otherwise `false`
      */
-    public func intersects(period: TimePeriod) -> Bool {
+    open func intersects(period: TimePeriod) -> Bool {
         return (
             (period.startDate <  self.startDate && period.endDate >= self.startDate) ||
             (period.startDate >= self.startDate && period.endDate <= self.endDate) ||
@@ -284,7 +283,7 @@ public class TimePeriod: NSObject {
     
        - returns: the relationship of the receiver to a given `TimePeriod`
      */
-    public func relationTo(period: TimePeriod) -> TimePeriodRelation {
+    open func relationTo(period: TimePeriod) -> TimePeriodRelation {
         guard self.startDate < self.endDate && period.startDate < period.endDate else {
             return .none
         }
@@ -324,7 +323,7 @@ public class TimePeriod: NSObject {
     
        - returns: the gap in seconds between the receiver and provided time period. Returns 0 if the time periods intersect, otherwise returns the gap between.
      */
-    public func gapBetween(period: TimePeriod) -> TimeInterval {
+    open func gapBetween(period: TimePeriod) -> TimeInterval {
         if self.endDate < period.startDate {
             return abs(self.endDate.timeIntervalSince(period.startDate))
         } else if period.endDate < self.startDate {
@@ -339,7 +338,7 @@ public class TimePeriod: NSObject {
     
        - returns: `Bool` representing whether the provided date is contained in the receiver.
      */
-    public func contains(date: Date, interval: TimePeriodInterval) -> Bool {
+    open func contains(date: Date, interval: TimePeriodInterval) -> Bool {
         switch interval {
         case .open:
             return self.startDate < date && self.endDate > date
@@ -355,7 +354,7 @@ public class TimePeriod: NSObject {
        - parameter size: Desired shift size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func shiftEarlier(withSize size: TimePeriodSize, amount: Int = 1) {
+    open func shiftEarlier(withSize size: TimePeriodSize, amount: Int = 1) {
         self.startDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         self.endDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
     }
@@ -366,7 +365,7 @@ public class TimePeriod: NSObject {
        - parameter size: Desired shift size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func shiftLater(withSize size: TimePeriodSize, amount: Int = 1) {
+    open func shiftLater(withSize size: TimePeriodSize, amount: Int = 1) {
         self.startDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         self.endDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
     }
@@ -378,7 +377,7 @@ public class TimePeriod: NSObject {
        - parameter size: Desired lenghtening size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func lengthen(withAnchor anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
+    open func lengthen(withAnchor anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
         switch anchor {
         case .start:
             self.endDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
@@ -397,7 +396,7 @@ public class TimePeriod: NSObject {
        - parameter size: Desired shortening size
        - parameter amount: Multiplier of size (i.e. "2 weeks" or "4 years")
      */
-    public func shorten(withAnchor anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
+    open func shorten(withAnchor anchor: TimePeriodAnchor, size: TimePeriodSize, amount: Int = 1) {
         switch anchor {
         case .start:
             self.endDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
@@ -409,7 +408,7 @@ public class TimePeriod: NSObject {
         }
     }
     
-     public override func copy() -> Any {
+     open func copy() -> TimePeriod {
         return TimePeriod(startDate: Date(timeIntervalSince1970: self.startDate.timeIntervalSince1970), endDate: Date(timeIntervalSince1970: self.endDate.timeIntervalSince1970), calendar: self.calendar)
      }
     
@@ -455,9 +454,9 @@ public class TimePeriod: NSObject {
 
 // MARK: - Comparators
 public func == (lhs: TimePeriod, rhs: TimePeriod) -> Bool {
-    return lhs.equals(period: rhs)
+    return lhs.equals(rhs)
 }
 
 public func != (lhs: TimePeriod, rhs: TimePeriod) -> Bool {
-    return !lhs.equals(period: rhs)
+    return !lhs.equals(rhs)
 }

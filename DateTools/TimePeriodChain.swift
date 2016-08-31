@@ -18,30 +18,39 @@
 
 import Foundation
 
-public class TimePeriodChain: NSObject, TimePeriodGroup {
+open class TimePeriodChain: TimePeriodGroup {
     
-    internal(set) var periods: [TimePeriod] = [] {
+    open internal(set) var periods: [TimePeriod] = [] {
         didSet {
             self.updateVariables()
         }
     }
     
-    internal(set) var calendar: Calendar
+    public subscript(index: Int) -> TimePeriod {
+        get {
+            return self.periods[index]
+        }
+        set (value) {
+            self.periods[index] = value
+        }
+    }
+    
+    open internal(set) var calendar: Calendar
     
     /**
         The start date of `TimePeriodChain` representing the starting boundary of the `TimePeriodChain`
     */
-    public var startDate: Date?
+    open var startDate: Date?
     
     /**
         The end date of `TimePeriodChain` representing the ending boundary of the `TimePeriodChain`
     */
-    public var endDate: Date?
+    open var endDate: Date?
     
     /**
         The earliest `TimePeriod` object in chain
     */
-    public var first: TimePeriod? {
+    open var first: TimePeriod? {
         get {
             return self.periods.first
         }
@@ -50,7 +59,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     /**
         The latest `TimePeriod` object in chain
     */
-    public var last: TimePeriod? {
+    open var last: TimePeriod? {
         get {
             return self.periods.last
         }
@@ -63,7 +72,6 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     */
     public init(calendar: Calendar = Calendar.current) {
         self.calendar = calendar
-        super.init()
     }
     
     /**
@@ -71,7 +79,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - parameter timePeriod: `TimePeriod` object to be added to the chain
     */
-    public func add(timePeriod: TimePeriod) {
+    open func add(timePeriod: TimePeriod) {
         if self.periods.count > 0 {
             let modifiedPeriod = TimePeriod(size: TimePeriodSize.second, amount: Int(timePeriod.durationInSeconds), startingAt: self.periods[self.periods.count - 1].endDate, calendar: self.calendar)
             self.periods.append(modifiedPeriod)
@@ -89,7 +97,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
         - parameter timePeriod: `TimePeriod` object to be inserted
         - parameter index: index at which `TimePeriod` object has to be inserted
     */
-    public func insert(timePeriod: TimePeriod, atIndex index: Int) {
+    open func insert(timePeriod: TimePeriod, atIndex index: Int) {
         switch index {
         case 0 where self.periods.count == 0:
             self.add(timePeriod: timePeriod)
@@ -120,7 +128,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - returns: `Optional(TimePeriod)` removed from the chain, `nil` if object is not found
     */
-    public func remove(atIndex index: Int) -> TimePeriod? {
+    open func remove(atIndex index: Int) -> TimePeriod? {
         guard index >= 0 && index < self.periods.count else {
             return nil
         }
@@ -143,7 +151,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - returns: `Optional(TimePeriod)` removed from the chain, `nil` if chain is empty
     */
-    public func removeLatestTimePeriod() -> TimePeriod? {
+    open func removeLatestTimePeriod() -> TimePeriod? {
         guard self.periods.count > 0 else {
             return nil
         }
@@ -159,7 +167,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - returns: `Optional(TimePeriod)` removed from the chain, `nil` if chain is empty
     */
-    public func removeEarliestTimePeriod() -> TimePeriod? {
+    open func removeEarliestTimePeriod() -> TimePeriod? {
         guard self.periods.count > 0 else {
             return nil
         }
@@ -180,7 +188,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
     
         - returns: true when chains are equal, false otherwise
     */
-    public func equals(chain: TimePeriodChain) -> Bool {
+    open func equals(_ chain: TimePeriodChain) -> Bool {
         if !self.hasSameCharacteristicsAs(timePeriodGroup: chain) {
             return false
         }
@@ -194,7 +202,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
         return true
     }
     
-    public override func copy() -> Any {
+    open func copy() -> TimePeriodChain {
         let chain = TimePeriodChain(calendar: self.calendar)
         for period in self.periods {
             chain.add(timePeriod: period)
@@ -202,7 +210,7 @@ public class TimePeriodChain: NSObject, TimePeriodGroup {
         return chain
     }
 
-private func updateVariables() {
+fileprivate func updateVariables() {
         self.startDate = self.periods.first?.startDate
         self.endDate = self.periods.last?.endDate
     }
@@ -210,10 +218,10 @@ private func updateVariables() {
 }
 
 public func == (lhs: TimePeriodChain, rhs: TimePeriodChain) -> Bool {
-    return lhs.equals(chain: rhs)
+    return lhs.equals(rhs)
 }
 
 public func != (lhs: TimePeriodChain, rhs: TimePeriodChain) -> Bool {
-    return !lhs.equals(chain: rhs)
+    return !lhs.equals(rhs)
 }
 

@@ -159,17 +159,17 @@ class TimePeriodChainTests: XCTestCase {
     }
     
     func testTimePeriod_isEqualToCopy_returnsTrue() {
-        let copy = self.chain.copy() as! TimePeriodChain
+        let copy = self.chain.copy()
         
-        expect(self.chain.equals(chain: copy)) == true
+        expect(self.chain.equals(copy)) == true
         expect(self.chain == copy) == true
     }
     
     func testTimePeriod_isEqualToChainWithMorePeriods_returnsFalse() {
-        let copy = self.chain.copy() as! TimePeriodChain
+        let copy = self.chain.copy()
         copy.add(timePeriod: self.fourMonthsPeriod)
         
-        expect(self.chain.equals(chain: copy)) == false
+        expect(self.chain.equals(copy)) == false
         expect(self.chain == copy) == false
     }
     
@@ -182,7 +182,7 @@ class TimePeriodChainTests: XCTestCase {
         chain.add(timePeriod: monthPeriodAfterMonth)
         chain.add(timePeriod: twoMonthsPeriodAfterTwoWeeks)
         
-        expect(self.chain.equals(chain: chain)) == false
+        expect(self.chain.equals(chain)) == false
         expect(self.chain == chain) == false
     }
     

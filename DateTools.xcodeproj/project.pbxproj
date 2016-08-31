@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4FA8B6FB6401B9F6C76D2513 /* Pods_DateToolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E4EB98D499FC85A7342A6C3 /* Pods_DateToolsTests.framework */; };
 		D321A6A41BBAB4640095F9C8 /* TimePeriodCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D321A6A31BBAB4640095F9C8 /* TimePeriodCollectionTests.swift */; };
 		D35959C51BC5547C00E952B7 /* DateTestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D35959C41BC5547C00E952B7 /* DateTestUtils.swift */; };
 		D3B928531BAC409E005FB9FD /* DateTools.h in Headers */ = {isa = PBXBuildFile; fileRef = D3B928521BAC409E005FB9FD /* DateTools.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,7 +31,6 @@
 		DC9520CA1BD130D1009AEB36 /* TimePeriodGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928711BAC605E005FB9FD /* TimePeriodGroup.swift */; };
 		DC9520CB1BD130D1009AEB36 /* Date+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928731BAC6082005FB9FD /* Date+DateTools.swift */; };
 		DC9520CC1BD130D1009AEB36 /* Calendar+DateTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B928DF1BB19110005FB9FD /* Calendar+DateTools.swift */; };
-		EEF495B6E776FDCBD6ECF09F /* Pods_DateToolsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32180C43E22CDC8FB4D8406 /* Pods_DateToolsTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,8 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		69CA5226A2601D94A7FA63FC /* Pods-DateToolsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateToolsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests.release.xcconfig"; sourceTree = "<group>"; };
-		D32180C43E22CDC8FB4D8406 /* Pods_DateToolsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DateToolsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1199AECDBD7BFC2C3C9A3745 /* Pods-DateToolsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateToolsTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests.release.xcconfig"; sourceTree = "<group>"; };
+		6ACB8CF02DB4072AEE7A2D70 /* Pods-DateToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateToolsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7E4EB98D499FC85A7342A6C3 /* Pods_DateToolsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DateToolsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D321A6A31BBAB4640095F9C8 /* TimePeriodCollectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodCollectionTests.swift; sourceTree = "<group>"; };
 		D35959C41BC5547C00E952B7 /* DateTestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTestUtils.swift; sourceTree = "<group>"; };
 		D3B9284F1BAC409E005FB9FD /* DateTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DateTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,7 +67,6 @@
 		D3E83CD81BBC0DDA0041CD1A /* TimePeriodChainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimePeriodChainTests.swift; sourceTree = "<group>"; };
 		D3F81B831C0EF2EF002FA2CE /* DateTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DateTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9520BD1BD130A5009AEB36 /* DateTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DateTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F06987FB4395F9EF2CD303A7 /* Pods-DateToolsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DateToolsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +82,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B9285A1BAC409F005FB9FD /* DateTools.framework in Frameworks */,
-				EEF495B6E776FDCBD6ECF09F /* Pods_DateToolsTests.framework in Frameworks */,
+				4FA8B6FB6401B9F6C76D2513 /* Pods_DateToolsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,10 +103,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D7366BB5F56F55DD3DEDB64 /* Frameworks */ = {
+		21A3604F8AA34BA7628E42B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D32180C43E22CDC8FB4D8406 /* Pods_DateToolsTests.framework */,
+				7E4EB98D499FC85A7342A6C3 /* Pods_DateToolsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,8 +125,8 @@
 				D3B928511BAC409E005FB9FD /* DateTools */,
 				D3B9285D1BAC409F005FB9FD /* DateToolsTests */,
 				D3B928501BAC409E005FB9FD /* Products */,
-				F57114D1BEFAD7D665D17282 /* Pods */,
-				1D7366BB5F56F55DD3DEDB64 /* Frameworks */,
+				DA029ABE4C13B2E6543B1061 /* Pods */,
+				21A3604F8AA34BA7628E42B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,11 +171,11 @@
 			path = DateToolsTests;
 			sourceTree = "<group>";
 		};
-		F57114D1BEFAD7D665D17282 /* Pods */ = {
+		DA029ABE4C13B2E6543B1061 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F06987FB4395F9EF2CD303A7 /* Pods-DateToolsTests.debug.xcconfig */,
-				69CA5226A2601D94A7FA63FC /* Pods-DateToolsTests.release.xcconfig */,
+				6ACB8CF02DB4072AEE7A2D70 /* Pods-DateToolsTests.debug.xcconfig */,
+				1199AECDBD7BFC2C3C9A3745 /* Pods-DateToolsTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -231,12 +231,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3B928661BAC409F005FB9FD /* Build configuration list for PBXNativeTarget "DateToolsTests" */;
 			buildPhases = (
+				59A8A54AFDD9E6C59CE4E841 /* 📦 Check Pods Manifest.lock */,
 				D25A3B70006FA295379C411D /* [CP] Check Pods Manifest.lock */,
 				D3B928551BAC409F005FB9FD /* Sources */,
 				D3B928561BAC409F005FB9FD /* Frameworks */,
 				D3B928571BAC409F005FB9FD /* Resources */,
 				31D9A405E895DB4EFA93B280 /* [CP] Embed Pods Frameworks */,
 				F98184235CE2288822C4E3D9 /* [CP] Copy Pods Resources */,
+				6A18AFA8726DFAC3F55A826A /* 📦 Embed Pods Frameworks */,
+				A20BFFC28568C6E90DAF4B0E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,9 +299,11 @@
 				TargetAttributes = {
 					D3B9284E1BAC409E005FB9FD = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					D3B928581BAC409F005FB9FD = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					D3F81B821C0EF2EF002FA2CE = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -373,6 +378,51 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59A8A54AFDD9E6C59CE4E841 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6A18AFA8726DFAC3F55A826A /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A20BFFC28568C6E90DAF4B0E /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D25A3B70006FA295379C411D /* [CP] Check Pods Manifest.lock */ = {
@@ -604,7 +654,7 @@
 		};
 		D3B928671BAC409F005FB9FD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F06987FB4395F9EF2CD303A7 /* Pods-DateToolsTests.debug.xcconfig */;
+			baseConfigurationReference = 6ACB8CF02DB4072AEE7A2D70 /* Pods-DateToolsTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -619,7 +669,7 @@
 		};
 		D3B928681BAC409F005FB9FD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 69CA5226A2601D94A7FA63FC /* Pods-DateToolsTests.release.xcconfig */;
+			baseConfigurationReference = 1199AECDBD7BFC2C3C9A3745 /* Pods-DateToolsTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;

@@ -314,13 +314,13 @@ extension TimePeriodTests {
     
     // MARK: - Helper methods
     func testShiftEarlier(period: TimePeriod, size: TimePeriodSize, amount: Int, startDate: Date) {
-        let newPeriod = period.copy() as! TimePeriod
+        let newPeriod = period.copy()
         newPeriod.shiftEarlier(withSize: size, amount: amount)
         expect(newPeriod.startDate) == startDate
     }
     
     func testShiftLater(period: TimePeriod, size: TimePeriodSize, amount: Int, startDate: Date) {
-        let newPeriod = period.copy() as! TimePeriod
+        let newPeriod = period.copy()
         newPeriod.shiftLater(withSize: size, amount: amount)
         expect(newPeriod.startDate) == startDate
     }

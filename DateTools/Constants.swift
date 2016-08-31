@@ -16,13 +16,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-public let SECONDS_IN_YEAR = 31556900
-public let SECONDS_IN_MONTH_28 = 2419200
-public let SECONDS_IN_MONTH_29 = 2505600
-public let SECONDS_IN_MONTH_30 = 2592000
-public let SECONDS_IN_MONTH_31 = 2678400
-public let SECONDS_IN_WEEK = 604800
-public let SECONDS_IN_DAY = 86400
-public let SECONDS_IN_HOUR = 3600
-public let SECONDS_IN_MINUTE = 60
-public let MILLISECONDS_IN_DAY = 86400000
+public enum SecondsIn: UInt {
+    case year = 31556900
+    case month28 = 2419200
+    case month29 = 2505600
+    case month30 = 2592000
+    case month31 = 2678400
+    case week = 604800
+    case day = 86400
+    case hour = 3600
+    case minute = 60
+}

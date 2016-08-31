@@ -18,7 +18,7 @@
 
 import Foundation
 
-protocol TimePeriodGroup: NSObjectProtocol {
+public protocol TimePeriodGroup {
     // MARK: - Date properties
     /**
       Number of time periods in group
@@ -28,7 +28,7 @@ protocol TimePeriodGroup: NSObjectProtocol {
     /**
       Array containing TimePeriod objects
     */
-    var periods: [TimePeriod] { get set }
+    var periods: [TimePeriod] { get }
     
     /**
       The start date of a group representing the earliest date of the time periods
@@ -64,7 +64,7 @@ protocol TimePeriodGroup: NSObjectProtocol {
     
         - returns: duration of the receiver in given `TimePeriodSize`
     */
-    func durationIn(size: TimePeriodSize) -> Int
+    func durationIn(_ size: TimePeriodSize) -> Int
     
     /**
         Shifts all TimePeriod objects later by a given size amount. Amount multiplies size.
@@ -92,69 +92,60 @@ protocol TimePeriodGroup: NSObjectProtocol {
     func hasSameCharacteristicsAs(timePeriodGroup: TimePeriodGroup) -> Bool
 }
 
-extension TimePeriodGroup {
+public extension TimePeriodGroup {
     // MARK: - Properties
-    var count: Int { get { return self.periods.count } }
+    public var count: Int { get { return self.periods.count } }
     
-    subscript(index: Int) -> TimePeriod {
-        get {
-            return self.periods[index];
-        }
-        set (value) {
-            self.periods[index] = value
-        }
-    }
-    
-    var durationInYears: Int {
+    public var durationInYears: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return self.calendar.yearsEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInMonths: Int {
+    public var durationInMonths: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return self.calendar.monthsEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInWeeks: Int {
+    public var durationInWeeks: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return self.calendar.weeksEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInDays: Int {
+    public var durationInDays: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return self.calendar.daysEarlier(for: startDate, than: endDate)
         }
     }
     
-    var durationInHours: Int {
+    public var durationInHours: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return Int(self.calendar.hoursEarlier(for: startDate, than: endDate))
         }
     }
     
-    var durationInMinutes: Int {
+    public var durationInMinutes: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return Int(self.calendar.minutesEarlier(for: startDate, than: endDate))
         }
     }
     
-    var durationInSeconds: Int {
+    public var durationInSeconds: Int {
         get {
             guard let startDate = self.startDate, let endDate = self.endDate else { return 0 }
             return Int(self.calendar.secondsEarlier(for: startDate, than: endDate))
         }
     }
     
-    func durationIn(size: TimePeriodSize) -> Int {
+    public func durationIn(_ size: TimePeriodSize) -> Int {
         switch size {
         case .second:
             return self.durationInSeconds
@@ -173,19 +164,19 @@ extension TimePeriodGroup {
         }
     }
     
-    func shiftLater(withSize size: TimePeriodSize, amount: Int = 1) {
+    public func shiftLater(withSize size: TimePeriodSize, amount: Int = 1) {
         self.periods.forEach { elem in
             elem.shiftLater(withSize: size, amount: amount)
         }
     }
     
-    func shiftEarlier(withSize size: TimePeriodSize, amount: Int) {
+    public func shiftEarlier(withSize size: TimePeriodSize, amount: Int) {
         self.periods.forEach { elem in
             elem.shiftEarlier(withSize: size, amount: amount)
         }
     }
     
-    func hasSameCharacteristicsAs(timePeriodGroup: TimePeriodGroup) -> Bool {
+    public func hasSameCharacteristicsAs(timePeriodGroup: TimePeriodGroup) -> Bool {
         if timePeriodGroup.count != self.count {
             return false
         } else if timePeriodGroup.count == 0 {

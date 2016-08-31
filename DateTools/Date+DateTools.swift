@@ -90,11 +90,11 @@ public extension Date {
     }
 
     public func hoursFrom(date: Date) -> Double {
-        return self.timeIntervalSince(date) / Double(SECONDS_IN_HOUR)
+        return self.timeIntervalSince(date) / Double(SecondsIn.hour.rawValue)
     }
     
     public func minutesFrom(date: Date) -> Double {
-        return self.timeIntervalSince(date) / Double(SECONDS_IN_MINUTE)
+        return self.timeIntervalSince(date) / Double(SecondsIn.minute.rawValue)
     }
     
     public func secondsFrom(date: Date) -> Double {
