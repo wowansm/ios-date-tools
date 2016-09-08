@@ -231,12 +231,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D3B928661BAC409F005FB9FD /* Build configuration list for PBXNativeTarget "DateToolsTests" */;
 			buildPhases = (
-				D25A3B70006FA295379C411D /* Check Pods Manifest.lock */,
+				D25A3B70006FA295379C411D /* [CP] Check Pods Manifest.lock */,
 				D3B928551BAC409F005FB9FD /* Sources */,
 				D3B928561BAC409F005FB9FD /* Frameworks */,
 				D3B928571BAC409F005FB9FD /* Resources */,
-				31D9A405E895DB4EFA93B280 /* Embed Pods Frameworks */,
-				F98184235CE2288822C4E3D9 /* Copy Pods Resources */,
+				31D9A405E895DB4EFA93B280 /* [CP] Embed Pods Frameworks */,
+				F98184235CE2288822C4E3D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -296,9 +296,11 @@
 				TargetAttributes = {
 					D3B9284E1BAC409E005FB9FD = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					D3B928581BAC409F005FB9FD = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					D3F81B821C0EF2EF002FA2CE = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -360,14 +362,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31D9A405E895DB4EFA93B280 /* Embed Pods Frameworks */ = {
+		31D9A405E895DB4EFA93B280 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,14 +377,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DateToolsTests/Pods-DateToolsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D25A3B70006FA295379C411D /* Check Pods Manifest.lock */ = {
+		D25A3B70006FA295379C411D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,14 +392,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		F98184235CE2288822C4E3D9 /* Copy Pods Resources */ = {
+		F98184235CE2288822C4E3D9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,6 +573,7 @@
 				PRODUCT_NAME = DateTools;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -589,6 +592,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateTools;
 				PRODUCT_NAME = DateTools;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -603,6 +607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateToolsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -615,6 +620,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateToolsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

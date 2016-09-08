@@ -1,6 +1,6 @@
 use_frameworks!
 
-target 'DateToolsTests', :exclusive => true do
-	pod 'Nimble', '~> 2.0.0-rc.3'
+target 'DateToolsTests' do
+	pod 'Nimble', '~> 4.1.0'
 end
 
