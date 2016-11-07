@@ -1,3 +1,6 @@
+# !!! WARNING !!!
+# As soon as Xcode 8.2 becomes public, we are dropping swift 2.3 support.
+
 # Swift Date Tools 
 [![Build Status](https://travis-ci.org/codewise/ios-date-tools.svg?branch=master)](https://travis-ci.org/codewise/ios-date-tools)
 [![CocoaPods](https://cocoapod-badges.herokuapp.com/v/SwiftDateTools/badge.png)](http://cocoapods.org/?q=swiftdatetools)
