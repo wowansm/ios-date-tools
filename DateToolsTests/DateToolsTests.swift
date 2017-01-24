@@ -73,49 +73,49 @@ class DateToolsTests: XCTestCase {
         expect(self.controlDate.daysInYear) == 365
         
         //Leap year (2000)
-        expect(self.controlDate.dateBySubtracting(years: 14).daysInYear) == 366
+        expect(self.controlDate.subtracting(years: 14).daysInYear) == 366
     }
     func testIsInLeapYear() {
         //Not leap year
         expect(false) == self.controlDate.isInLeapYear
         
         //Is leap year (%400) 2000
-        expect(true) == self.controlDate.dateBySubtracting(years: 14).isInLeapYear
+        expect(true) == self.controlDate.subtracting(years: 14).isInLeapYear
         
         //Not leap year (%100) 1900
-        expect(false) == self.controlDate.dateBySubtracting(years: 114).isInLeapYear
+        expect(false) == self.controlDate.subtracting(years: 114).isInLeapYear
         
         //Is leap year (%4) 2016
-        expect(true) == self.controlDate.dateByAdding(years: 2).isInLeapYear
+        expect(true) == self.controlDate.adding(years: 2).isInLeapYear
     }
     func testIsToday() {
         //Test true now
         expect(true) == Date().isToday
         
         //Test true past (Technically, could fail if you ran the test precisely at midnight, but...)
-        expect(true) == Date().dateBySubtracting(seconds: 1).isToday
+        expect(true) == Date().subtracting(seconds: 1).isToday
         
         //Test true future (Technically, could fail if you ran the test precisely at midnight, but...)
-        expect(true) == Date().dateByAdding(seconds: 1).isToday
+        expect(true) == Date().adding(seconds: 1).isToday
         
         //Tests false past
-        expect(false) == Date().dateBySubtracting(days: 2).isToday
+        expect(false) == Date().subtracting(days: 2).isToday
         
         //Tests false future
-        expect(false) == Date().dateByAdding(days: 1).isToday
+        expect(false) == Date().adding(days: 1).isToday
     }
     func testIsTomorrow() {
         //Test false with now
         expect(false) == Date().isTomorrow
         
         //Test false past
-        expect(false) == Date().dateBySubtracting(days: 1).isTomorrow
+        expect(false) == Date().subtracting(days: 1).isTomorrow
         
         //Test true future
-        expect(true) == Date().dateByAdding(days: 1).isTomorrow
+        expect(true) == Date().adding(days: 1).isTomorrow
         
         //Tests false future
-        expect(false) == Date().dateByAdding(days: 2).isTomorrow
+        expect(false) == Date().adding(days: 2).isTomorrow
         
     }
     func testIsYesterday() {
@@ -123,13 +123,13 @@ class DateToolsTests: XCTestCase {
         expect(false) == Date().isYesterday
         
         //Test true past
-        expect(true) == Date().dateBySubtracting(days: 1).isYesterday
+        expect(true) == Date().subtracting(days: 1).isYesterday
         
         //Test false future
-        expect(false) == Date().dateByAdding(days: 1).isYesterday
+        expect(false) == Date().adding(days: 1).isYesterday
         
         //Tests false future
-        expect(false) == Date().dateBySubtracting(days: 2).isYesterday
+        expect(false) == Date().subtracting(days: 2).isYesterday
     }
     
     func testIsWeekend() {
@@ -156,10 +156,10 @@ class DateToolsTests: XCTestCase {
         expect(true) == testSameDay1.isSameDay(testSameDay2)
         
         //Test false 1 day ahead
-        expect(false) == testSameDay1.isSameDay(Date().dateByAdding(days: 1))
+        expect(false) == testSameDay1.isSameDay(Date().adding(days: 1))
         
         //Test false 1 day before
-        expect(false) == testSameDay1.isSameDay(Date().dateBySubtracting(days: 1))
+        expect(false) == testSameDay1.isSameDay(Date().subtracting(days: 1))
     }
     
     func testIsSameDayStatic() {
@@ -172,10 +172,10 @@ class DateToolsTests: XCTestCase {
         expect(true) == Date.isSameDay(date: testSameDay1, asDate:testSameDay2)
         
         //Test false 1 day ahead
-        expect(false) == Date.isSameDay(date: Date(), asDate:Date().dateByAdding(days: 1))
+        expect(false) == Date.isSameDay(date: Date(), asDate:Date().adding(days: 1))
         
         //Test false 1 day before
-        expect(false) == Date.isSameDay(date: Date(), asDate:Date().dateBySubtracting(days: 1))
+        expect(false) == Date.isSameDay(date: Date(), asDate:Date().subtracting(days: 1))
     }
     
     // MARK: - Date Editing
@@ -192,63 +192,63 @@ class DateToolsTests: XCTestCase {
     }
     
     // MARK: Date By Adding
-    func testDateByAddingYears() {
+    func testAddingYears() {
         let testDate = self.formatter.date(from: "2016 11 05 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(years: 2)
+        expect(testDate) == self.controlDate.adding(years: 2)
     }
-    func testDateByAddingMonths() {
+    func testAddingMonths() {
         let testDate = self.formatter.date(from: "2015 01 05 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(months: 2)
+        expect(testDate) == self.controlDate.adding(months: 2)
     }
-    func testDateByAddingWeeks() {
+    func testAddingWeeks() {
         let testDate = self.formatter.date(from: "2014 11 12 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(weeks: 1)
+        expect(testDate) == self.controlDate.adding(weeks: 1)
     }
-    func testDateByAddingDays() {
+    func testAddingDays() {
         let testDate = self.formatter.date(from: "2014 11 07 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(days: 2)
+        expect(testDate) == self.controlDate.adding(days: 2)
     }
-    func testDateByAddingHours() {
+    func testAddingHours() {
         let testDate = self.formatter.date(from: "2014 11 06 6:15:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(hours: 12)
+        expect(testDate) == self.controlDate.adding(hours: 12)
     }
-    func testDateByAddingMinutes() {
+    func testAddingMinutes() {
         let testDate = self.formatter.date(from: "2014 11 05 18:30:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(minutes: 15)
+        expect(testDate) == self.controlDate.adding(minutes: 15)
     }
-    func testDateByAddingSeconds() {
+    func testAddingSeconds() {
         let testDate = self.formatter.date(from: "2014 11 05 18:16:12.000")!
-        expect(testDate) == self.controlDate.dateByAdding(seconds: 60)
+        expect(testDate) == self.controlDate.adding(seconds: 60)
     }
     
     // MARK: Date By Subtracting
-    func testDateBySubtractingYears() {
+    func testSubtractingYears() {
         let testDate = self.formatter.date(from: "2000 11 05 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(years: 14)
+        expect(testDate) == self.controlDate.subtracting(years: 14)
     }
-    func testDateBySubtractingMonths() {
+    func testSubtractingMonths() {
         let testDate = self.formatter.date(from: "2014 4 05 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(months: 7)
+        expect(testDate) == self.controlDate.subtracting(months: 7)
     }
-    func testDateBySubtractingWeeks() {
+    func testSubtractingWeeks() {
         let testDate = self.formatter.date(from: "2014 10 29 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(weeks: 1)
+        expect(testDate) == self.controlDate.subtracting(weeks: 1)
     }
-    func testDateBySubtractingDays() {
+    func testSubtractingDays() {
         let testDate = self.formatter.date(from: "2014 11 01 18:15:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(days: 4)
+        expect(testDate) == self.controlDate.subtracting(days: 4)
     }
-    func testDateBySubtractingHours() {
+    func testSubtractingHours() {
         let testDate = self.formatter.date(from: "2014 11 05 00:15:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(hours: 18)
+        expect(testDate) == self.controlDate.subtracting(hours: 18)
     }
-    func testDateBySubtractingMinutes() {
+    func testSubtractingMinutes() {
         let testDate = self.formatter.date(from: "2014 11 05 17:45:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(minutes: 30)
+        expect(testDate) == self.controlDate.subtracting(minutes: 30)
     }
-    func testDateBySubtractingSeconds() {
+    func testSubtractingSeconds() {
         let testDate = self.formatter.date(from: "2014 11 05 18:14:12.000")!
-        expect(testDate) == self.controlDate.dateBySubtracting(seconds: 60)
+        expect(testDate) == self.controlDate.subtracting(seconds: 60)
     }
     
     // MARK: - Date Comparison

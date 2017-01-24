@@ -546,7 +546,7 @@ public extension Date {
     
     public var isTomorrow: Bool {
         let cal = Calendar.current
-        var components = cal.dateComponents([.era, .year, .month, .day], from: Date().dateByAdding(days: 1))
+        var components = cal.dateComponents([.era, .year, .month, .day], from: Date().adding(days: 1))
         let tomorrow = cal.date(from: components)
         components = cal.dateComponents([.era, .year, .month, .day], from: self)
         let otherDate = cal.date(from: components)
@@ -556,7 +556,7 @@ public extension Date {
     
     public var isYesterday: Bool {
         let cal = Calendar.current
-        var components = cal.dateComponents([.era, .year, .month, .day], from: Date().dateBySubtracting(days: 1))
+        var components = cal.dateComponents([.era, .year, .month, .day], from: Date().subtracting(days: 1))
         let tomorrow = cal.date(from: components)
         components = cal.dateComponents([.era, .year, .month, .day], from: self)
         let otherDate = cal.date(from: components)
@@ -618,7 +618,7 @@ public extension Date {
      *
      *  @return Int - represents the era (0 for BC, 1 for AD for Gregorian)
      */
-    public func eraWithCalendar(calendar: Calendar) -> Int {
+    public func era(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .era, calendar: calendar)
     }
     
@@ -629,7 +629,7 @@ public extension Date {
      *
      *  @return Int - represents the year as an Int
      */
-    public func yearWithCalendar(calendar: Calendar) -> Int {
+    public func year(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .year, calendar: calendar)
     }
     
@@ -640,7 +640,7 @@ public extension Date {
      *
      *  @return Int - represents the month as an Int
      */
-    public func monthWithCalendar(calendar: Calendar) -> Int {
+    public func month(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .month, calendar: calendar)
     }
     
@@ -651,7 +651,7 @@ public extension Date {
      *
      *  @return Int - represents the day of the month as an Int
      */
-    public func dayWithCalendar(calendar: Calendar) -> Int {
+    public func day(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .day, calendar: calendar)
     }
     
@@ -662,7 +662,7 @@ public extension Date {
      *
      *  @return Int - represents the hour of the day as an Int
      */
-    public func hourWithCalendar(calendar: Calendar) -> Int {
+    public func hour(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .hour, calendar: calendar)
     }
     
@@ -673,7 +673,7 @@ public extension Date {
      *
      *  @return Int - represents the minute of the hour as an Int
      */
-    public func minuteWithCalendar(calendar: Calendar) -> Int {
+    public func minute(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .minute, calendar: calendar)
     }
     
@@ -684,7 +684,7 @@ public extension Date {
      *
      *  @return Int - represents the second as an Int
      */
-    public func secondWithCalendar(calendar: Calendar) -> Int {
+    public func second(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .second, calendar: calendar)
     }
     
@@ -695,7 +695,7 @@ public extension Date {
      *
      *  @return Int - represents the weekday as an Int
      */
-    public func weekdayWithCalendar(calendar: Calendar) -> Int {
+    public func weekday(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .weekday, calendar: calendar)
     }
     
@@ -706,7 +706,7 @@ public extension Date {
      *
      *  @return Int - represents the weekday ordinal as an Int
      */
-    public func weekdayOrdinalWithCalendar(calendar: Calendar) -> Int {
+    public func weekdayOrdinal(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .weekdayOrdinal, calendar: calendar)
     }
     
@@ -717,7 +717,7 @@ public extension Date {
      *
      *  @return Int - represents the quarter as an Int
      */
-    public func quarterWithCalendar(calendar: Calendar) -> Int {
+    public func quarter(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .quarter, calendar: calendar)
     }
     
@@ -728,7 +728,7 @@ public extension Date {
      *
      *  @return Int - represents the week of the month as an Int
      */
-    public func weekOfMonthWithCalendar(calendar: Calendar) -> Int {
+    public func weekOfMonth(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .weekOfMonth, calendar: calendar)
     }
     
@@ -739,7 +739,7 @@ public extension Date {
      *
      *  @return Int - represents the week of the year as an Int
      */
-    public func weekOfYearWithCalendar(calendar: Calendar) -> Int {
+    public func weekOfYear(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .weekOfYear, calendar: calendar)
     }
     
@@ -750,7 +750,7 @@ public extension Date {
      *
      *  @return Int - represents the year for week of the year as an Int
      */
-    public func yearForWeekOfYearWithCalendar(calendar: Calendar) -> Int {
+    public func yearForWeekOfYear(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .yearForWeekOfYear, calendar: calendar)
     }
     
@@ -762,7 +762,7 @@ public extension Date {
      *
      *  @return Int - represents the day of the year as an Int
      */
-    public func dayOfYearWithCalendar(calendar: Calendar) -> Int {
+    public func dayOfYear(with calendar: Calendar) -> Int {
         return self.componentFor(date: self, type: .dayOfYear, calendar: calendar)
     }
     
@@ -823,60 +823,60 @@ public extension Date {
     
     // MARK: - Adding components to date
     
-    public func dateByAdding(years: Int) -> Date {
+    public func adding(years: Int) -> Date {
         return Calendar.current.dateByAdding(years: years, to: self)
     }
     
-    public func dateByAdding(months: Int) -> Date {
+    public func adding(months: Int) -> Date {
         return Calendar.current.dateByAdding(months: months, to: self)
     }
     
-    public func dateByAdding(weeks: Int) -> Date {
+    public func adding(weeks: Int) -> Date {
         return Calendar.current.dateByAdding(weeks: weeks, to: self)
     }
     
-    public func dateByAdding(days: Int) -> Date {
+    public func adding(days: Int) -> Date {
         return Calendar.current.dateByAdding(days: days, to: self)
     }
     
-    public func dateByAdding(hours: Int) -> Date {
+    public func adding(hours: Int) -> Date {
         return Calendar.current.dateByAdding(hours: hours, to: self)
     }
     
-    public func dateByAdding(minutes: Int) -> Date {
+    public func adding(minutes: Int) -> Date {
         return Calendar.current.dateByAdding(minutes: minutes, to: self)
     }
     
-    public func dateByAdding(seconds: Int) -> Date {
+    public func adding(seconds: Int) -> Date {
         return Calendar.current.dateByAdding(seconds: seconds, to: self)
     }
     
     // MARK: - Subtracting components from date
-    public func dateBySubtracting(years: Int) -> Date {
+    public func subtracting(years: Int) -> Date {
         return Calendar.current.dateBySubtracting(years: years, from: self)
     }
     
-    public func dateBySubtracting(months: Int) -> Date {
+    public func subtracting(months: Int) -> Date {
         return Calendar.current.dateBySubtracting(months: months, from: self)
     }
     
-    public func dateBySubtracting(weeks: Int) -> Date {
+    public func subtracting(weeks: Int) -> Date {
         return Calendar.current.dateBySubtracting(weeks: weeks, from: self)
     }
     
-    public func dateBySubtracting(days: Int) -> Date {
+    public func subtracting(days: Int) -> Date {
         return Calendar.current.dateBySubtracting(days: days, from: self)
     }
     
-    public func dateBySubtracting(hours: Int) -> Date {
+    public func subtracting(hours: Int) -> Date {
         return Calendar.current.dateBySubtracting(hours: hours, from: self)
     }
     
-    public func dateBySubtracting(minutes: Int) -> Date {
+    public func subtracting(minutes: Int) -> Date {
         return Calendar.current.dateBySubtracting(minutes: minutes, from: self)
     }
     
-    public func dateBySubtracting(seconds: Int) -> Date {
+    public func subtracting(seconds: Int) -> Date {
         return Calendar.current.dateBySubtracting(seconds: seconds, from: self)
     }
     

@@ -343,7 +343,7 @@ class TimePeriodCollectionTests: XCTestCase {
     }
     
     func testPeriodCollection_periodsIntersectedByPeriod_returnsAllPeriodsThatIntersectWithGivenPeriod() {
-        let periods1 = self.collection.periodsIntersected(byPeriod: TimePeriod(size: .week, amount: 5, startingAt: self.startDate.dateBySubtracting(days: 5), calendar: self.calendar))
+        let periods1 = self.collection.periodsIntersected(byPeriod: TimePeriod(size: .week, amount: 5, startingAt: self.startDate.subtracting(days: 5), calendar: self.calendar))
         let periods2 = self.collection.periodsIntersected(byPeriod: TimePeriod(size: .week, amount: 1, startingAt: self.twoMonthsPeriod.endDate, calendar: self.calendar))
         
         expect(periods1.count) == 3
@@ -358,7 +358,7 @@ class TimePeriodCollectionTests: XCTestCase {
     }
     
     func testPeriodCollection_periodsOverlappedByPeriod_returnsAllPeriodsOverlappedByGivenPeriod() {
-        let periods1 = self.collection.periodsOverlapped(byPeriod: TimePeriod(size: .month, amount: 2, startingAt: self.startDate.dateBySubtracting(months: 1), calendar: self.calendar))
+        let periods1 = self.collection.periodsOverlapped(byPeriod: TimePeriod(size: .month, amount: 2, startingAt: self.startDate.subtracting(months: 1), calendar: self.calendar))
         let periods2 = self.collection.periodsOverlapped(byPeriod: TimePeriod(size: .week, amount: 1, startingAt: self.twoMonthsPeriod.endDate, calendar: self.calendar))
         
         expect(periods1.count) == 3
