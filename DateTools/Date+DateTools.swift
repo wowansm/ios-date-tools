@@ -78,7 +78,7 @@ public extension Date {
             return implicitCalendar.identifier
         }
         set {
-            if (newValue != implicitCalendar.identifier) {
+            if newValue != implicitCalendar.identifier {
                 implicitCalendar = Calendar(identifier: newValue)
             }
         }
@@ -180,11 +180,11 @@ public extension Date {
     }
     
     public func timeAgo(since date: Date, numericDates useNumericDates: Bool, numericTimes useNumericTimes: Bool) -> String?  {
-        if (useNumericDates && useNumericTimes) {
+        if useNumericDates && useNumericTimes {
             return self.timeAgo(since: date, format: .longUsingNumericDatesAndTimes)
-        } else if (useNumericDates) {
+        } else if useNumericDates {
             return self.timeAgo(since: date, format: .longUsingNumericDates)
-        } else if (useNumericTimes) {
+        } else if useNumericTimes {
             return self.timeAgo(since: date, format: .longUsingNumericDates)
         } else {
             return self.timeAgo(since: date, format: .long)
@@ -209,10 +209,10 @@ public extension Date {
         let upToHours: Set<Calendar.Component> = [.second, .minute, .hour]
         var difference = calendar.dateComponents(upToHours, from: earliest, to: latest)
         
-        if (difference.hour! < 24) {
-            if (difference.hour! >= 1) {
+        if difference.hour! < 24 {
+            if difference.hour! >= 1 {
                 return self.localizedString(forFormat: format, valueType: .hours, value: difference.hour!)
-            } else if (difference.minute! >= 1) {
+            } else if difference.minute! >= 1 {
                 return self.localizedString(forFormat: format, valueType: .minutes, value: difference.minute!)
             } else {
                 return self.localizedString(forFormat: format, valueType: .seconds, value: difference.second!)
@@ -229,11 +229,11 @@ public extension Date {
             
             difference = calendar.dateComponents(bigUnits, from: earliest, to: latest)
             
-            if (difference.year! >= 1) {
+            if difference.year! >= 1 {
                 return self.localizedString(forFormat: format, valueType: .years, value: difference.year!)
-            } else if (difference.month! >= 1) {
+            } else if difference.month! >= 1 {
                 return self.localizedString(forFormat: format, valueType: .months, value: difference.month!)
-            } else if (difference.weekOfYear! >= 1) {
+            } else if difference.weekOfYear! >= 1 {
                 return self.localizedString(forFormat: format, valueType: .weeks, value: difference.weekOfYear!)
             } else {
                 return self.localizedString(forFormat: format, valueType: .days, value: difference.day!)
@@ -249,40 +249,40 @@ public extension Date {
         
         switch (valueType) {
         case .years:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@y", withValue: value)
-            } else if (value >= 2) {
+            } else if value >= 2 {
                 return self.logicLocalizedString(fromFormat:"%%d %@years ago", withValue: value)
-            } else if (isNumericDate) {
+            } else if isNumericDate {
                 return DateToolsLocalizedStrings("1 year ago")
             } else {
                 return DateToolsLocalizedStrings("Last year")
             }
         case .months:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@M", withValue: value)
-            } else if (value >= 2) {
+            } else if value >= 2 {
                 return self.logicLocalizedString(fromFormat:"%%d %@months ago", withValue: value)
-            } else if (isNumericDate) {
+            } else if isNumericDate {
                 return DateToolsLocalizedStrings("1 month ago")
             } else {
                 return DateToolsLocalizedStrings("Last month")
             }
         case .weeks:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@w", withValue: value)
-            } else if (value >= 2) {
+            } else if value >= 2 {
                 return self.logicLocalizedString(fromFormat:"%%d %@weeks ago", withValue: value)
-            } else if (isNumericDate) {
+            } else if isNumericDate {
                 return DateToolsLocalizedStrings("1 week ago")
             } else {
                 return DateToolsLocalizedStrings("Last week")
             }
         case .days:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@d", withValue: value)
-            } else if (value >= 2) {
-                if (isWeek && value <= 7) {
+            } else if value >= 2 {
+                if isWeek && value <= 7 {
                     let dayDateFormatter = DateFormatter()
                     dayDateFormatter.dateFormat = "EEE"
                     let eee = dayDateFormatter.string(from: self)
@@ -291,37 +291,37 @@ public extension Date {
                 }
             
                 return self.logicLocalizedString(fromFormat:"%%d %@days ago", withValue: value)
-            } else if (isNumericDate) {
+            } else if isNumericDate {
                 return DateToolsLocalizedStrings("1 day ago")
             } else {
                 return DateToolsLocalizedStrings("Yesterday")
             }
         case .hours:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@h", withValue: value)
-            } else if (value >= 2) {
+            } else if value >= 2 {
                 return self.logicLocalizedString(fromFormat:"%%d %@hours ago", withValue: value)
-            } else if (isNumericTime) {
+            } else if isNumericTime {
                 return DateToolsLocalizedStrings("1 hour ago")
             } else {
                 return DateToolsLocalizedStrings("An hour ago")
             }
         case .minutes:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@m", withValue: value)
-            } else if (value >= 2) {
+            } else if value >= 2 {
                 return self.logicLocalizedString(fromFormat:"%%d %@minutes ago", withValue: value)
-            } else if (isNumericTime) {
+            } else if isNumericTime {
                 return DateToolsLocalizedStrings("1 minute ago")
             } else {
                 return DateToolsLocalizedStrings("A minute ago")
             }
         case .seconds:
-            if (isShort) {
+            if isShort {
                 return self.logicLocalizedString(fromFormat:"%%d%@s", withValue: value)
-            } else if (value >= 2) {
+            } else if value >= 2 {
                 return self.logicLocalizedString(fromFormat:"%%d %@seconds ago", withValue: value)
-            } else if (isNumericTime) {
+            } else if isNumericTime {
                 return DateToolsLocalizedStrings("1 second ago")
             } else {
                 return DateToolsLocalizedStrings("Just now")
@@ -338,19 +338,19 @@ public extension Date {
         let localeCode = Bundle.main.preferredLocalizations[0]
         
         // Russian (ru) and Ukrainian (uk)
-        if (localeCode == "ru-RU" || localeCode == "uk") {
+        if localeCode == "ru-RU" || localeCode == "uk" {
             let XY = value % 100
             let Y = value % 10
         
-            if (Y == 0 || Y > 4 || (XY > 10 && XY < 15)) {
+            if Y == 0 || Y > 4 || (XY > 10 && XY < 15) {
                 return ""
             }
             
-            if (Y > 1 && Y < 5 && (XY < 10 || XY > 20))  {
+            if Y > 1 && Y < 5 && (XY < 10 || XY > 20) {
                 return "_"
             }
             
-            if (Y == 1 && XY != 11) {
+            if Y == 1 && XY != 11 {
                 return "__"
             }
         }
@@ -505,7 +505,7 @@ public extension Date {
      *  @return Int
      */
     public var daysInYear: Int {
-        if (self.isInLeapYear) {
+        if self.isInLeapYear {
             return 366
         }
         
@@ -521,13 +521,13 @@ public extension Date {
         let calendar = Date.self.implicitCalendar
         let dateComponents = calendar.dateComponents(Date.self.allCalendarUnitFlags, from: self)
         
-        if (dateComponents.year!%400 == 0){
+        if dateComponents.year!%400 == 0 {
             return true
         }
-        else if (dateComponents.year!%100 == 0){
+        else if dateComponents.year!%100 == 0 {
             return false
         }
-        else if (dateComponents.year!%4 == 0){
+        else if dateComponents.year!%4 == 0 {
             return true
         }
     
@@ -572,7 +572,7 @@ public extension Date {
         
         var result = false
         
-        if (weekdayOfSomeDate == weekdayRange.lowerBound || weekdayOfSomeDate == weekdayRange.upperBound - 1) {
+        if weekdayOfSomeDate == weekdayRange.lowerBound || weekdayOfSomeDate == weekdayRange.upperBound - 1 {
             result = true
         }
     
@@ -780,7 +780,7 @@ public extension Date {
         let calendar = fromCalendar ?? Date.self.implicitCalendar
         var unitFlags: Set<Calendar.Component>
         
-        if (component == .yearForWeekOfYear) {
+        if component == .yearForWeekOfYear {
             unitFlags = [.year, .quarter, .month, .weekOfYear, .weekOfMonth, .day, .hour, .minute, .second, .era, .weekday, .weekdayOrdinal, .weekOfYear, .yearForWeekOfYear]
         } else {
             unitFlags = Date.self.allCalendarUnitFlags
@@ -1336,7 +1336,7 @@ public extension Date {
      *  @return Bool representing comparison result
      */
     public func isEarlier(than date: Date) -> Bool {
-        if (self.timeIntervalSince1970 < date.timeIntervalSince1970) {
+        if self.timeIntervalSince1970 < date.timeIntervalSince1970 {
             return true
         }
         return false
@@ -1350,7 +1350,7 @@ public extension Date {
      *  @return Bool representing comparison result
      */
     public func isLater(than date: Date) -> Bool {
-        if (self.timeIntervalSince1970 > date.timeIntervalSince1970) {
+        if self.timeIntervalSince1970 > date.timeIntervalSince1970 {
             return true
         }
         return false
@@ -1364,7 +1364,7 @@ public extension Date {
      *  @return Bool representing comparison result
      */
     public func isEarlierThanOrEqualTo(_ date: Date) -> Bool {
-        if (self.timeIntervalSince1970 <= date.timeIntervalSince1970) {
+        if self.timeIntervalSince1970 <= date.timeIntervalSince1970 {
             return true
         }
         return false
@@ -1378,7 +1378,7 @@ public extension Date {
      *  @return Bool representing comparison result
      */
     public func isLaterThanOrEqualTo(_ date: Date) -> Bool {
-        if (self.timeIntervalSince1970 >= date.timeIntervalSince1970) {
+        if self.timeIntervalSince1970 >= date.timeIntervalSince1970 {
             return true
         }
         return false
@@ -1503,11 +1503,11 @@ public extension Date {
      *  @return Bool evaluation of year
      */
     private static func isLeapYear(year: Int) -> Bool {
-        if (year%400 != 0){
+        if year%400 != 0 {
             return true
-        } else if (year%100 != 0){
+        } else if year%100 != 0 {
             return false
-        } else if (year%4 != 0){
+        } else if year%4 != 0 {
             return true
         }
     
