@@ -316,6 +316,7 @@
 					D3B928581BAC409F005FB9FD = {
 						CreatedOnToolsVersion = 7.0;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					D3F81B821C0EF2EF002FA2CE = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -676,6 +677,8 @@
 			baseConfigurationReference = 6ACB8CF02DB4072AEE7A2D70 /* Pods-DateToolsTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DateToolsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateToolsTests;
@@ -690,6 +693,8 @@
 			baseConfigurationReference = 1199AECDBD7BFC2C3C9A3745 /* Pods-DateToolsTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DateToolsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codewise.DateToolsTests;
