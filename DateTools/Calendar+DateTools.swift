@@ -126,6 +126,7 @@ public extension Calendar {
     }
     
     // MARK: - Counting components between dates
+    
     public func years(from firstDate: Date, to secondDate: Date) -> Int {
         let earliest = (firstDate < secondDate) ? firstDate : secondDate
         let latest = (firstDate == earliest) ? secondDate : firstDate
@@ -183,15 +184,15 @@ public extension Calendar {
     }
     
     public func hoursEarlier(for firstDate: Date, than secondDate: Date) -> Double {
-        return abs(min(firstDate.hoursFrom(date: secondDate), 0))
+        return abs(min(firstDate.hours(from: secondDate), 0))
     }
     
     public func minutesEarlier(for firstDate: Date, than secondDate: Date) -> Double {
-        return abs(min(firstDate.minutesFrom(date: secondDate), 0))
+        return abs(min(firstDate.minutes(from: secondDate), 0))
     }
     
     public func secondsEarlier(for firstDate: Date, than secondDate: Date) -> Double {
-        return abs(min(firstDate.secondsFrom(date: secondDate), 0))
+        return abs(min(firstDate.seconds(from: secondDate), 0))
     }
     
     public static func isLeapYear(year: Int) -> Bool {
