@@ -35,35 +35,30 @@ class TimeAgoTests: XCTestCase {
     
     func testLongTimeAgo2Days() {
         self.date0 = self.formatter.date(from: "2014 11 05 18:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.timeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("2 days ago")
     }
     
     func testLongTimeAgo1DayAndHalf() {
         self.date0 = self.formatter.date(from: "2014 11 06 9:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.timeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("Yesterday")
     }
     
     func testLongTimeAgoExactlyYesterday() {
         self.date0 = self.formatter.date(from: "2014 11 06 18:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.timeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("Yesterday")
     }
     
     func testLongTimeAgoLessThan24hoursButYesterday() {
         self.date0 = self.formatter.date(from: "2014 11 06 20:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.timeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("22 hours ago")
     }
     
     func testLongTimeAgoLessThan24hoursSameDay() {
         self.date0 = self.formatter.date(from: "2014 11 07 10:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.timeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("8 hours ago")
     }
@@ -85,35 +80,30 @@ class TimeAgoTests: XCTestCase {
     
     func testShortTimeAgo2Days() {
         self.date0 = self.formatter.date(from: "2014 11 05 18:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.shortTimeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("2d")
     }
     
     func testShortTimeAgo1DayAndHalf() {
         self.date0 = self.formatter.date(from: "2014 11 06 9:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.shortTimeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("1d")
     }
     
     func testShortTimeAgoExactlyYesterday() {
         self.date0 = self.formatter.date(from: "2014 11 06 18:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.shortTimeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("1d")
     }
     
     func testShortTimeAgoLessThan24hoursButYesterday() {
         self.date0 = self.formatter.date(from: "2014 11 06 20:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.shortTimeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("22h")
     }
     
     func testShortTimeAgoLessThan24hoursSameDay() {
         self.date0 = self.formatter.date(from: "2014 11 07 10:15:12.000")!
-        self.date1 = self.formatter.date(from: "2014 11 07 18:15:12.000")!
         let ago = self.date0.shortTimeAgo(since: self.date1)
         expect(ago) == DateToolsLocalizedStrings("8h")
     }

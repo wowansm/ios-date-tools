@@ -37,7 +37,7 @@ private enum DTDateComponent : UInt {
     case dayOfYear
 }
 
-private enum DateAgoFormat : UInt {
+public enum DateAgoFormat : UInt {
     case long
     case longUsingNumericDatesAndTimes
     case longUsingNumericDates
@@ -199,7 +199,7 @@ public extension Date {
         return self.timeAgo(since: since, format: .week)
     }
     
-    private func timeAgo(since date: Date, format: DateAgoFormat) -> String?  {
+    public func timeAgo(since date: Date, format: DateAgoFormat) -> String?  {
     
         let calendar = Calendar.current
         var earliest = (self as NSDate).earlierDate(date)
@@ -521,13 +521,13 @@ public extension Date {
         let calendar = Date.self.implicitCalendar
         let dateComponents = calendar.dateComponents(Date.self.allCalendarUnitFlags, from: self)
         
-        if dateComponents.year!%400 == 0 {
+        if dateComponents.year! % 400 == 0 {
             return true
         }
-        else if dateComponents.year!%100 == 0 {
+        else if dateComponents.year! % 100 == 0 {
             return false
         }
-        else if dateComponents.year!%4 == 0 {
+        else if dateComponents.year! % 4 == 0 {
             return true
         }
     
@@ -881,76 +881,8 @@ public extension Date {
     }
     
     // MARK: - Date Comparison
-    
-    // MARK: Time From
-    
-    /**
-     *  Returns an Int representing the amount of time in years between the receiver and the provided date.
-     *  If the receiver is earlier than the provided date, the returned value will be negative.
-     *  Uses the default Gregorian calendar
-     *
-     *  @param date Date - The provided date for comparison
-     *
-     *  @return Int - The Int representation of the years between receiver and provided date
-     */
-    public func years(from date: Date) -> Int {
-        return self.years(from: date, calendar: nil)
-    }
-    
-    /**
-     *  Returns an Int representing the amount of time in months between the receiver and the provided date.
-     *  If the receiver is earlier than the provided date, the returned value will be negative.
-     *  Uses the default Gregorian calendar
-     *
-     *  @param date Date - The provided date for comparison
-     *
-     *  @return Int - The Int representation of the years between receiver and provided date
-     */
-    public func months(from date: Date) -> Int {
-        return self.months(from: date, calendar: nil)
-    }
-    
-    /**
-     *  Returns an Int representing the amount of time in weeks between the receiver and the provided date.
-     *  If the receiver is earlier than the provided date, the returned value will be negative.
-     *  Uses the default Gregorian calendar
-     *
-     *  @param date Date - The provided date for comparison
-     *
-     *  @return Int - The double representation of the weeks between receiver and provided date
-     */
-    public func weeks(from date: Date) -> Int {
-        return self.weeks(from: date, calendar: nil)
-    }
-    
-    /**
-     *  Returns an Int representing the amount of time in days between the receiver and the provided date.
-     *  If the receiver is earlier than the provided date, the returned value will be negative.
-     *  Uses the default Gregorian calendar
-     *
-     *  @param date Date - The provided date for comparison
-     *
-     *  @return Int - The double representation of the days between receiver and provided date
-     */
-    public func days(from date: Date) -> Int {
-        return self.days(from: date, calendar: nil)
-    }
 
-    public func hours(from date: Date) -> Double {
-        return self.timeIntervalSince(date) / Double(SecondsIn.hour.rawValue)
-    }
-    
-    public func minutes(from date: Date) -> Double {
-        return self.timeIntervalSince(date) / Double(SecondsIn.minute.rawValue)
-    }
-    
-    public func seconds(from date: Date) -> Double {
-        return self.timeIntervalSince(date)
-    }
-    
-    
-    // MARK: Time From With Calendar
-    
+
     /**
      *  Returns an Int representing the amount of time in years between the receiver and the provided date.
      *  If the receiver is earlier than the provided date, the returned value will be negative.
@@ -960,9 +892,7 @@ public extension Date {
      *
      *  @return Int - The double representation of the years between receiver and provided date
      */
-    public func years(from date: Date, calendar fromCalendar: Calendar?) -> Int {
-        let calendar = fromCalendar ?? Date.self.implicitCalendar
-        
+    public func years(from date: Date, calendar: Calendar = Date.self.implicitCalendar) -> Int {
         let earliest = (self as NSDate).earlierDate(date)
         let latest = (earliest == self) ? date : self
         let multiplier = (earliest == self) ? -1 : 1
@@ -979,9 +909,7 @@ public extension Date {
      *
      *  @return Int - The double representation of the months between receiver and provided date
      */
-    public func months(from date: Date, calendar fromCalendar: Calendar?) -> Int {
-        let calendar = fromCalendar ?? Date.self.implicitCalendar
-        
+    public func months(from date: Date, calendar: Calendar = Date.self.implicitCalendar) -> Int {
         let earliest = (self as NSDate).earlierDate(date)
         let latest = (earliest == self) ? date : self
         let multiplier = (earliest == self) ? -1 : 1
@@ -998,9 +926,7 @@ public extension Date {
      *
      *  @return Int - The double representation of the weeks between receiver and provided date
      */
-    public func weeks(from date: Date, calendar fromCalendar: Calendar?) -> Int {
-        let calendar = fromCalendar ?? Date.self.implicitCalendar
-        
+    public func weeks(from date: Date, calendar: Calendar = Date.self.implicitCalendar) -> Int {
         let earliest = (self as NSDate).earlierDate(date)
         let latest = (earliest == self) ? date : self
         let multiplier = (earliest == self) ? -1 : 1
@@ -1017,16 +943,26 @@ public extension Date {
      *
      *  @return Int - The double representation of the days between receiver and provided date
      */
-    public func days(from date: Date, calendar fromCalendar: Calendar?) -> Int {
-        let calendar = fromCalendar ?? Date.self.implicitCalendar
-        
+    public func days(from date: Date, calendar: Calendar = Date.self.implicitCalendar) -> Int {
         let earliest = (self as NSDate).earlierDate(date)
         let latest = (earliest == self) ? date : self
         let multiplier = (earliest == self) ? -1 : 1
         let components = calendar.dateComponents([.day], from: earliest, to: latest)
         return multiplier*components.day!
     }
-    
+
+    public func hours(from date: Date) -> Double {
+        return self.timeIntervalSince(date) / Double(SecondsIn.hour.rawValue)
+    }
+
+    public func minutes(from date: Date) -> Double {
+        return self.timeIntervalSince(date) / Double(SecondsIn.minute.rawValue)
+    }
+
+    public func seconds(from date: Date) -> Double {
+        return self.timeIntervalSince(date)
+    }
+
     // MARK: Time Until
     /**
      *  Returns the number of years until the receiver's date. Returns 0 if the receiver is the same or earlier than now.
@@ -1492,25 +1428,5 @@ public extension Date {
         formatter.locale = locale
         return formatter.string(from: self)
     }
-    
-    // MARK: - Helpers
-    /**
-     *  Class method that returns whether the given year is a leap year for the Gregorian Calendar
-     *  Returns YES if year is a leap year, otherwise returns NO
-     *
-     *  @param year Int - Year to evaluate
-     *
-     *  @return Bool evaluation of year
-     */
-    private static func isLeapYear(year: Int) -> Bool {
-        if year%400 != 0 {
-            return true
-        } else if year%100 != 0 {
-            return false
-        } else if year%4 != 0 {
-            return true
-        }
-    
-        return false
-    }
+
 }

@@ -675,7 +675,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6ACB8CF02DB4072AEE7A2D70 /* Pods-DateToolsTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DateToolsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -690,7 +689,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1199AECDBD7BFC2C3C9A3745 /* Pods-DateToolsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DateToolsTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
