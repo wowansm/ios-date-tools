@@ -18,4 +18,4 @@ install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
 script:
-- set -o pipefail && xcodebuild -workspace DateTools.xcworkspace -scheme DateToolsTests -sdk iphonesimulator10.2 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.2' test | xcpretty -c
+- set -o pipefail && xcodebuild -workspace DateTools.xcworkspace -scheme DateToolsTests -sdk iphonesimulator10.2 -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.1' test | xcpretty -c
