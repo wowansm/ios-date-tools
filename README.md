@@ -3,6 +3,7 @@
 [![CocoaPods](https://cocoapod-badges.herokuapp.com/v/SwiftDateTools/badge.png)](http://cocoapods.org/?q=swiftdatetools)
 
 Project is a swift version of [DateTools](https://github.com/MatthewYork/DateTools) library created by Matthew York.
+
 Support Swift 5.0
 
 ## Installation
