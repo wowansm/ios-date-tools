@@ -13,7 +13,6 @@ let minutePrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd HH:
 let hourPrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd HH")
 let dayPrecisionFormatter = createFormatterWithFormat(format: "yyyy-MM-dd")
 
-
 func date(dateString: String) -> Date {
     for formatter in [secondPrecisionFormatter, minutePrecisionFormatter, hourPrecisionFormatter, dayPrecisionFormatter] {
         if let date = formatter.date(from: dateString) {

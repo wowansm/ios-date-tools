@@ -18,7 +18,7 @@
 
 import Foundation
 
-public enum TimePeriodRelation : UInt {
+public enum TimePeriodRelation: UInt {
     case after
     case startTouching
     case startInside
@@ -35,7 +35,7 @@ public enum TimePeriodRelation : UInt {
     case none // One or more of the dates does not exist
 }
 
-public enum TimePeriodSize : UInt {
+public enum TimePeriodSize: UInt {
     case second
     case minute
     case hour
@@ -45,12 +45,12 @@ public enum TimePeriodSize : UInt {
     case year
 }
 
-public enum TimePeriodInterval : UInt {
+public enum TimePeriodInterval: UInt {
     case open
     case closed
 }
 
-public enum TimePeriodAnchor : UInt {
+public enum TimePeriodAnchor: UInt {
     case start
     case center
     case end
@@ -62,17 +62,17 @@ open class TimePeriod {
        The start date for a TimePeriod representing the starting boundary of the time period
      */
     open var startDate: Date
-    
+
     /**
        The end date for a TimePeriod representing the ending boundary of the time period
      */
     open var endDate: Date
-    
+
     /**
        Calendar used for date calculations
      */
-    open let calendar: Calendar
-    
+    public let calendar: Calendar
+
     // MARK: - Initializers
     /**
       Initializes an instance of TimePeriod from a given start and end date
@@ -88,7 +88,7 @@ open class TimePeriod {
         self.endDate = endDate
         self.calendar = calendar
     }
-    
+
     /**
        Returns a new instance of TimePeriod that starts on the provided start date and is of the size provided. The amount represents a multipler to the size (e.g. "2 weeks" or "4 years")
     
@@ -102,8 +102,7 @@ open class TimePeriod {
     public convenience init(size: TimePeriodSize, amount: Int = 1, startingAt date: Date, calendar: Calendar = Calendar.current) {
         self.init(startDate: date, endDate: TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: date, calendar: calendar), calendar: calendar)
     }
-    
-    
+
     /**
        Returns a new instance of TimePeriod that ends on the provided end date
        and is of the size provided. The amount represents a multipler to the size (e.g. "2 weeks" or "4 years")
@@ -118,7 +117,7 @@ open class TimePeriod {
     public convenience init(size: TimePeriodSize, amount: Int = 1, endingAt date: Date, calendar: Calendar = Calendar.current) {
         self.init(startDate: TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: date, calendar: calendar), endDate: date, calendar: calendar)
     }
-    
+
     // MARK: - TimePeriod methods
     /**
       Returns a new instance of TimePeriod that represents the largest time period available.
@@ -129,7 +128,7 @@ open class TimePeriod {
     public class func timePeriodWithAllTime() -> TimePeriod {
         return TimePeriod(startDate: Date.distantPast, endDate: Date.distantFuture)
     }
-    
+
     /**
       Returns a boolean representing whether the receiver is a "moment", that is the start and end dates are the same.
     
@@ -138,7 +137,7 @@ open class TimePeriod {
     open func isMoment() -> Bool {
         return self.startDate == self.endDate
     }
-    
+
     // MARK: - Duration methods
     /**
        - returns: duration of the receiver in given `TimePeriodSize`
@@ -161,56 +160,56 @@ open class TimePeriod {
             return self.durationInYears
         }
     }
-    
+
     /**
         - returns: duration of the receiver in years
      */
     open var durationInYears: Int {
         get { return self.calendar.yearsEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     /**
         - returns: duration of the receiver in months
     */
     open var durationInMonths: Int {
         get { return self.calendar.monthsEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     /**
         - returns: duration of the receiver in weeks
     */
     open var durationInWeeks: Int {
         get { return self.calendar.weeksEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     /**
         - returns: duration of the receiver in days
     */
     open var durationInDays: Int {
         get { return self.calendar.daysEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     /**
         - returns: duration of the receiver in hours
     */
     open var durationInHours: Double {
         get { return self.calendar.hoursEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     /**
         - returns: duration of the receiver in minutes
     */
     open var durationInMinutes: Double {
         get { return self.calendar.minutesEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     /**
         - returns: duration of the receiver in seconds
     */
     open var durationInSeconds: Double {
         get { return self.calendar.secondsEarlier(for: self.startDate, than: self.endDate) }
     }
-    
+
     // MARK: - Relationship methods
     /**
        Returns a `Bool` representing whether the receiver's start and end dates exatcly match a given time period
@@ -222,7 +221,7 @@ open class TimePeriod {
     open func equals(_ period: TimePeriod) -> Bool {
         return (self.startDate == period.startDate) && (self.endDate == period.endDate)
     }
-    
+
     /**
        Returns a `Bool` representing whether the receiver's start and end dates exatcly match a given time period or is contained within them
     
@@ -233,7 +232,7 @@ open class TimePeriod {
     open func isInside(period: TimePeriod) -> Bool {
         return (period.startDate <= self.startDate) && (period.endDate >= self.endDate)
     }
-    
+
     /**
        Returns a `Bool` representing whether the given time period's start and end dates exatcly match the receivers' or is contained within them
     
@@ -245,7 +244,7 @@ open class TimePeriod {
     open func contains(period: TimePeriod) -> Bool {
         return (self.startDate <= period.startDate) && (self.endDate >= period.endDate)
     }
-    
+
     /**
        Returns a `Bool` representing whether the receiver and the given time period overlap.
        This covers all space they share, minus instantaneous space (i.e. one's start date equals another's end date)
@@ -261,7 +260,7 @@ open class TimePeriod {
             (period.startDate <  self.endDate   && period.endDate >  self.endDate)
         )
     }
-    
+
     /**
        Returns a `Bool` representing whether the receiver and the given time period overlap.
        This covers all space they share, including instantaneous space (i.e. one's start date equals another's end date)
@@ -277,7 +276,7 @@ open class TimePeriod {
             (period.startDate <= self.endDate   && period.endDate >  self.endDate)
         )
     }
-    
+
     /**
        - parameter period: `TimePeriod` to compare to receiver
     
@@ -287,12 +286,12 @@ open class TimePeriod {
         guard self.startDate < self.endDate && period.startDate < period.endDate else {
             return .none
         }
-        
+
         if period.endDate < self.startDate {
             return .after
         } else if period.endDate == self.startDate {
             return .startTouching
-        } else if period.startDate <  self.startDate && period.endDate < self.endDate  {
+        } else if period.startDate < self.startDate && period.endDate < self.endDate {
             return .startInside
         } else if period.startDate == self.startDate && period.endDate > self.endDate {
             return .insideStartTouching
@@ -317,7 +316,7 @@ open class TimePeriod {
         }
         return .none
     }
-    
+
     /**
        - parameter period: `TimePeriod` to compute the gap
     
@@ -331,7 +330,7 @@ open class TimePeriod {
         }
         return 0
     }
-    
+
     /**
        - parameter date: Date to evaluate
        - parameter interval: TimePeriodInterval representing evaluation type (Closed includes StartDate and EndDate in evaluation, Open does not)
@@ -346,7 +345,7 @@ open class TimePeriod {
             return self.startDate <= date && self.endDate >= date
         }
     }
-    
+
     // MARK: - Mutating methods
     /**
        Shifts the `startDate` and `endDate` earlier by a given size amount. Amount multiplies size.
@@ -358,7 +357,7 @@ open class TimePeriod {
         self.startDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         self.endDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
     }
-    
+
     /**
        Shifts the `startDate` and `endDate` later by a given size amount. Amount multiplies size.
     
@@ -369,7 +368,7 @@ open class TimePeriod {
         self.startDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         self.endDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.endDate, calendar: self.calendar)
     }
-    
+
     /**
        Lengthens the receiver by a given amount, anchored by a provided point. Amount multiplies size.
     
@@ -388,7 +387,7 @@ open class TimePeriod {
             self.startDate = TimePeriod.dateWithSubtractedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         }
     }
-    
+
     /**
        Shortens the receiver by a given amount, anchored by a provided point. Amount multiplies size.
     
@@ -407,11 +406,11 @@ open class TimePeriod {
             self.startDate = TimePeriod.dateWithAddedTime(size: size, amount: amount, baseDate: self.startDate, calendar: self.calendar)
         }
     }
-    
-     open func copy() -> TimePeriod {
+
+    open func copy() -> TimePeriod {
         return TimePeriod(startDate: Date(timeIntervalSince1970: self.startDate.timeIntervalSince1970), endDate: Date(timeIntervalSince1970: self.endDate.timeIntervalSince1970), calendar: self.calendar)
      }
-    
+
     // MARK: - Private helper methods
     private class func dateWithAddedTime(size: TimePeriodSize, amount: Int, baseDate date: Date, calendar: Calendar) -> Date {
         switch size {
@@ -431,7 +430,7 @@ open class TimePeriod {
             return calendar.dateByAdding(years: amount, to: date)
         }
     }
-    
+
     private class func dateWithSubtractedTime(size: TimePeriodSize, amount: Int, baseDate date: Date, calendar: Calendar) -> Date {
         switch size {
         case .second:
