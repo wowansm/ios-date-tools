@@ -8,7 +8,7 @@ Project is a swift version of [DateTools](https://github.com/MatthewYork/DateToo
 
 **CocoaPods**
 
-<code>pod 'SwiftDateTools'</code>
+<code>pod "SwiftDateTools", :git => 'https://github.com/wowansm/ios-date-tools'</code>
 
 ## Credits
 
